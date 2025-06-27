@@ -2,7 +2,7 @@
 # Get all the files in a directory from the path that match a pattern
 # returns a list of file paths
 # -----------------------------------
-test_that("get_file_paths returns a list of dataframes", {
+test_that("get_file_paths returns a list of file paths", {
   # Generate tmp directory to test function against
   tmp_dir <- withr::local_tempdir()
 
@@ -13,7 +13,10 @@ test_that("get_file_paths returns a list of dataframes", {
   write.csv(test_data_frame, file.path(tmp_dir, paste0(pattern, "_2.csv")))
 
   # Expect get_file_paths to return a list of file paths
-  expect_type(get_file_paths(tmp_dir, pattern), "list")
+  output <- get_file_paths(tmp_dir, pattern)
+  expect_type(output, "list")
+  expect_type(output[[1]][1], "character")
+  expect_type(output[[1]][2], "character")
 })
 
 test_that("get_file_paths fails if dir does not exist at path", {
@@ -37,11 +40,21 @@ test_that("get_file_paths fails if no matching files", {
 
 })
 
-
-
-
 test_that("list of matching files is returned as a message to the user", {
+  # Generate tmp directory to test function against
+  tmp_dir <- withr::local_tempdir()
 
+  # Create csv files that match the pattern
+  pattern <- "test_data"
+  test_data_frame <- data.frame(x = 1:5)
+  file_names <- file.path(tmp_dir, paste0(pattern, "_", 1:2 ,".csv"))
+  for(path in file_names){
+    write.csv(test_data_frame, path)
+  }
+
+  expect_message(get_file_paths(tmp_dir, pattern),
+                 regexp = paste0("Files that match pattern:\n", file_names[1],"\n", file_names[2]),
+                 fixed = TRUE)
 })
 
 test_that("non matching files are not included in message to the user", {

@@ -33,7 +33,7 @@ get_file_paths <- function(path, pattern){
   files <- str_subset(files, "\\.csv$|\\.tsv$")
 
   # Print message to user of files that match
-  message(paste0("Files that match pattern", files, collapse = "\n"))
+  message("Files that match pattern: \n", paste0(files, collapse = "\n"))
 
   list(files)
 
