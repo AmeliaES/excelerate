@@ -8,8 +8,8 @@ This package provides a set of functions to easily create and export Excel sprea
 
 ``` r
 install.packages("devtools")
-devtools::install_github("yourusername/excel-recipes")
-library(excelrecipes)
+devtools::install_github("ameliaes/excelerate")
+library(excelerate)
 ```
 
 ### Example: Create an Excel Table
