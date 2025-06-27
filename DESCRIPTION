@@ -17,4 +17,7 @@ Description: The **excellerate** package provides a set of functions to easily c
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+RoxygenNote: 7.3.2
