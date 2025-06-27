@@ -19,15 +19,32 @@ test_that("get_file_paths returns a list of dataframes", {
 test_that("get_file_paths fails if dir does not exist at path", {
   expect_error(
     get_file_paths("non_existent_path", pattern = NULL),
-    "No such file or directory"
+    "No directory at path"
   )
 })
 
-test_that("get_file_paths returns a list of matching files", {
+test_that("get_file_paths fails if no matching files", {
+  # Generate tmp directory to test function against
+  tmp_dir <- withr::local_tempdir()
+
+  # Create csv files that do not match the pattern
+  pattern <- "test_data"
+  test_data_frame <- data.frame(x = 1:5)
+  write.csv(test_data_frame, file.path(tmp_dir, "test_file.csv"))
+
+  expect_error(get_file_paths(tmp_dir, pattern),
+               "No files found at")
 
 })
 
+
+
+
 test_that("list of matching files is returned as a message to the user", {
+
+})
+
+test_that("non matching files are not included in message to the user", {
 
 })
 
