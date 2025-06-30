@@ -12,7 +12,7 @@ test_that("sheet works", {
   write.csv(test_meta, file.path(tmp_dir, paste0(pattern, "_2.csv.cols")), row.names = FALSE)
 
   # Sheet returns a list item with two dataframes named main and meta
-  output <- sheet(tmp_dir, paste0(pattern,"_1"), sheet_name = "A")
+  output <- sheet(tmp_dir, paste0(pattern,"_1"), sheet_name = "A", sheet_legend = "Summary of what sheet A contains")
   expect_identical(as.data.frame(output[[1]]$main), as.data.frame(test_data_frame))
   expect_equal(length(output), 1)
   expect_type(output, "list")
@@ -35,6 +35,6 @@ test_that("sheet names the sheets correctly",{
   write.csv(test_meta, file.path(tmp_dir, paste0(pattern, "_2.csv.cols")), row.names = FALSE)
 
   # Sheet returns a list item with two dataframes named main and meta
-  output <- sheet(tmp_dir, paste0(pattern,"_1") , sheet_name = "A")
+  output <- sheet(tmp_dir, paste0(pattern,"_1") , sheet_name = "A", sheet_legend = "Summary of what sheet A contains")
   expect_identical(names(output), "A")
 })
