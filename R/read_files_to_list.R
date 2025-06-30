@@ -4,15 +4,18 @@
 #' @param pattern pattern to subset files in the directory
 #'
 #' @returns a list of data frames
-#' @export
 #' @importFrom data.table fread
 #'
-#' @examples read_files_to_list("path/to/data/", "extract_matching_files")
-read_files_to_list <- function(path, pattern = NULL){
+read_files_to_list <- function(path, pattern = NULL, sheet_names){
 
   # Get paths to all the files
   file_paths <- get_file_paths(path, pattern)
+
   # Read each file and return a list of dataframes
   dataframes <- lapply(file_paths, read_results)
+
+  # Name the dataframes by the supplied sheet names
+  names(dataframes) <- sheet_names
+
   dataframes
 }

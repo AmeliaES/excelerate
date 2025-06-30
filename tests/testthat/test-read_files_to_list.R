@@ -12,10 +12,14 @@ test_that("read_files_to_list works", {
   write.csv(test_meta, file.path(tmp_dir, paste0(pattern, "_2.csv.cols")), row.names = FALSE)
 
   # Expect read_files_to_list returns a list of dataframes
-  output <- read_files_to_list(tmp_dir, pattern)
+  output <- read_files_to_list(tmp_dir, pattern, sheet_names = c("A", "B"))
   expect_identical(as.data.frame(output[[1]]$main), as.data.frame(test_data_frame))
   expect_equal(length(output), 2)
   expect_type(output, "list")
   expect_s3_class(output[[1]]$main, "data.frame")
+
+})
+
+test_that("read_files_to_list names the sheets correctly",{
 
 })
