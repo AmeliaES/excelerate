@@ -60,9 +60,7 @@ test_that("non matching files are not included in message to the user", {
 
 })
 
-test_that("get_file_paths errors if no files in dir match pattern", {
 
-})
 
 test_that("error if file paths returned are not all .csv or .tsv",{
 
