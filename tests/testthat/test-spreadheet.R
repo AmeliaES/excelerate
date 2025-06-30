@@ -21,7 +21,7 @@ test_that("spreadsheet function works", {
 
   # a list of dataframes
   expect_type(output$sheets, "list")
-  expect_s3_class(output$sheets[[1]], "data.frame")
+  expect_s3_class(output$sheets$A$main, "data.frame")
   expect_equal(output$title, "Supplementary Table 1")
   expect_equal(output$filename, "SuppTab1")
 
