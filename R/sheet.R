@@ -8,7 +8,7 @@
 #' @importFrom data.table fread
 #'
 #' @export
-sheet <- function(path, pattern, sheet_name){
+sheet <- function(path, pattern, sheet_name, sheet_legend){
 
   # Get path to the results file
   file_path <- get_file_path(path, pattern)
