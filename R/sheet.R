@@ -1,10 +1,10 @@
 #' Read in file paths, pattern and sheet name
 #'
 #' @param path path to directory where files for supplementary tables exist
-#' @param pattern pattern to subset files in the directory
+#' @param pattern pattern to identify one file in the directory
 #' @param sheet_name sheet name for table
 #'
-#' @returns a list of data frames
+#' @returns Results and meta data tables named by sheet
 #' @importFrom data.table fread
 #'
 #' @export
