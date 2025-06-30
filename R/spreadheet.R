@@ -1,4 +1,6 @@
 spreadsheet <- function(..., title, filename){
   sheets <- c(...)
-  list(sheets = sheets, title = title, filename = filename)
+  spreadsheet <- list(sheets = sheets, title = title, filename = filename)
+  class(spreadsheet) <- "spreadsheet"
+  spreadsheet
 }
