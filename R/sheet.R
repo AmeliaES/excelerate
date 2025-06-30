@@ -1,4 +1,4 @@
-#' Read in file paths and return a list of dataframes
+#' Read in file paths, pattern and sheet name
 #'
 #' @param path path to directory where files for supplementary tables exist
 #' @param pattern pattern to subset files in the directory
@@ -6,13 +6,16 @@
 #' @returns a list of data frames
 #' @importFrom data.table fread
 #'
-read_files_to_list <- function(path, pattern = NULL, sheet_names){
+sheet <- function(path, pattern = NULL, sheet_names){
 
-  # Get paths to all the files
-  file_paths <- get_file_paths(path, pattern)
+  # Get path to the results file
+  file_path <- get_file_path(path, pattern)
 
   # Read each file and return a list of dataframes
-  dataframes <- lapply(file_paths, read_results)
+  dataframes <- read_results(file_path)
+
+  # Create a list item
+  dataframes <- list(dataframes)
 
   # Name the dataframes by the supplied sheet names
   names(dataframes) <- sheet_names

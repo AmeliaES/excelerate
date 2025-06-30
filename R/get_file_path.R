@@ -7,8 +7,8 @@
 #' @importFrom stringr str_subset
 #'
 #' @examples
-#' get_file_paths("path/to/data/", "extract_matching_files")
-get_file_paths <- function(path, pattern){
+#' get_file_path("path/to/data/", "extract_matching_files")
+get_file_path <- function(path, pattern){
   # Check dir exists at path
   if(!dir.exists(path)){
     stop(paste0("No directory at path: ", path))
@@ -19,7 +19,7 @@ get_file_paths <- function(path, pattern){
 
   # If there are no files stop with error
   if (length(files) == 0) {
-    stop(paste0("No files found at: ", path, " with regex: ", pattern))
+    stop(paste0("No file found at: ", path, " with pattern: ", pattern))
   }
 
   # If files are found, check if they all end with .csv, .tsv or .cols
@@ -28,13 +28,18 @@ get_file_paths <- function(path, pattern){
     stop(paste0("No csv or tsv files found at: ", path, " with pattern: ", pattern))
   }
 
-  # Subset to only return .tsv or .csv files
-  files <- str_subset(files, "\\.csv$|\\.tsv$")
+  # Subset to only return .tsv or .csv file
+  file <- str_subset(files, "\\.csv$|\\.tsv$")
+
+  # Stop if more than one file is found
+  if(length(file) > 1){
+    stop(paste0("More than one file is found at: ", path, " with pattern: ", pattern))
+  }
 
   # Print message to user of files that match
-  message("Files that match pattern: \n", paste0(files, collapse = "\n"))
+  message("File that match pattern: \n", paste0(file, collapse = "\n"))
 
-  as.list(files)
+  files
 
 }
 
