@@ -14,7 +14,7 @@ sheet <- function(path, pattern, sheet_name, sheet_legend){
   file_path <- get_file_path(path, pattern)
 
   # Read each file and return a list of dataframes
-  dataframes <- read_results(file_path)
+  dataframes <- read_results(file_path, sheet_legend)
 
   # Create a list item
   dataframes <- list(dataframes)
