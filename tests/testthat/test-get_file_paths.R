@@ -53,8 +53,7 @@ test_that("list of matching files is returned as a message to the user", {
   }
 
   expect_message(get_file_paths(tmp_dir, pattern),
-                 regexp = paste0("Files that match pattern:\n", file_names[1],"\n", file_names[2]),
-                 fixed = TRUE)
+                 regexp = cat("Files that match pattern:\n", file_names[1],"\n", file_names[2]))
 })
 
 test_that("non matching files are not included in message to the user", {
