@@ -2,11 +2,13 @@
 #'
 #' @param path path to directory where files for supplementary tables exist
 #' @param pattern pattern to subset files in the directory
+#' @param sheet_name sheet name for table
 #'
 #' @returns a list of data frames
 #' @importFrom data.table fread
 #'
-sheet <- function(path, pattern = NULL, sheet_names){
+#' @export
+sheet <- function(path, pattern, sheet_name){
 
   # Get path to the results file
   file_path <- get_file_path(path, pattern)
@@ -17,8 +19,8 @@ sheet <- function(path, pattern = NULL, sheet_names){
   # Create a list item
   dataframes <- list(dataframes)
 
-  # Name the dataframes by the supplied sheet names
-  names(dataframes) <- sheet_names
+  # Name the dataframes by the supplied sheet name
+  names(dataframes) <- sheet_name
 
   dataframes
 }
