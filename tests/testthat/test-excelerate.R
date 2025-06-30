@@ -40,7 +40,7 @@ test_that("input to excelerate are spreadsheet class",{
                "Non spreadsheet class used as input to excelerate")
 })
 
-test_that("README sheet contains legend title, legend text and metadata",{
+test_that("README sheet contains legend title, sheet legends and metadata",{
 
 })
 
