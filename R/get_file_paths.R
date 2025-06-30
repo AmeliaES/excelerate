@@ -5,7 +5,6 @@
 #'
 #' @return Character vector of full paths to files
 #' @importFrom stringr str_subset
-#' @export
 #'
 #' @examples
 #' get_file_paths("path/to/data/", "extract_matching_files")
