@@ -34,7 +34,7 @@ get_file_paths <- function(path, pattern){
   # Print message to user of files that match
   message("Files that match pattern: \n", paste0(files, collapse = "\n"))
 
-  list(files)
+  as.list(files)
 
 }
 
