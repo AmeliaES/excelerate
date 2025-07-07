@@ -27,10 +27,10 @@ excelerate <- function(...){
         add_legend_title(wb, spreadsheet$title)
 
         # Function that writes the sheet summary (using "sheet_legend" from sheet() )
-        add_sheet_legend(wb, spreadsheet)
+        nextFreeRow <- add_sheet_legend(wb, spreadsheet)
 
         # Function that writes column meta data (using "meta" from sheet() )
-
+        add_meta(wb, spreadsheet, nextFreeRow)
 
       # Function that creates data sheets (using "main" from sheet(), and name of sheet from sheet())
 

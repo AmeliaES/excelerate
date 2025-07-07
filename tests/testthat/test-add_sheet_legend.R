@@ -21,7 +21,7 @@ test_that("add_sheet_legend works", {
   wb <- createWorkbook()
   addWorksheet(wb, sheetName = "README")
 
-  add_sheet_legend(wb, spreadsheet1)
+  output <- add_sheet_legend(wb, spreadsheet1)
 
   # Save to a temporary file
   temp_file <- tempfile(fileext = ".xlsx")
@@ -33,4 +33,5 @@ test_that("add_sheet_legend works", {
   # Check if the sheet legends were added
   expect_equal(README[[1,1]], "sheet legend 1")
   expect_equal(README[[2,1]], "sheet legend 2")
+  expect_equal(output, 4)
 })
