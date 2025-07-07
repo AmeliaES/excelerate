@@ -3,7 +3,7 @@
 #' @param ... One or more spreadsheet objects returned from the `spreadsheet()` function.
 #'
 #' @export
-#' @importFrom openxlsx createWorkbook
+#' @importFrom openxlsx createWorkbook saveWorkbook
 #'
 excelerate <- function(...){
   # Check input to function are all of class "spreadsheet"
@@ -20,7 +20,7 @@ excelerate <- function(...){
     wb <- createWorkbook()
 
       # Function that creates README sheet:
-      add_readme(wb, spreadsheet)
+      add_readme(wb)
 
       # Insert into README sheet:
         # Function that writes legend title for the excel table (using "title" from spreadsheet())
@@ -33,6 +33,10 @@ excelerate <- function(...){
         add_meta(wb, spreadsheet, nextFreeRow)
 
       # Function that creates data sheets (using "main" from sheet(), and name of sheet from sheet())
+      add_main_sheets(wb, spreadsheet)
 
+      # Write the spreadsheet to excel file
+      saveWorkbook(wb, spreadsheet$filename, overwrite = TRUE)
   })
+
 }

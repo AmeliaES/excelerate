@@ -15,14 +15,14 @@ test_that("excelerate function works", {
     sheet(tmp_dir, paste0(pattern,"_1"), sheet_name = "A", "sheet legend"),
     sheet(tmp_dir, paste0(pattern,"_2"), sheet_name = "B", "sheet legend"),
     title = "Supplementary Table 1",
-    filename = "SuppTab1"
+    filename = file.path(tmp_dir, "SuppTab1.xlsx")
   )
 
   spreadsheet2 <- spreadsheet(
     sheet(tmp_dir, paste0(pattern,"_1"), sheet_name = "A", "sheet legend"),
     sheet(tmp_dir, paste0(pattern,"_2"), sheet_name = "B", "sheet legend"),
     title = "Supplementary Table 2",
-    filename = "SuppTab2"
+    filename = file.path(tmp_dir, "SuppTab2.xlsx")
   )
 
   output <- excelerate(spreadsheet1, spreadsheet2)
