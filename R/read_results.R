@@ -5,7 +5,7 @@
 #' @importFrom data.table fread
 #' @importFrom readr read_csv
 #'
-read_results <- function(full_path) {
+read_results <- function(full_path, sheet_legend) {
   csv_path <- grep("\\.csv$", full_path, value = TRUE)
 
   # Use guard clauses to exit function early if error
@@ -22,7 +22,7 @@ read_results <- function(full_path) {
   stopifnot(is.data.frame(main), is.data.frame(meta))
 
   # Combine into a list
-  results <- list(main = main, meta = meta)
+  results <- list(main = main, meta = meta, sheet_legend = sheet_legend)
 
   return(results)
 }
