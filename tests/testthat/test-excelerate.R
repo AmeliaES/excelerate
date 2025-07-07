@@ -12,15 +12,15 @@ test_that("excelerate function works", {
   write.csv(test_meta, file.path(tmp_dir, paste0(pattern, "_2.csv.cols")), row.names = FALSE)
 
   spreadsheet1 <- spreadsheet(
-    sheet(tmp_dir, paste0(pattern,"_1"), sheet_name = "A"),
-    sheet(tmp_dir, paste0(pattern,"_2"), sheet_name = "B"),
+    sheet(tmp_dir, paste0(pattern,"_1"), sheet_name = "A", "sheet legend"),
+    sheet(tmp_dir, paste0(pattern,"_2"), sheet_name = "B", "sheet legend"),
     title = "Supplementary Table 1",
     filename = "SuppTab1"
   )
 
   spreadsheet2 <- spreadsheet(
-    sheet(tmp_dir, paste0(pattern,"_1"), sheet_name = "A"),
-    sheet(tmp_dir, paste0(pattern,"_2"), sheet_name = "B"),
+    sheet(tmp_dir, paste0(pattern,"_1"), sheet_name = "A", "sheet legend"),
+    sheet(tmp_dir, paste0(pattern,"_2"), sheet_name = "B", "sheet legend"),
     title = "Supplementary Table 2",
     filename = "SuppTab2"
   )
