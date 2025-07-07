@@ -13,8 +13,12 @@ test_that("spreadsheet function works", {
 
   # Check spreadsheet returns expected object
   output <- spreadsheet(
-    sheet(tmp_dir, paste0(pattern,"_1"), sheet_name = "A"),
-    sheet(tmp_dir, paste0(pattern,"_2"), sheet_name = "B"),
+    sheet(tmp_dir, paste0(pattern,"_1"),
+          sheet_name = "A",
+          sheet_legend = "Legend for table"),
+    sheet(tmp_dir, paste0(pattern,"_2"),
+          sheet_name = "B",
+          sheet_legend = "Legend for table"),
     title = "Supplementary Table 1",
     filename = "SuppTab1"
   )
@@ -42,8 +46,12 @@ test_that("output of spreadsheet function is spreadsheet class", {
 
   # Check spreadsheet returns expected object
   output <- spreadsheet(
-    sheet(tmp_dir, paste0(pattern,"_1"), sheet_name = "A"),
-    sheet(tmp_dir, paste0(pattern,"_2"), sheet_name = "B"),
+    sheet(tmp_dir, paste0(pattern,"_1"),
+          sheet_name = "A",
+          sheet_legend = "Legend for table"),
+    sheet(tmp_dir, paste0(pattern,"_2"),
+          sheet_name = "B",
+          sheet_legend = "Legend for table"),
     title = "Supplementary Table 1",
     filename = "SuppTab1"
   )
