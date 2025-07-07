@@ -39,12 +39,3 @@ test_that("input to excelerate are spreadsheet class",{
   expect_error(excelerate(NULL),
                "Non spreadsheet class used as input to excelerate")
 })
-
-test_that("README sheet contains legend title, sheet legends and metadata",{
-
-})
-
-test_that("non README sheets contain expected data",{
-
-})
-
