@@ -44,7 +44,7 @@ test_that("README sheet contains legend title, sheet legends and metadata",{
 
 })
 
-test_that("non README sheets contain expected data"{
+test_that("non README sheets contain expected data",{
 
 })
 
