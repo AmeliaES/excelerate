@@ -20,7 +20,7 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 Imports:
-    stringr, data.table, readr
+    stringr, data.table, readr, openxlsx
 Suggests: 
     testthat (>= 3.0.0), readxl
 Config/testthat/edition: 3
