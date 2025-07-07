@@ -2,7 +2,6 @@
 #'
 #' @param path path to directory where files for supplementary tables exist
 #' @param pattern pattern to subset files in the directory
-#'
 #' @return Character vector of full paths to files
 #' @importFrom stringr str_subset
 #'
