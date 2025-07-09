@@ -6,7 +6,9 @@
 #' @importFrom stringr str_subset
 #'
 #' @examples
+#' \dontrun{
 #' get_file_path("path/to/data/", "extract_matching_files")
+#' }
 get_file_path <- function(path, pattern){
   # Check dir exists at path
   if(!dir.exists(path)){
