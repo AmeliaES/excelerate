@@ -35,9 +35,5 @@ Thumbs.db
 # R package documentation
 man/
 
-# Excel or data files
-*.xlsx
-*.csv
-
 # Miscellaneous
 *.log
