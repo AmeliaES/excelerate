@@ -8,7 +8,7 @@
 #' @export
 #'
 #' @examples
-#' \dontrun {
+#' \dontrun{
 #' spreadsheet(
 #' sheet("path/to/data/", "file_name_for_first_sheet", "sheet name A", "Table legend A"),
 #' sheet("path/to/data/second_file", "file_name_for_second_sheet", "sheet name B", "Table legend B"),

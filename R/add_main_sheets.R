@@ -2,7 +2,6 @@
 #'
 #' @param wb openxlsx workbook object
 #' @param spreadsheet spreadsheet object from spreadsheet()
-#'
 add_main_sheets <- function(wb, spreadsheet){
 
   # extract the main data from spreadsheets sheets

@@ -9,7 +9,9 @@
 #' @importFrom readr read_csv
 #'
 #' @examples
+#' \dontrun{
 #' read_results("path/to/data/", "table legend")
+#' }
 read_results <- function(full_path, sheet_legend) {
   csv_path <- grep("\\.csv$|\\.tsv$", full_path, value = TRUE)
 

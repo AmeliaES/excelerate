@@ -3,7 +3,6 @@
 #' @param wb Workbook object from openxlsx package
 #' @param title Character string with title from spreadsheet()
 #' @importFrom openxlsx writeData
-#'
 add_legend_title <- function(wb, title) {
 
   # Update legend_title

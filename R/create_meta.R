@@ -6,12 +6,12 @@
 #' @importFrom tibble tibble
 #' @importFrom here here
 #' @importFrom glue glue
+#' @importFrom utils write.csv
 #' @param file_name A character string specifying the path and file name (including the .csv part) of the corresponding table meta data is created for.
 #' @param table_variable_name A data frame for which metadata is being generated.
 #' @param colname_descriptions A named character vector where names correspond to column names of `table_variable_name` and values are their descriptions.
 #'
 #' @return Writes a `.cols` metadata file as a side effect. No object is returned.
-
 create_meta <- function(file_name, table_variable_name, colname_descriptions){
   colname_descriptions_table <- tibble(column = names(colname_descriptions), description = colname_descriptions)
 

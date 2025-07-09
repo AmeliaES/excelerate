@@ -4,7 +4,7 @@
 #' @importFrom openxlsx addWorksheet
 #'
 #' @examples
-#' \notrun {
+#' \dontrun{
 #' add_readme(wb)
 #' }
 add_readme <- function(wb){

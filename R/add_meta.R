@@ -5,7 +5,6 @@
 #' @param nextFreeRow index of row with empty cell after writing sheet legends
 #'
 #' @importFrom dplyr bind_rows
-#'
 add_meta <- function(wb, spreadsheet, nextFreeRow) {
 
   # extract the meta data from each results item
