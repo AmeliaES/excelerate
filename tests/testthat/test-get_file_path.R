@@ -14,8 +14,7 @@ test_that("get_file_path returns a list of file path", {
 
   # Expect get_file_path to return a list of file path
   output <- get_file_path(tmp_dir, paste0(pattern, "_1"))
-  expect_type(output, "list")
-  expect_type(output[[1]][1], "character")
+  expect_type(output, "character")
 })
 
 test_that("get_file_path fails if dir does not exist at path", {

@@ -1,12 +1,17 @@
 #' Function to read in the results tables and sidecar .cols files
 #'
-#' @param full_path full path to csv
+#' @param full_path character string containing full path to csv or tsv
+#' @param sheet_legend character string containing table legend
+#' @return List of dataframes containing the main results (data frame),
+#' the metadata (data frame) and sheet legend (character string)
 #'
 #' @importFrom data.table fread
 #' @importFrom readr read_csv
 #'
-read_results <- function(full_path) {
-  csv_path <- grep("\\.csv$", full_path, value = TRUE)
+#' @examples
+#' read_results("path/to/data/", "table legend")
+read_results <- function(full_path, sheet_legend) {
+  csv_path <- grep("\\.csv$|\\.tsv$", full_path, value = TRUE)
 
   # Use guard clauses to exit function early if error
   if(!file.exists(paste0(csv_path, ".cols"))){
@@ -22,7 +27,7 @@ read_results <- function(full_path) {
   stopifnot(is.data.frame(main), is.data.frame(meta))
 
   # Combine into a list
-  results <- list(main = main, meta = meta)
+  results <- list(main = main, meta = meta, sheet_legend = sheet_legend)
 
-  return(results)
+  results
 }

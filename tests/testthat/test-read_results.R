@@ -10,9 +10,9 @@ test_that("read_results works", {
   write.csv(test_meta, file.path(tmp_dir, paste0(pattern, "_1.csv.cols")), row.names = FALSE)
 
   # Expect read_results to return a list of file paths
-  output <- read_results(file.path(tmp_dir, paste0(pattern, "_1.csv")))
+  output <- read_results(file.path(tmp_dir, paste0(pattern, "_1.csv")), "Summary of what sheet A contains")
   expect_type(output, "list")
-  expect_equal(names(output), c("main", "meta"))
+  expect_equal(names(output), c("main", "meta", "sheet_legend"))
   expect_s3_class(output$main, "data.frame")
   expect_s3_class(output$meta, "data.frame")
 })
@@ -29,7 +29,7 @@ test_that("read_results produces an error if the user has not supplied meta data
 
   # Expect error if meta data not supplied
   expect_error(
-    read_results(file.path(tmp_dir, paste0(pattern, "_1.csv"))),
+    read_results(file.path(tmp_dir, paste0(pattern, "_1.csv")), "Summary of what sheet A contains"),
     'Cannot find meta data file with ".cols" extension'
   )
 })

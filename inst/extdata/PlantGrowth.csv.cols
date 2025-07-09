@@ -1,0 +1,3 @@
+column	description
+weight	Weight of the plant in grams
+group	Group identifier (control, treatment1, treatment2)
