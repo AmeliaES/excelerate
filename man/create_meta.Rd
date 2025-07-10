@@ -2,22 +2,54 @@
 % Please edit documentation in R/create_meta.R
 \name{create_meta}
 \alias{create_meta}
-\title{Create .cols sidecar meta data file}
+\title{Create .cols Sidecar Metadata File}
 \usage{
 create_meta(file_name, table_variable_name, colname_descriptions)
 }
 \arguments{
-\item{file_name}{A character string specifying the path and file name (including the .csv part) of the corresponding table meta data is created for.}
+\item{file_name}{A character string specifying the absolute path
+and file name for the file for which metadata is being generated.}
 
-\item{table_variable_name}{A data frame for which metadata is being generated.}
+\item{table_variable_name}{A data frame for which metadata is being
+generated.}
 
-\item{colname_descriptions}{A named character vector where names correspond to column names of \code{table_variable_name} and values are their descriptions.}
+\item{colname_descriptions}{A named character vector where names match column
+names of \code{table_variable_name} and values are their descriptions.}
 }
 \value{
-Writes a \code{.cols} metadata file as a side effect. No object is returned.
+Invisibly returns \code{NULL}. The function performs file creation as
+a side effect.
 }
 \description{
-This function creates a .cols sidecar meta data file of column name descriptions for a given table.
-It checks if all column names in the table variable name are described in the colname_descriptions and stops with an error message if not.
-The .cols file is saved in the same directory as the table variable name with the same name as the file name.
+This function creates a .cols sidecar metadata file with column name
+descriptions for a given table. It checks if all column names in the table
+are described. The \code{.cols} file is saved in the same directory as the data
+file, appending \code{.cols} to the original file name (e.g.,
+\code{your_file.csv.cols}).
+}
+\examples{
+temp_dir <- tempdir()
+temp_file <- file.path(temp_dir, "example.csv")
+write.csv(mtcars, temp_file, row.names = FALSE)
+
+create_meta(
+  file_name = temp_file,
+  table_variable_name = mtcars,
+  colname_descriptions = c(
+    "mpg" = "Miles/(US) gallon",
+    "cyl" = "Number of cylinders",
+    "disp" = "Displacement (cu.in.)",
+    "hp" = "Gross horsepower",
+    "drat" = "Rear axle ratio",
+    "wt" = "Weight (1000 lbs)",
+    "qsec" = "1/4 mile time",
+    "vs" = "Engine (0 = V-shaped, 1 = straight)",
+    "am" = "Transmission (0 = automatic, 1 = manual)",
+    "gear" = "Number of forward gears",
+    "carb" = "Number of carburetors"
+  )
+)
+
+# Clean up the temporary files
+unlink(c(temp_file, paste0(temp_file, ".cols")))
 }

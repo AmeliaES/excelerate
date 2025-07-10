@@ -1,10 +1,11 @@
 #' Function to add column description metadata to README file
 #'
-#' @param wb openxlsx workbook object
-#' @param spreadsheet spreadsheet object returned from spreadsheet()
-#' @param nextFreeRow index of row with empty cell after writing sheet legends
+#' @param wb openxlsx workbook object.
+#' @param spreadsheet `spreadsheet` object created with [spreadsheet()].
+#' @param nextFreeRow index of row with empty cell after writing sheet legends.
 #'
 #' @importFrom dplyr bind_rows
+#' @noRd
 add_meta <- function(wb, spreadsheet, nextFreeRow) {
 
   # extract the meta data from each results item

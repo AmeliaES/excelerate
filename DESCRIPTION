@@ -26,8 +26,13 @@ Imports:
     openxlsx,
     dplyr,
     glue,
-    here,
     tibble
 Suggests: 
-    testthat (>= 3.0.0), readxl, withr
+    testthat (>= 3.0.0),
+    readxl,
+    withr,
+    knitr,
+    rmarkdown
 Config/testthat/edition: 3
+VignetteBuilder: knitr
+URL: https://ameliaes.github.io/excelerate/

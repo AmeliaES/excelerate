@@ -2,29 +2,52 @@
 % Please edit documentation in R/sheet.R
 \name{sheet}
 \alias{sheet}
-\title{Read in file path, file pattern, sheet name and sheet legend}
+\title{Read File Path, Pattern, Sheet Name, and Legend}
 \usage{
 sheet(path, pattern, sheet_name, sheet_legend)
 }
 \arguments{
-\item{path}{character string with path to directory where files for supplementary tables exist}
+\item{path}{A character string specifying the path to the directory
+containing the files.}
 
-\item{pattern}{character string with pattern to identify one file in the directory}
+\item{pattern}{A regular expression pattern to filter files within the
+directory.}
 
-\item{sheet_name}{character string sheet name for table}
+\item{sheet_name}{A character string for naming the sheet.}
 
-\item{sheet_legend}{character string containing table legend}
+\item{sheet_legend}{A character string containing the table legend.}
 }
 \value{
-Named nested list of dataframes containing the main results (data frame),
-the metadata (data frame) and sheet legend (character string).
-Named by sheet_name.
+A named nested list containing the main results (data frame),
+metadata (data frame), and sheet legend. Named by \code{sheet_name}.
 }
 \description{
-Read in file path, file pattern, sheet name and sheet legend
+This function reads a file matching a pattern from a given directory and
+returns supplementary table data.
 }
 \examples{
-\dontrun{
-sheet("path/to/data/", "file_name", "sheet name", "sheet legend")
-}
+temp_dir <- tempdir()
+temp_file <- file.path(temp_dir, "example.csv")
+write.csv(mtcars, temp_file, row.names = FALSE)
+create_meta(
+  file_name = temp_file,
+  table_variable_name = mtcars,
+  colname_descriptions = c(
+    "mpg" = "Miles/(US) gallon",
+    "cyl" = "Number of cylinders",
+    "disp" = "Displacement (cu.in.)",
+    "hp" = "Gross horsepower",
+    "drat" = "Rear axle ratio",
+    "wt" = "Weight (1000 lbs)",
+    "qsec" = "1/4 mile time",
+    "vs" = "Engine (0 = V-shaped, 1 = straight)",
+    "am" = "Transmission (0 = automatic, 1 = manual)",
+    "gear" = "Number of forward gears",
+    "carb" = "Number of carburetors"
+  )
+)
+sheet(temp_dir, "example\\\\.csv$", "Example Sheet", "An example legend")
+
+# Clean up the temporary files
+unlink(c(temp_file, paste0(temp_file, ".cols")))
 }

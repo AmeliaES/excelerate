@@ -1,15 +1,11 @@
-#' Creates README sheet in first sheet
+#' Create README Sheet in Workbook
 #'
-#' @param wb Workbook object from openxlsx package
+#' This function adds a README sheet as the first sheet in an openxlsx workbook.
+#'
+#' @param wb A workbook object from the openxlsx package.
 #' @importFrom openxlsx addWorksheet
-#'
-#' @examples
-#' \dontrun{
-#' add_readme(wb)
-#' }
-add_readme <- function(wb){
-
+#' @noRd
+add_readme <- function(wb) {
   # Create a readme sheet
   addWorksheet(wb, sheetName = "README")
-
 }
