@@ -1,17 +1,20 @@
-#' Add main sheets to spreadsheet
+#' Add Main Sheets to Workbook
 #'
-#' @param wb openxlsx workbook object
-#' @param spreadsheet spreadsheet object from spreadsheet()
-add_main_sheets <- function(wb, spreadsheet){
-
-  # extract the main data from spreadsheets sheets
-  main_list <- lapply(spreadsheet$sheets, function(sheet) {
-    sheet$main
-  })
+#' This function adds main data sheets to an openxlsx workbook object using a
+#' spreadsheet object.
+#'
+#' @param wb An openxlsx workbook object.
+#' @param spreadsheet `spreadsheet` object created with [spreadsheet()].
+#' @importFrom openxlsx addWorksheet writeData
+#' @noRd
+add_main_sheets <- function(wb, spreadsheet) {
 
   # Add each table to a new sheet
   for (i in seq_along(spreadsheet$sheets)) {
     addWorksheet(wb, sheetName = names(spreadsheet$sheets)[i])
-    writeData(wb, sheet = names(spreadsheet$sheets)[i], spreadsheet$sheets[[i]]$main, startRow = 1, colNames = TRUE)
+    writeData(wb, sheet = names(spreadsheet$sheets)[i],
+              spreadsheet$sheets[[i]]$main,
+              startRow = 1,
+              colNames = TRUE)
   }
 }

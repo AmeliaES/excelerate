@@ -12,17 +12,17 @@ test_that("excelerate function works", {
   write.csv(test_meta, file.path(tmp_dir, paste0(pattern, "_2.csv.cols")), row.names = FALSE)
 
   spreadsheet1 <- spreadsheet(
-    sheet(tmp_dir, paste0(pattern,"_1"), sheet_name = "A", "sheet legend"),
-    sheet(tmp_dir, paste0(pattern,"_2"), sheet_name = "B", "sheet legend"),
     title = "Supplementary Table 1",
-    filename = file.path(tmp_dir, "SuppTab1.xlsx")
+    filename = file.path(tmp_dir, "SuppTab1.xlsx"),
+    sheet(tmp_dir, paste0(pattern,"_1"), sheet_name = "A", "sheet legend"),
+    sheet(tmp_dir, paste0(pattern,"_2"), sheet_name = "B", "sheet legend")
   )
 
   spreadsheet2 <- spreadsheet(
-    sheet(tmp_dir, paste0(pattern,"_1"), sheet_name = "A", "sheet legend"),
-    sheet(tmp_dir, paste0(pattern,"_2"), sheet_name = "B", "sheet legend"),
     title = "Supplementary Table 2",
-    filename = file.path(tmp_dir, "SuppTab2.xlsx")
+    filename = file.path(tmp_dir, "SuppTab2.xlsx"),
+    sheet(tmp_dir, paste0(pattern,"_1"), sheet_name = "A", "sheet legend"),
+    sheet(tmp_dir, paste0(pattern,"_2"), sheet_name = "B", "sheet legend")
   )
 
   output <- excelerate(spreadsheet1, spreadsheet2)

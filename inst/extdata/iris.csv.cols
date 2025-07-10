@@ -1,6 +1,0 @@
-"column","description"
-"Sepal.Length","Length of the sepal in cm"
-"Sepal.Width","Width of the sepal in cm"
-"Petal.Length","Length of the petal in cm"
-"Petal.Width","Width of the petal in cm"
-"Species","Species of iris"

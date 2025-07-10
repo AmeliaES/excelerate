@@ -1,11 +1,15 @@
-#' Add legends for sheets below main legend
+#' Add Legends for Sheets Below Main Legend
 #'
-#' @param wb openxlsx workbook object
-#' @param spreadsheet spreadsheet object returned from spreadsheet()
+#' This function adds legends for each sheet in a given spreadsheet to the
+#' README worksheet of an openxlsx workbook.
 #'
-#' @return numeric value with row index for next empty cell
+#' @param wb An `openxlsx` workbook object.
+#' @param spreadsheet A spreadsheet object returned from `spreadsheet()`.
+#'
+#' @return Numeric value with the row index for the next empty cell.
+#' @importFrom openxlsx writeData
+#' @noRd
 add_sheet_legend <- function(wb, spreadsheet) {
-
   # Get all sheet legends
   legends <- sapply(spreadsheet$sheets, function(sheet) sheet$sheet_legend)
 

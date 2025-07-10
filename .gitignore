@@ -8,9 +8,6 @@
 renv/
 renv.lock
 
-# R build and installation files
-.Rbuildignore
-
 # .Rprofile is specific to your local R setup, usually doesn't need to be tracked
 .Rprofile
 
@@ -32,8 +29,7 @@ Thumbs.db
 .git/
 .gitmodules
 
-# R package documentation
-man/
-
 # Miscellaneous
 *.log
+inst/doc
+docs

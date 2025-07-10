@@ -1,10 +1,14 @@
-#' Adds legend title to first cell in README sheet
+#' Add Legend Title to README Sheet
 #'
-#' @param wb Workbook object from openxlsx package
-#' @param title Character string with title from spreadsheet()
+#' This function writes a legend title to the first cell in the README sheet of
+#' a workbook.
+#'
+#' @param wb A workbook object from the openxlsx package.
+#' @param title A character string with the legend title from [spreadsheet()].
+#'
 #' @importFrom openxlsx writeData
+#' @noRd
 add_legend_title <- function(wb, title) {
-
   # Update legend_title
   legend_title <- title
 
