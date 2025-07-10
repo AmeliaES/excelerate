@@ -31,3 +31,4 @@ Thumbs.db
 
 # Miscellaneous
 *.log
+inst/doc

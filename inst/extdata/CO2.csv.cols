@@ -1,6 +1,0 @@
-"column","description"
-"Plant","Identifier for the plant"
-"Type","Type of plant (Quebec or Mississippi)"
-"Treatment","Treatment type (nonchilled or chilled)"
-"conc","Concentration of CO2 in uL/L"
-"uptake","CO2 uptake in mg"
