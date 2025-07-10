@@ -5,6 +5,8 @@
 \alias{excelerate-package}
 \title{excelerate: Functions to Create and Export Excel Spreadsheets for Supplementary Tables}
 \description{
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
+
 The **excellerate** package provides a set of functions to easily create and export Excel spreadsheets, specifically for generating supplementary tables required when preparing research manuscripts for scientific journals. It allows for quick and customizable table creation from R data, making it easier to structure and format tables according to journal requirements.
 }
 \seealso{

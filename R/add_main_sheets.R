@@ -13,7 +13,7 @@ add_main_sheets <- function(wb, spreadsheet) {
   for (i in seq_along(spreadsheet$sheets)) {
     addWorksheet(wb, sheetName = names(spreadsheet$sheets)[i])
     writeData(wb, sheet = names(spreadsheet$sheets)[i],
-              spreadsheet$sheets[[i]]$main,
+              spreadsheet$sheets[[i]]$results,
               startRow = 1,
               colNames = TRUE)
   }

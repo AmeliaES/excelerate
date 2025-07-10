@@ -4,21 +4,17 @@
 \alias{create_meta}
 \title{Create .cols Sidecar Metadata File}
 \usage{
-create_meta(file_name, table_variable_name, colname_descriptions)
+create_meta(results, colname_descriptions)
 }
 \arguments{
-\item{file_name}{A character string specifying the absolute path
-and file name for the file for which metadata is being generated.}
-
-\item{table_variable_name}{A data frame for which metadata is being
+\item{results}{A data.frame to be marked up with comments for each column.
 generated.}
 
 \item{colname_descriptions}{A named character vector where names match column
-names of \code{table_variable_name} and values are their descriptions.}
+names of \code{results} and values are their descriptions.}
 }
 \value{
-Invisibly returns \code{NULL}. The function performs file creation as
-a side effect.
+A data.frame marked up with comments for each column.
 }
 \description{
 This function creates a .cols sidecar metadata file with column name
@@ -28,13 +24,9 @@ file, appending \code{.cols} to the original file name (e.g.,
 \code{your_file.csv.cols}).
 }
 \examples{
-temp_dir <- tempdir()
-temp_file <- file.path(temp_dir, "example.csv")
-write.csv(mtcars, temp_file, row.names = FALSE)
 
 create_meta(
-  file_name = temp_file,
-  table_variable_name = mtcars,
+  results = mtcars,
   colname_descriptions = c(
     "mpg" = "Miles/(US) gallon",
     "cyl" = "Number of cylinders",
@@ -50,6 +42,4 @@ create_meta(
   )
 )
 
-# Clean up the temporary files
-unlink(c(temp_file, paste0(temp_file, ".cols")))
 }
