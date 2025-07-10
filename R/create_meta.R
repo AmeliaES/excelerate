@@ -51,7 +51,9 @@ create_meta <- function(file_name, table_variable_name, colname_descriptions) {
   )
 
   if (any(colname_descriptions_table$column != colnames(table_variable_name))) {
-    stop(glue("Column names in {file_name}
+    missing_cols_idx <- which(! colnames(table_variable_name) %in% colname_descriptions_table$column)
+    missing_cols <- colnames(table_variable_name)[missing_cols_idx]
+    stop(glue("Column names {paste(missing_cols, collapse = ",")} in {file_name}
               are not all described in colname_descriptions"))
   }
 
