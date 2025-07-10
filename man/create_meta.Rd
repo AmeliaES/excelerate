@@ -7,8 +7,8 @@
 create_meta(file_name, table_variable_name, colname_descriptions)
 }
 \arguments{
-\item{file_name}{A character string specifying the path and file name for the
-file for which metadata is being generated.}
+\item{file_name}{A character string specifying the absolute path
+and file name for the file for which metadata is being generated.}
 
 \item{table_variable_name}{A data frame for which metadata is being
 generated.}

@@ -6,8 +6,8 @@
 #' file, appending `.cols` to the original file name (e.g.,
 #' `your_file.csv.cols`).
 #'
-#' @param file_name A character string specifying the path and file name for the
-#'  file for which metadata is being generated.
+#' @param file_name A character string specifying the absolute path
+#'  and file name for the file for which metadata is being generated.
 #' @param table_variable_name A data frame for which metadata is being
 #'   generated.
 #' @param colname_descriptions A named character vector where names match column
@@ -16,7 +16,6 @@
 #' @return Invisibly returns \code{NULL}. The function performs file creation as
 #'   a side effect.
 #' @importFrom tibble tibble
-#' @importFrom here here
 #' @importFrom glue glue
 #' @importFrom utils write.csv
 #' @examples
@@ -57,7 +56,6 @@ create_meta <- function(file_name, table_variable_name, colname_descriptions) {
   }
 
   write.csv(colname_descriptions_table,
-    here::here(glue("{file_name}.cols")),
-    row.names = FALSE
-  )
+            paste0(file_name, ".cols"),
+            row.names = FALSE)
 }
