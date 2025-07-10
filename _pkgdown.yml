@@ -1,4 +1,28 @@
 url: https://ameliaes.github.io/excelerate/
+
+home:
+  sidebar:
+    structure: [links, license, citation, authors]
+  links:
+  - text: Browse source code
+    href: https://www.github.com/ameliaes/excelerate
+  - text: Report a bug
+    href: https://github.com/AmeliaES/excelerate/issues
+
+authors:
+  Amelia Edmondson-Stait:
+    href: https://ameliaes.github.io
+
 template:
   bootstrap: 5
+  light-switch: true
 
+navbar:
+  structure:
+    left:  [intro, reference]
+    right: [search, github, lightswitch]
+  components:
+    github:
+      icon: fa-github
+      href: https://www.github.com/ameliaes/excelerate
+      aria-label: GitHub
