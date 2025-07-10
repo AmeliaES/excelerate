@@ -15,7 +15,7 @@
 #' "Supplementary Table Legend Title",
 #' "path/to/save/excel/file_name")
 #' }
-spreadsheet <- function(..., title, filename){
+spreadsheet <- function(title, filename, ...) {
   sheets <- c(...)
   spreadsheet <- list(sheets = sheets, title = title, filename = filename)
   class(spreadsheet) <- "spreadsheet"
