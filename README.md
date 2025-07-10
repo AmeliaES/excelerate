@@ -1,5 +1,8 @@
 # `excelerate` R package
 
+  <!-- badges: start -->
+  [![R-CMD-check](https://github.com/AmeliaES/excelerate/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/AmeliaES/excelerate/actions/workflows/R-CMD-check.yaml)
+
 This package provides a set of functions to easily create and export Excel spreadsheets for supplementary tables required when preparing research manuscripts for scientific journals. It helps accelerate the process of generating well-organised, publication-ready tables directly from raw csv or tsv files. There is the option to use the functions in the package as they are, or if you'd rather you can customise the functions to suit your needs.
 
 ## Using the Functions in the Package
