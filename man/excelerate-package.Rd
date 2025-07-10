@@ -7,6 +7,13 @@
 \description{
 The **excellerate** package provides a set of functions to easily create and export Excel spreadsheets, specifically for generating supplementary tables required when preparing research manuscripts for scientific journals. It allows for quick and customizable table creation from R data, making it easier to structure and format tables according to journal requirements.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://ameliaes.github.io/excelerate/}
+}
+
+}
 \author{
 \strong{Maintainer}: Amelia Edmondson-Stait \email{aedmond3@ed.ac.uk}
 

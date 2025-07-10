@@ -1,9 +1,8 @@
 ---
-title: "Creating Supplementary Tables with `excelerate`"
-author: "Amelia Edmondson-Stait"
+title: "Introduction to excelerate"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{my-vignette}
+  %\VignetteIndexEntry{Get started}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -42,7 +41,7 @@ for (dataset in dataset_names) {
 ```
 
 ## Creating Metadata Files
-We then create .cols sidecar metadata files for each dataset using the `create_meta()` function.
+We then create .cols sidecar metadata files for each dataset using the `create_meta()` function. This file contains column names and descriptions to ensure the generated excel file is easy to understand.
 
 ```{r}
 create_meta(file_name = file.path(temp_dir, "iris.csv"),
