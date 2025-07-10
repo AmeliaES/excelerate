@@ -30,6 +30,7 @@ test_that("create_meta stops on missing description", {
   # Create csv files that match the pattern
   pattern <- "test_data"
   test_data_frame <- data.frame(x = 1:5, y = 1:5)
+  # Miss description of column y to test error
   test_meta <- data.frame("Col_name" = "X", "description" = "description of the column here")
   write.csv(test_data_frame, file.path(tmp_dir, paste0(pattern, "_1.csv")), row.names = FALSE)
 
