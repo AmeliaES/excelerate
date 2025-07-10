@@ -1,22 +1,45 @@
-#' Read in file path, file pattern, sheet name and sheet legend
+#' Read File Path, Pattern, Sheet Name, and Legend
 #'
-#' @param path character string with path to directory where files for supplementary tables exist
-#' @param pattern character string with pattern to identify one file in the directory
-#' @param sheet_name character string sheet name for table
-#' @param sheet_legend character string containing table legend
+#' This function reads a file matching a pattern from a given directory and
+#' returns supplementary table data.
 #'
-#' @returns Named nested list of dataframes containing the main results (data frame),
-#' the metadata (data frame) and sheet legend (character string).
-#' Named by sheet_name.
+#' @param path A character string specifying the path to the directory
+#'   containing the files.
+#' @param pattern A regular expression pattern to filter files within the
+#'   directory.
+#' @param sheet_name A character string for naming the sheet.
+#' @param sheet_legend A character string containing the table legend.
+#'
+#' @return A named nested list containing the main results (data frame),
+#'   metadata (data frame), and sheet legend. Named by `sheet_name`.
 #' @importFrom data.table fread
-#'
-#' @export
 #' @examples
-#' \dontrun{
-#' sheet("path/to/data/", "file_name", "sheet name", "sheet legend")
-#' }
-sheet <- function(path, pattern, sheet_name, sheet_legend){
-
+#' temp_dir <- tempdir()
+#' temp_file <- file.path(temp_dir, "example.csv")
+#' write.csv(mtcars, temp_file, row.names = FALSE)
+#' create_meta(
+#'   file_name = temp_file,
+#'   table_variable_name = mtcars,
+#'   colname_descriptions = c(
+#'     "mpg" = "Miles/(US) gallon",
+#'     "cyl" = "Number of cylinders",
+#'     "disp" = "Displacement (cu.in.)",
+#'     "hp" = "Gross horsepower",
+#'     "drat" = "Rear axle ratio",
+#'     "wt" = "Weight (1000 lbs)",
+#'     "qsec" = "1/4 mile time",
+#'     "vs" = "Engine (0 = V-shaped, 1 = straight)",
+#'     "am" = "Transmission (0 = automatic, 1 = manual)",
+#'     "gear" = "Number of forward gears",
+#'     "carb" = "Number of carburetors"
+#'   )
+#' )
+#' sheet(temp_dir, "example\\.csv$", "Example Sheet", "An example legend")
+#'
+#' # Clean up the temporary files
+#' unlink(c(temp_file, paste0(temp_file, ".cols")))
+#' @export
+sheet <- function(path, pattern, sheet_name, sheet_legend) {
   # Get path to the results file
   file_path <- get_file_path(path, pattern)
 

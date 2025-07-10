@@ -1,4 +1,4 @@
-## code to prepare example .csv and .xlsx files in `extdata/`
+## Code to prepare example .csv and .xlsx files in `inst/extdata/`
 
 # Read in example datasets
 dataset_names <- c("iris", "ChickWeight", "ToothGrowth", "CO2")
