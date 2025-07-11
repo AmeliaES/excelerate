@@ -2,7 +2,7 @@ test_that("add_sheet_legend works", {
   # Generate tmp directory to test function against
   tmp_dir <- withr::local_tempdir()
 
-  results <- create_meta(
+  results <- append_meta(
     results = mtcars,
     colname_descriptions = c(
       "mpg" = "Miles/(US) gallon",

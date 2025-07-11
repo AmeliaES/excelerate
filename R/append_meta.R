@@ -17,7 +17,7 @@
 #' @importFrom utils write.csv
 #' @examples
 #'
-#' create_meta(
+#' append_meta(
 #'   results = mtcars,
 #'   colname_descriptions = c(
 #'     "mpg" = "Miles/(US) gallon",
@@ -35,7 +35,7 @@
 #' )
 #'
 #' @export
-create_meta <- function(results, colname_descriptions) {
+append_meta <- function(results, colname_descriptions) {
   # Check for missing descriptions
   if (any(!colnames(results) %in% names(colname_descriptions))) {
     missing_cols_idx <- which(!colnames(results) %in% names(colname_descriptions))

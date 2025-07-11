@@ -10,7 +10,7 @@
 #'
 #' @return A list of sheets, with title and path for saving the Excel file.
 #' @examples
-#' results <- create_meta(
+#' results <- append_meta(
 #'   results = mtcars,
 #'   colname_descriptions = c(
 #'     "mpg" = "Miles/(US) gallon",

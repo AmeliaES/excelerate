@@ -8,7 +8,7 @@
 #' @examples
 #' temp_dir <- tempdir()
 #'
-#' results <- create_meta(
+#' results <- append_meta(
 #'   results = mtcars,
 #'   colname_descriptions = c(
 #'     "mpg" = "Miles/(US) gallon",
@@ -63,9 +63,9 @@ excelerate <- function(...) {
     # (using "sheet_legend" from sheet() )
     next_free_row <- add_sheet_legend(wb, spreadsheet)
 
-    # Function that writes column meta data
+    # Function that writes column meta data to README sheet
     # (using "meta" from sheet() )
-    add_meta(wb, spreadsheet, next_free_row)
+    add_meta_to_README(wb, spreadsheet, next_free_row)
 
     # Function that creates data sheets
     # (using "main" from sheet(), and name of sheet from sheet())

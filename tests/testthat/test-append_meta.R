@@ -1,6 +1,6 @@
-test_that("create_meta works", {
+test_that("append_meta works", {
 
-  results <- create_meta(
+  results <- append_meta(
    results = mtcars,
    colname_descriptions = c(
      "mpg" = "Miles/(US) gallon",
@@ -22,10 +22,10 @@ test_that("create_meta works", {
 
 })
 
-test_that("create_meta stops on missing description", {
+test_that("append_meta stops on missing description", {
 
   expect_error(
-    results <- create_meta(
+    results <- append_meta(
       results = mtcars,
       colname_descriptions = c(
         "mpg" = "Miles/(US) gallon",

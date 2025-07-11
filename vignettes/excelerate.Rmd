@@ -36,31 +36,31 @@ lapply(datasets, head)
 
 ## Creating Metadata
 
-We will use `create_meta()` to add comments on each of the columns in these dataframes with a description.
+We will use `append_meta()` to add comments on each of the columns in these dataframes with a description.
 This metadata will be presented in the README sheet of the Excel file.
 
-The `create_meta()` function requires the `results` argument to be a dataframe and the `colname_descriptions` argument to be a named character vector where the names are the column names and the values are the descriptions.
+The `append_meta()` function requires the `results` argument to be a dataframe and the `colname_descriptions` argument to be a named character vector where the names are the column names and the values are the descriptions.
 
 ```{r}
-iris_commented <- create_meta(results = iris,
+iris_commented <- append_meta(results = iris,
             colname_descriptions = c("Sepal.Length" = "Length of the sepal in cm",
                                       "Sepal.Width" = "Width of the sepal in cm",
                                       "Petal.Length" = "Length of the petal in cm",
                                       "Petal.Width" = "Width of the petal in cm",
                                       "Species" = "Species of iris"))
 
-ChickWeight_commented <- create_meta(results = ChickWeight,
+ChickWeight_commented <- append_meta(results = ChickWeight,
             colname_descriptions = c("weight" = "Weight of the chick in grams",
                                       "Time" = "Time in days",
                                       "Chick" = "Chick identifier",
                                       "Diet" = "Diet type"))
 
-ToothGrowth_commented <- create_meta(results = ToothGrowth,
+ToothGrowth_commented <- append_meta(results = ToothGrowth,
             colname_descriptions = c("len" = "Tooth length in mm",
                                       "supp" = "Supplement type (VC or OJ)",
                                       "dose" = "Dose of the supplement in mg"))
 
-CO2_commented <- create_meta(results = CO2,
+CO2_commented <- append_meta(results = CO2,
             colname_descriptions = c("Plant" = "Identifier for the plant",
                                       "Type" = "Type of plant (Quebec or Mississippi)",
                                       "Treatment" = "Treatment type (nonchilled or chilled)",

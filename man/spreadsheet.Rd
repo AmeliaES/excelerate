@@ -22,7 +22,7 @@ Combines multiple sheets into a single structure with supplementary table
 legend and filename for saving as Excel.
 }
 \examples{
-results <- create_meta(
+results <- append_meta(
   results = mtcars,
   colname_descriptions = c(
     "mpg" = "Miles/(US) gallon",

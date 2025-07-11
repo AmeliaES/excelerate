@@ -1,6 +1,6 @@
 test_that("spreadsheet function works", {
 
-  results <- create_meta(
+  results <- append_meta(
     results = mtcars,
     colname_descriptions = c(
       "mpg" = "Miles/(US) gallon",
@@ -38,7 +38,7 @@ test_that("spreadsheet function works", {
 })
 
 test_that("output of spreadsheet function is spreadsheet class", {
-  results <- create_meta(
+  results <- append_meta(
     results = mtcars,
     colname_descriptions = c(
       "mpg" = "Miles/(US) gallon",

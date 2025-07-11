@@ -1,8 +1,8 @@
-test_that("check add_meta works", {
+test_that("check add_meta_to_readme works", {
   # Generate tmp directory to test function against
   tmp_dir <- withr::local_tempdir()
 
-  results <- create_meta(
+  results <- append_meta(
     results = mtcars,
     colname_descriptions = c(
       "mpg" = "Miles/(US) gallon",
@@ -37,7 +37,7 @@ test_that("check add_meta works", {
   writeData(wb, sheet = "README", "a test string 1", startRow = 2, startCol = 1)
   writeData(wb, sheet = "README", "a test string 2", startRow = 3, startCol = 1)
 
-  add_meta(wb, spreadsheet1, nextFreeRow = 4)
+  add_meta_to_readme(wb, spreadsheet1, nextFreeRow = 4)
 
   # Save to a temporary file
   temp_file <- tempfile(fileext = ".xlsx")
