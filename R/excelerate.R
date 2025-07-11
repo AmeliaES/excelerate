@@ -65,7 +65,7 @@ excelerate <- function(...) {
 
     # Function that writes column meta data to README sheet
     # (using "meta" from sheet() )
-    add_meta_to_README(wb, spreadsheet, next_free_row)
+    add_meta_to_readme(wb, spreadsheet, next_free_row)
 
     # Function that creates data sheets
     # (using "main" from sheet(), and name of sheet from sheet())

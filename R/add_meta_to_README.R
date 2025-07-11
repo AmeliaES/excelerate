@@ -6,7 +6,7 @@
 #'
 #' @importFrom dplyr bind_rows
 #' @noRd
-add_meta_to_README <- function(wb, spreadsheet, nextFreeRow) {
+add_meta_to_readme <- function(wb, spreadsheet, nextFreeRow) {
 
   # extract the meta data from each results item
   meta_list <- lapply(spreadsheet$sheets, function(sheet) {
