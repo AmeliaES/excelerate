@@ -1,4 +1,4 @@
-test_that("add_sheet_legend works", {
+test_that("check add_meta_to_readme works", {
   # Generate tmp directory to test function against
   tmp_dir <- withr::local_tempdir()
 
@@ -23,18 +23,21 @@ test_that("add_sheet_legend works", {
   spreadsheet1 <- spreadsheet(
     sheet(results,
           sheet_name = "A",
-          sheet_legend = "sheet legend 1"),
+          sheet_legend = "Legend for table"),
     sheet(results,
           sheet_name = "B",
-          sheet_legend = "sheet legend 2"),
+          sheet_legend = "Legend for table"),
     title = "Supplementary Table 1",
     filename = "SuppTab1"
   )
 
   wb <- createWorkbook()
   addWorksheet(wb, sheetName = "README")
+  writeData(wb, sheet = "README", "a test string", startRow = 1, startCol = 1)
+  writeData(wb, sheet = "README", "a test string 1", startRow = 2, startCol = 1)
+  writeData(wb, sheet = "README", "a test string 2", startRow = 3, startCol = 1)
 
-  output <- add_sheet_legend(wb, spreadsheet1)
+  add_meta_to_readme(wb, spreadsheet1, nextFreeRow = 4)
 
   # Save to a temporary file
   temp_file <- tempfile(fileext = ".xlsx")
@@ -43,8 +46,12 @@ test_that("add_sheet_legend works", {
   # Read the README sheet
   README <- openxlsx::read.xlsx(temp_file, sheet = "README", colNames = FALSE)
 
-  # Check if the sheet legends were added
-  expect_equal(README[[1,1]], "sheet legend 1")
-  expect_equal(README[[2,1]], "sheet legend 2")
-  expect_equal(output, 4)
+  # Check if the metadata were added
+  expect_equal(README[[4,1]], "Sheet_Name")
+  expect_equal(README[[4,2]], "Column_Name")
+  expect_equal(README[[4,3]], "Description")
+  expect_equal(README[[5,1]], "A")
+  expect_equal(README[[5,2]], "mpg")
+  expect_equal(README[[5,3]], "Miles/(US) gallon")
+
 })
