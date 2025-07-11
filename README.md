@@ -80,7 +80,7 @@ supplementary_table <- spreadsheet(
 excelerate(supplementary_table)
 ```
 
-Please see the `Get Started` page for more detailed instructions.
+Please see the [`Get Started`](https://ameliaes.github.io/excelerate/articles/excelerate.html) page for more detailed instructions.
 
 ### Output
 
