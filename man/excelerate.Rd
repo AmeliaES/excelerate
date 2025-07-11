@@ -15,7 +15,7 @@ This function creates and saves Excel files from given spreadsheet objects.
 \examples{
 temp_dir <- tempdir()
 
-create_meta(
+results <- create_meta(
   results = mtcars,
   colname_descriptions = c(
     "mpg" = "Miles/(US) gallon",
@@ -32,8 +32,8 @@ create_meta(
   )
 )
 
-sheet1 <- sheet(mtcars, "Sheet A", "Legend A")
-sheet2 <- sheet(mtcars, "Sheet B", "Legend B")
+sheet1 <- sheet(results, "Sheet A", "Legend A")
+sheet2 <- sheet(results, "Sheet B", "Legend B")
 
 sp <- spreadsheet(
   "Supplementary Table X",

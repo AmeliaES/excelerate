@@ -12,7 +12,7 @@
 #' @importFrom data.table fread
 #' @examples
 #'
-#' create_meta(
+#' results <- create_meta(
 #'   results = mtcars,
 #'   colname_descriptions = c(
 #'     "mpg" = "Miles/(US) gallon",
@@ -28,7 +28,7 @@
 #'     "carb" = "Number of carburetors"
 #'   )
 #' )
-#' sheet(mtcars, "Example Sheet", "An example legend")
+#' sheet(results, "Example Sheet", "An example legend")
 #'
 #' @export
 sheet <- function(results, sheet_name, sheet_legend) {

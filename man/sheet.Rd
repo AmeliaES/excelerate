@@ -23,7 +23,7 @@ returns supplementary table data.
 }
 \examples{
 
-create_meta(
+results <- create_meta(
   results = mtcars,
   colname_descriptions = c(
     "mpg" = "Miles/(US) gallon",
@@ -39,6 +39,6 @@ create_meta(
     "carb" = "Number of carburetors"
   )
 )
-sheet(mtcars, "Example Sheet", "An example legend")
+sheet(results, "Example Sheet", "An example legend")
 
 }
