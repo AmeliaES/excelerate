@@ -17,7 +17,12 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Amelia Edmondson-Stait \email{aedmond3@ed.ac.uk}
+\strong{Maintainer}: Amelia Edmondson-Stait \email{aedmond3@ed.ac.uk} (\href{https://orcid.org/0000-0003-1456-5128}{ORCID}) [copyright holder]
+
+Authors:
+\itemize{
+  \item Mark James Adams \email{mark.adams@ed.ac.uk} (\href{https://orcid.org/0000-0002-3599-6018}{ORCID})
+}
 
 }
 \keyword{internal}
