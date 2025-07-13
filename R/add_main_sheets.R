@@ -5,7 +5,7 @@
 #'
 #' @param wb An openxlsx workbook object.
 #' @param spreadsheet `spreadsheet` object created with [spreadsheet()].
-#' @importFrom openxlsx addWorksheet writeData
+#' @importFrom openxlsx addWorksheet writeData setColWidths
 #' @noRd
 add_main_sheets <- function(wb, spreadsheet) {
 
@@ -16,5 +16,9 @@ add_main_sheets <- function(wb, spreadsheet) {
               spreadsheet$sheets[[i]]$results,
               startRow = 1,
               colNames = TRUE)
+    # autofit cols
+    setColWidths(wb, sheet = names(spreadsheet$sheets)[i],
+                 cols = c(1:ncol(spreadsheet$sheets[[i]]$results)),
+                 widths = "auto")
   }
 }

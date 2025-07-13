@@ -10,48 +10,37 @@
 #' @importFrom openxlsx writeData createStyle addStyle
 #' @noRd
 add_sheet_legend <- function(wb, spreadsheet) {
-  # Get all sheet legends
-  legends <- lapply(spreadsheet$sheets, function(sheet){
-    sheet$sheet_legend
-  })
+  # Get all sheet legends and their names
+  sheet_names <- names(spreadsheet$sheets)
+  legends <- sapply(spreadsheet$sheets, function(sheet) sheet$sheet_legend)
 
-  # Name the legend with the sheet name it applies to
-  names(legends) <- names(spreadsheet$sheets)
+  # Create a data frame with sheet names and legends
+  legends_df <- data.frame(
+    "Sheet_Name" = sheet_names,
+    "Legend" = legends,
+    stringsAsFactors = FALSE
+  )
 
-  # Define bold and italc styles
+  # Define styles
   bold_style <- createStyle(textDecoration = "bold")
   italic_style <- createStyle(textDecoration = "italic")
 
   # Define the heading row
-  header_row <- 2
+  header_row <- 3
 
-  # Add a heading
-  writeData(wb, sheet = "README", "Sheet Name",
-            startRow = header_row, startCol = 1)
+  # Write the header
+  writeData(wb, sheet = "README",
+            legends_df,
+            startRow = header_row, startCol = 1,
+            colNames = TRUE, headerStyle = italic_style)
 
-  writeData(wb, sheet = "README", "Legend",
-            startRow = header_row, startCol = 2)
+  # Style the legends with bold
+  addStyle(wb, sheet = "README", style = bold_style,
+           rows = (header_row + 1):(header_row + nrow(legends_df)), cols = 1:2,
+           gridExpand = TRUE)
 
-  # Style heading with italics
-  addStyle(wb, sheet = "README", style = italic_style,
-           rows = header_row, cols = 1:2)
-
-  # Write each legend to a new row in the README sheet
-  for (i in seq_along(legends)) {
-
-    # Write the sheet name and legend to the README sheet
-    writeData(wb, sheet = "README", names(legends[i]),
-              startRow = i + header_row, startCol = 1)
-    writeData(wb, sheet = "README", legends[[i]],
-              startRow = i + header_row, startCol = 2)
-
-    # Style the sheet legend in bold
-    addStyle(wb, sheet = "README", style = bold_style,
-             rows = i + header_row, cols = 1:2)
-
-    # Define variable with row index for next empty cell
-    nextFreeRow <- i + header_row + 1
-  }
+  # Return the next free row
+  nextFreeRow <- header_row + nrow(legends_df) + 1
 
   nextFreeRow
 }
