@@ -1,17 +1,13 @@
-#' Create .cols Sidecar Metadata File
+#' Annotate Data Frame with Column Descriptions
 #'
-#' This function creates a .cols sidecar metadata file with column name
-#' descriptions for a given table. It checks if all column names in the table
-#' are described. The `.cols` file is saved in the same directory as the data
-#' file, appending `.cols` to the original file name (e.g.,
-#' `your_file.csv.cols`).
+#' Adds descriptions as comments to all columns in a given data frame.
 #'
 #' @param results A data.frame to be marked up with comments for each column.
 #'   generated.
 #' @param colname_descriptions A named character vector where names match column
 #'   names of `results` and values are their descriptions.
 #'
-#' @return A data.frame marked up with comments for each column.
+#' @return The input data.frame with comments added to each column.
 #' @importFrom tibble tibble
 #' @importFrom glue glue
 #' @importFrom utils write.csv

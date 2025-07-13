@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 ```
 
 ## Introduction
-This vignette demonstrates how to use the `excelerate` package to create supplementary tables from example datasets. We will prepare CSV and .cols metadata files, and then generate Excel spreadsheets.
+This vignette demonstrates how to use the `excelerate` package to create supplementary tables from example datasets.
 
 ```{r setup}
 library(excelerate)
