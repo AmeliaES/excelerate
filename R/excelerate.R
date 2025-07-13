@@ -7,11 +7,9 @@
 #' @importFrom openxlsx createWorkbook saveWorkbook
 #' @examples
 #' temp_dir <- tempdir()
-#' temp_file <- file.path(temp_dir, "example.csv")
-#' write.csv(mtcars, temp_file, row.names = FALSE)
-#' create_meta(
-#'   file_name = temp_file,
-#'   table_variable_name = mtcars,
+#'
+#' results <- append_meta(
+#'   results = mtcars,
 #'   colname_descriptions = c(
 #'     "mpg" = "Miles/(US) gallon",
 #'     "cyl" = "Number of cylinders",
@@ -26,18 +24,19 @@
 #'     "carb" = "Number of carburetors"
 #'   )
 #' )
-#' sheet1 <- sheet(temp_dir, "example\\.csv$", "Sheet A", "Legend A")
-#' sheet2 <- sheet(temp_dir, "example\\.csv$", "Sheet B", "Legend B")
+#'
+#' sheet1 <- sheet(results, "Sheet A", "Legend A")
+#' sheet2 <- sheet(results, "Sheet B", "Legend B")
+#'
 #' sp <- spreadsheet(
 #'   "Supplementary Table X",
 #'   file.path(temp_dir, "example.xlsx"),
 #'   sheet1, sheet2)
+#'
 #' excelerate(sp)
 #'
 #' # Clean up the temporary files
-#' unlink(c(temp_file,
-#'   paste0(temp_file, ".cols"),
-#'   paste0(temp_dir, "/example.xlsx")))
+#' unlink(file.path(temp_dir, "example.xlsx"))
 #' @export
 excelerate <- function(...) {
   # Check input to function are all of class "spreadsheet"
@@ -64,9 +63,9 @@ excelerate <- function(...) {
     # (using "sheet_legend" from sheet() )
     next_free_row <- add_sheet_legend(wb, spreadsheet)
 
-    # Function that writes column meta data
+    # Function that writes column meta data to README sheet
     # (using "meta" from sheet() )
-    add_meta(wb, spreadsheet, next_free_row)
+    add_meta_to_readme(wb, spreadsheet, next_free_row)
 
     # Function that creates data sheets
     # (using "main" from sheet(), and name of sheet from sheet())

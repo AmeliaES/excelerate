@@ -15,58 +15,52 @@ knitr::opts_chunk$set(
 ```
 
 ## Introduction
-This vignette demonstrates how to use the `excelerate` package to create supplementary tables from example datasets. We will prepare CSV and .cols metadata files, and then generate Excel spreadsheets.
+This vignette demonstrates how to use the `excelerate` package to create supplementary tables from example datasets.
 
 ```{r setup}
 library(excelerate)
 
-# Set up temporary directory
+# Set up temporary directory to save the excel spreadsheets in
 temp_dir <- tempdir()
 ```
 
-## Preparing Example Datasets
-First, we load and save example datasets as CSV files. We use the built-in datasets: iris, ChickWeight, ToothGrowth, and CO2.
+## Viewing Example Datasets
+For our examples we will use the built-in datasets: iris, ChickWeight, ToothGrowth, and CO2.
 
 ```{r}
 # Load example datasets
-dataset_names <- c("iris", "ChickWeight", "ToothGrowth", "CO2")
-for (dataset in dataset_names) {
-  data(list = dataset, package = "datasets")
-}
+datasets <- list(iris, ChickWeight, ToothGrowth, CO2)
+lapply(datasets, head)
 
-# Save datasets as CSV files
-for (dataset in dataset_names) {
-  write.csv(get(dataset), file = file.path(temp_dir, paste0("/", dataset, ".csv")), row.names = FALSE)
-}
 ```
 
-## Creating Metadata Files
-We then create .cols sidecar metadata files for each dataset using the `create_meta()` function. This file contains column names and descriptions to ensure the generated excel file is easy to understand.
+## Creating Metadata
+
+We will use `append_meta()` to add comments on each of the columns in these dataframes with a description.
+This metadata will be presented in the README sheet of the Excel file.
+
+The `append_meta()` function requires the `results` argument to be a dataframe and the `colname_descriptions` argument to be a named character vector where the names are the column names and the values are the descriptions.
 
 ```{r}
-create_meta(file_name = file.path(temp_dir, "iris.csv"),
-            table_variable_name = iris,
+iris_commented <- append_meta(results = iris,
             colname_descriptions = c("Sepal.Length" = "Length of the sepal in cm",
                                       "Sepal.Width" = "Width of the sepal in cm",
                                       "Petal.Length" = "Length of the petal in cm",
                                       "Petal.Width" = "Width of the petal in cm",
                                       "Species" = "Species of iris"))
 
-create_meta(file_name = file.path(temp_dir, "ChickWeight.csv"),
-            table_variable_name = ChickWeight,
+ChickWeight_commented <- append_meta(results = ChickWeight,
             colname_descriptions = c("weight" = "Weight of the chick in grams",
                                       "Time" = "Time in days",
                                       "Chick" = "Chick identifier",
                                       "Diet" = "Diet type"))
 
-create_meta(file_name = file.path(temp_dir, "ToothGrowth.csv"),
-            table_variable_name = ToothGrowth,
+ToothGrowth_commented <- append_meta(results = ToothGrowth,
             colname_descriptions = c("len" = "Tooth length in mm",
                                       "supp" = "Supplement type (VC or OJ)",
                                       "dose" = "Dose of the supplement in mg"))
 
-create_meta(file_name = file.path(temp_dir, "CO2.csv"),
-            table_variable_name = CO2,
+CO2_commented <- append_meta(results = CO2,
             colname_descriptions = c("Plant" = "Identifier for the plant",
                                       "Type" = "Type of plant (Quebec or Mississippi)",
                                       "Treatment" = "Treatment type (nonchilled or chilled)",
@@ -75,18 +69,19 @@ create_meta(file_name = file.path(temp_dir, "CO2.csv"),
 ```
 
 ## Generating Supplementary Tables
+
 Next, we demonstrate how to combine sheets into a single Excel file using the `sheet()`, `spreadsheet()` and `excelerate()` functions. In the below example we create two supplementary tables, each containing multiple sheets with metadata and data from the example datasets. These are saved as Excel files in the temporary directory with the names `supplementary_table_1.xlsx` and `supplementary_table_2.xlsx`.
 
 ```{r}
 supplementary_table_1 <- spreadsheet(
-  sheet(temp_dir, "iris", "iris", "sheet_legend for the iris dataset."),
-  sheet(temp_dir, "ChickWeight", "ChickWeight", "sheet_legend for the ChickWeight dataset."),
+  sheet(iris_commented, "iris sheet label", "sheet_legend for the iris dataset."),
+  sheet(ChickWeight_commented, "ChickWeight sheet label", "sheet_legend for the ChickWeight dataset."),
   title = "Supplementary Table 1. Example of output from excelerate(). This is the legend_title passed to spreadsheet().",
   filename = file.path(temp_dir, "supplementary_table_1.xlsx"))
 
 supplementary_table_2 <- spreadsheet(
-  sheet(temp_dir, "ToothGrowth", "ToothGrowth", "sheet_legend for the ToothGrowth dataset."),
-  sheet(temp_dir, "CO2", "CO2", "sheet_legend for the CO2 dataset."),
+  sheet(ToothGrowth_commented, "ToothGrowth sheet label", "sheet_legend for the ToothGrowth dataset."),
+  sheet(CO2_commented, "CO2 sheet label", "sheet_legend for the CO2 dataset."),
   title = "Supplementary Table 2. Example of output from excelerate(). This is the legend_title passed to spreadsheet().",
   filename = file.path(temp_dir, "supplementary_table_2.xlsx"))
 
@@ -94,6 +89,25 @@ supplementary_table_2 <- spreadsheet(
 excelerate(supplementary_table_1,
            supplementary_table_2)
 ```
+
+## Inspect the saved Excel files
+
+The Excel files have been saved in a temporary directory that we definied at the top of this script. You can inspect these files using the following steps:
+
+1. List the files in the temporary directory to make sure they have been created.
+2. Open the Excel files directly from R using `browseURL()`.
+
+```{r inspect-files}
+# List all files in the temporary directory
+list.files(temp_dir, pattern = "\\.xlsx$", full.names = TRUE)
+
+# Open the files to inspect them
+browseURL(file.path(temp_dir, "supplementary_table_1.xlsx"))
+browseURL(file.path(temp_dir, "supplementary_table_2.xlsx"))
+
+```
+
 ## Conclusion
-This vignette has demonstrated how to create supplementary tables using the `excelerate` package in R. We prepared example datasets, created metadata files, and generated Excel spreadsheets with multiple sheets. The `excelerate` package simplifies the process of creating well-structured and documented Excel files for data analysis and reporting.
+
+This vignette has demonstrated how to create supplementary tables using the `excelerate` package in R. We viewed example datasets, attached metadata to these datasets, and generated Excel spreadsheets with multiple sheets. The `excelerate` package simplifies the process of creating Supplementary Tables which can often be a time consuming, manual task in manuscript preparation.
 

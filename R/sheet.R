@@ -3,10 +3,7 @@
 #' This function reads a file matching a pattern from a given directory and
 #' returns supplementary table data.
 #'
-#' @param path A character string specifying the path to the directory
-#'   containing the files.
-#' @param pattern A regular expression pattern to filter files within the
-#'   directory.
+#' @param results A data.frame marked up with comments for each column.
 #' @param sheet_name A character string for naming the sheet.
 #' @param sheet_legend A character string containing the table legend.
 #'
@@ -14,12 +11,9 @@
 #'   metadata (data frame), and sheet legend. Named by `sheet_name`.
 #' @importFrom data.table fread
 #' @examples
-#' temp_dir <- tempdir()
-#' temp_file <- file.path(temp_dir, "example.csv")
-#' write.csv(mtcars, temp_file, row.names = FALSE)
-#' create_meta(
-#'   file_name = temp_file,
-#'   table_variable_name = mtcars,
+#'
+#' results <- append_meta(
+#'   results = mtcars,
 #'   colname_descriptions = c(
 #'     "mpg" = "Miles/(US) gallon",
 #'     "cyl" = "Number of cylinders",
@@ -34,23 +28,14 @@
 #'     "carb" = "Number of carburetors"
 #'   )
 #' )
-#' sheet(temp_dir, "example\\.csv$", "Example Sheet", "An example legend")
+#' sheet(results, "Example Sheet", "An example legend")
 #'
-#' # Clean up the temporary files
-#' unlink(c(temp_file, paste0(temp_file, ".cols")))
 #' @export
-sheet <- function(path, pattern, sheet_name, sheet_legend) {
-  # Get path to the results file
-  file_path <- get_file_path(path, pattern)
+sheet <- function(results, sheet_name, sheet_legend) {
 
-  # Read each file and return a list of dataframes
-  dataframes <- read_results(file_path, sheet_legend)
+  # Create nested list so function returns sheet_name$results and sheet_name$sheet_legend
+  output <- list()
+  output[[sheet_name]] <- list(results = results, sheet_legend = sheet_legend)
 
-  # Create a list item
-  dataframes <- list(dataframes)
-
-  # Name the dataframes by the supplied sheet name
-  names(dataframes) <- sheet_name
-
-  dataframes
+  output
 }

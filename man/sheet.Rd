@@ -4,14 +4,10 @@
 \alias{sheet}
 \title{Read File Path, Pattern, Sheet Name, and Legend}
 \usage{
-sheet(path, pattern, sheet_name, sheet_legend)
+sheet(results, sheet_name, sheet_legend)
 }
 \arguments{
-\item{path}{A character string specifying the path to the directory
-containing the files.}
-
-\item{pattern}{A regular expression pattern to filter files within the
-directory.}
+\item{results}{A data.frame marked up with comments for each column.}
 
 \item{sheet_name}{A character string for naming the sheet.}
 
@@ -26,12 +22,9 @@ This function reads a file matching a pattern from a given directory and
 returns supplementary table data.
 }
 \examples{
-temp_dir <- tempdir()
-temp_file <- file.path(temp_dir, "example.csv")
-write.csv(mtcars, temp_file, row.names = FALSE)
-create_meta(
-  file_name = temp_file,
-  table_variable_name = mtcars,
+
+results <- append_meta(
+  results = mtcars,
   colname_descriptions = c(
     "mpg" = "Miles/(US) gallon",
     "cyl" = "Number of cylinders",
@@ -46,8 +39,6 @@ create_meta(
     "carb" = "Number of carburetors"
   )
 )
-sheet(temp_dir, "example\\\\.csv$", "Example Sheet", "An example legend")
+sheet(results, "Example Sheet", "An example legend")
 
-# Clean up the temporary files
-unlink(c(temp_file, paste0(temp_file, ".cols")))
 }
