@@ -1,8 +1,9 @@
 # excelerate <a href="https://ameliaes.github.io/excelerate/"><img src="man/figures/logo.png" align="right" height="120" alt="excelerate website" /></a>
 
-  <!-- badges: start -->
+<!-- badges: start -->
   [![R-CMD-check](https://github.com/AmeliaES/excelerate/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/AmeliaES/excelerate/actions/workflows/R-CMD-check.yaml) [![Codecov test coverage](https://codecov.io/gh/AmeliaES/excelerate/graph/badge.svg)](https://app.codecov.io/gh/AmeliaES/excelerate)
-  <!-- badges: end -->
+  
+<!-- badges: end -->
 
 The excelerate package accelerates the creation of supplementary tables for research papers.
 

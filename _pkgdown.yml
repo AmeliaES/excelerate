@@ -2,7 +2,7 @@ url: https://ameliaes.github.io/excelerate/
 
 home:
   sidebar:
-    structure: [links, license, citation, authors]
+    structure: [links, license, citation, authors, dev]
   links:
   - text: Browse source code
     href: https://www.github.com/ameliaes/excelerate
@@ -28,3 +28,6 @@ navbar:
       icon: fa-github
       href: https://www.github.com/ameliaes/excelerate
       aria-label: GitHub
+
+development:
+  mode: auto
