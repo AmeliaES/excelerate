@@ -36,7 +36,7 @@
 #' excelerate(sp)
 #'
 #' # Clean up the temporary files
-#' unlink(paste0(temp_dir, "/example.xlsx"))
+#' unlink(file.path(temp_dir, "example.xlsx"))
 #' @export
 excelerate <- function(...) {
   # Check input to function are all of class "spreadsheet"
