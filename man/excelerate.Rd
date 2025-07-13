@@ -43,5 +43,5 @@ sp <- spreadsheet(
 excelerate(sp)
 
 # Clean up the temporary files
-unlink(paste0(temp_dir, "/example.xlsx"))
+unlink(file.path(temp_dir, "example.xlsx"))
 }
