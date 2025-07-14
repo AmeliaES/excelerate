@@ -31,7 +31,8 @@
 #' sp <- spreadsheet(
 #'   "Supplementary Table X",
 #'   file.path(temp_dir, "example.xlsx"),
-#'   sheet1, sheet2)
+#'   sheet1, sheet2
+#' )
 #'
 #' excelerate(sp)
 #'

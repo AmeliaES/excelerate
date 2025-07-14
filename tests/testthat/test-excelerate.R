@@ -22,22 +22,26 @@ test_that("excelerate function works", {
   # Check spreadsheet returns expected object
   spreadsheet1 <- spreadsheet(
     sheet(results,
-          sheet_name = "A",
-          sheet_legend = "Legend for table"),
+      sheet_name = "A",
+      sheet_legend = "Legend for table"
+    ),
     sheet(results,
-          sheet_name = "B",
-          sheet_legend = "Legend for table"),
+      sheet_name = "B",
+      sheet_legend = "Legend for table"
+    ),
     title = "Supplementary Table 1",
     filename = file.path(tmp_dir, "SuppTab1.xlsx")
   )
 
   spreadsheet2 <- spreadsheet(
     sheet(results,
-          sheet_name = "A",
-          sheet_legend = "Legend for table"),
+      sheet_name = "A",
+      sheet_legend = "Legend for table"
+    ),
     sheet(results,
-          sheet_name = "B",
-          sheet_legend = "Legend for table"),
+      sheet_name = "B",
+      sheet_legend = "Legend for table"
+    ),
     title = "Supplementary Table 2",
     filename = file.path(tmp_dir, "SuppTab2.xlsx")
   )
@@ -49,10 +53,11 @@ test_that("excelerate function works", {
   expect_equal(readxl::excel_sheets(file.path(tmp_dir, "SuppTab1.xlsx")), c("README", "A", "B"))
   expect_true(file.exists(file.path(tmp_dir, "SuppTab2.xlsx")))
   expect_equal(readxl::excel_sheets(file.path(tmp_dir, "SuppTab2.xlsx")), c("README", "A", "B"))
-
 })
 
-test_that("input to excelerate are spreadsheet class",{
-  expect_error(excelerate(NULL),
-               "Non spreadsheet class used as input to excelerate")
+test_that("input to excelerate are spreadsheet class", {
+  expect_error(
+    excelerate(NULL),
+    "Non spreadsheet class used as input to excelerate"
+  )
 })

@@ -2,7 +2,7 @@
 % Please edit documentation in R/append_meta.R
 \name{append_meta}
 \alias{append_meta}
-\title{Create .cols Sidecar Metadata File}
+\title{Annotate Data Frame with Column Descriptions}
 \usage{
 append_meta(results, colname_descriptions)
 }
@@ -14,14 +14,10 @@ generated.}
 names of \code{results} and values are their descriptions.}
 }
 \value{
-A data.frame marked up with comments for each column.
+The input data.frame with comments added to each column.
 }
 \description{
-This function creates a .cols sidecar metadata file with column name
-descriptions for a given table. It checks if all column names in the table
-are described. The \code{.cols} file is saved in the same directory as the data
-file, appending \code{.cols} to the original file name (e.g.,
-\code{your_file.csv.cols}).
+Adds descriptions as comments to all columns in a given data frame.
 }
 \examples{
 

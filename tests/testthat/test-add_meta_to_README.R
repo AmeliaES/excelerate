@@ -22,11 +22,13 @@ test_that("check add_meta_to_readme works", {
   # Check spreadsheet returns expected object
   spreadsheet1 <- spreadsheet(
     sheet(results,
-          sheet_name = "A",
-          sheet_legend = "Legend for table"),
+      sheet_name = "A",
+      sheet_legend = "Legend for table"
+    ),
     sheet(results,
-          sheet_name = "B",
-          sheet_legend = "Legend for table"),
+      sheet_name = "B",
+      sheet_legend = "Legend for table"
+    ),
     title = "Supplementary Table 1",
     filename = "SuppTab1"
   )
@@ -47,11 +49,10 @@ test_that("check add_meta_to_readme works", {
   README <- openxlsx::read.xlsx(temp_file, sheet = "README", colNames = FALSE)
 
   # Check if the metadata were added
-  expect_equal(README[[4,1]], "Sheet_Name")
-  expect_equal(README[[4,2]], "Column_Name")
-  expect_equal(README[[4,3]], "Description")
-  expect_equal(README[[5,1]], "A")
-  expect_equal(README[[5,2]], "mpg")
-  expect_equal(README[[5,3]], "Miles/(US) gallon")
-
+  expect_equal(README[[4, 1]], "Sheet_Name")
+  expect_equal(README[[4, 2]], "Column_Name")
+  expect_equal(README[[4, 3]], "Description")
+  expect_equal(README[[5, 1]], "A")
+  expect_equal(README[[5, 2]], "mpg")
+  expect_equal(README[[5, 3]], "Miles/(US) gallon")
 })

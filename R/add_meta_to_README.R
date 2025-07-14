@@ -7,10 +7,8 @@
 #' @importFrom dplyr bind_rows
 #' @noRd
 add_meta_to_readme <- function(wb, spreadsheet, nextFreeRow) {
-
   # extract the meta data from each results item
   meta_list <- lapply(spreadsheet$sheets, function(sheet) {
-
     # Extract column names
     column_names <- colnames(sheet$results)
 
@@ -23,7 +21,6 @@ add_meta_to_readme <- function(wb, spreadsheet, nextFreeRow) {
     rownames(metadata) <- NULL
 
     metadata
-
   })
 
   # combine all meta data into a single data frame and add id column

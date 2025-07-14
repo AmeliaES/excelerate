@@ -25,6 +25,4 @@ test_that("sheet works", {
   expect_s3_class(output[[1]]$results, "data.frame")
   expect_equal(names(output), "A")
   expect_equal(names(output[[1]]), c("results", "sheet_legend"))
-
 })
-
