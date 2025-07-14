@@ -22,11 +22,13 @@ test_that("check add_main_sheets works as expected", {
   # Check spreadsheet returns expected object
   spreadsheet1 <- spreadsheet(
     sheet(results,
-          sheet_name = "A",
-          sheet_legend = "Legend for table"),
+      sheet_name = "A",
+      sheet_legend = "Legend for table"
+    ),
     sheet(results,
-          sheet_name = "B",
-          sheet_legend = "Legend for table"),
+      sheet_name = "B",
+      sheet_legend = "Legend for table"
+    ),
     title = "Supplementary Table 1",
     filename = "SuppTab1"
   )
@@ -39,8 +41,8 @@ test_that("check add_main_sheets works as expected", {
   openxlsx::saveWorkbook(wb, temp_file, overwrite = TRUE)
 
   # Read in the excel file, with sheet_name = A
-  sheetA <- openxlsx::read.xlsx(temp_file, sheet = "A", colNames = TRUE)
+  sheet <- openxlsx::read.xlsx(temp_file, sheet = "A", colNames = TRUE)
 
   row.names(mtcars) <- NULL
-  expect_equal(sheetA, mtcars)
+  expect_equal(sheet, mtcars)
 })

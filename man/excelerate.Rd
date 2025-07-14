@@ -38,10 +38,11 @@ sheet2 <- sheet(results, "Sheet B", "Legend B")
 sp <- spreadsheet(
   "Supplementary Table X",
   file.path(temp_dir, "example.xlsx"),
-  sheet1, sheet2)
+  sheet1, sheet2
+)
 
 excelerate(sp)
 
 # Clean up the temporary files
-unlink(paste0(temp_dir, "/example.xlsx"))
+unlink(file.path(temp_dir, "example.xlsx"))
 }

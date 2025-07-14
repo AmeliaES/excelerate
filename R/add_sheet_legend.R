@@ -15,10 +15,14 @@ add_sheet_legend <- function(wb, spreadsheet) {
 
   # Write each legend to a new row in the README sheet
   for (i in seq_along(legends)) {
-    writeData(wb, sheet = "README", legends[i], startRow = i + 1, startCol = 1)
+    openxlsx::writeData(wb,
+      sheet = "README", legends[i],
+      startRow = i + 1,
+      startCol = 1
+    )
     # Define variable with row index for next empty cell
-    nextFreeRow <- i + 2
+    next_free_row <- i + 2
   }
 
-  nextFreeRow
+  next_free_row
 }

@@ -77,4 +77,3 @@ The output is an excel file with multiple sheets.
   - The `sheet_legend`s, specified in `sheet()`, for each sheet.
   - The meta data supplied to `append_meta()`, for each sheet.
 - The remaining sheets are those supplied to `sheet()`. In the order each sheet object was supplied to `spreadsheet()`. Each sheet contains the data from the corresponding csv or tsv file, with the first row containing the column names.
-
