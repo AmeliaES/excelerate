@@ -1,4 +1,4 @@
-test_that("check add_main_sheets works as expected", {
+test_that("check add_meta_to_readme works", {
   # Generate tmp directory to test function against
   tmp_dir <- withr::local_tempdir()
 
@@ -34,15 +34,25 @@ test_that("check add_main_sheets works as expected", {
   )
 
   wb <- createWorkbook()
-  add_main_sheets(wb, spreadsheet1)
+  addWorksheet(wb, sheetName = "README")
+  writeData(wb, sheet = "README", "a test string", startRow = 1, startCol = 1)
+  writeData(wb, sheet = "README", "a test string 1", startRow = 2, startCol = 1)
+  writeData(wb, sheet = "README", "a test string 2", startRow = 3, startCol = 1)
+
+  add_meta_to_readme(wb, spreadsheet1, next_free_row = 4)
 
   # Save to a temporary file
   temp_file <- tempfile(fileext = ".xlsx")
   openxlsx::saveWorkbook(wb, temp_file, overwrite = TRUE)
 
-  # Read in the excel file, with sheet_name = A
-  sheet <- openxlsx::read.xlsx(temp_file, sheet = "A", colNames = TRUE)
+  # Read the README sheet
+  readme <- openxlsx::read.xlsx(temp_file, sheet = "README", colNames = FALSE)
 
-  row.names(mtcars) <- NULL
-  expect_equal(sheet, mtcars)
+  # Check if the metadata were added
+  expect_equal(readme[[4, 1]], "Sheet_Name")
+  expect_equal(readme[[4, 2]], "Column_Name")
+  expect_equal(readme[[4, 3]], "Description")
+  expect_equal(readme[[5, 1]], "A")
+  expect_equal(readme[[5, 2]], "mpg")
+  expect_equal(readme[[5, 3]], "Miles/(US) gallon")
 })

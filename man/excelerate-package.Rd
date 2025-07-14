@@ -3,9 +3,11 @@
 \docType{package}
 \name{excelerate-package}
 \alias{excelerate-package}
-\title{excelerate: Functions to Create and Export Excel Spreadsheets for Supplementary Tables}
+\title{excelerate: Create Excel Spreadsheets for Supplementary Tables}
 \description{
-The **excellerate** package provides a set of functions to easily create and export Excel spreadsheets, specifically for generating supplementary tables required when preparing research manuscripts for scientific journals. It allows for quick and customizable table creation from R data, making it easier to structure and format tables according to journal requirements.
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
+
+The excelerate package simplifies the creation of supplementary tables for research papers. It uses the openxlsx R package to produce tables in a consistent format. You can easily turn data frames into Excel files, with accompanying metadata in a README sheet, and save them as numbered supplementary files.
 }
 \seealso{
 Useful links:
@@ -15,7 +17,12 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Amelia Edmondson-Stait \email{aedmond3@ed.ac.uk}
+\strong{Maintainer}: Amelia Edmondson-Stait \email{aedmond3@ed.ac.uk} (\href{https://orcid.org/0000-0003-1456-5128}{ORCID}) [copyright holder]
+
+Authors:
+\itemize{
+  \item Mark James Adams \email{mark.adams@ed.ac.uk} (\href{https://orcid.org/0000-0002-3599-6018}{ORCID})
+}
 
 }
 \keyword{internal}
