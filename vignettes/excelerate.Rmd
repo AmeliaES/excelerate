@@ -52,7 +52,7 @@ iris_commented <- append_meta(
   )
 )
 
-ChickWeight_commented <- append_meta(
+chickweight_commented <- append_meta(
   results = ChickWeight,
   colname_descriptions = c(
     "weight" = "Weight of the chick in grams",
@@ -62,7 +62,7 @@ ChickWeight_commented <- append_meta(
   )
 )
 
-ToothGrowth_commented <- append_meta(
+toothgrowth_commented <- append_meta(
   results = ToothGrowth,
   colname_descriptions = c(
     "len" = "Tooth length in mm",
@@ -70,8 +70,7 @@ ToothGrowth_commented <- append_meta(
     "dose" = "Dose of the supplement in mg"
   )
 )
-
-CO2_commented <- append_meta(
+co2_commented <- append_meta(
   results = CO2,
   colname_descriptions = c(
     "Plant" = "Identifier for the plant",
@@ -89,16 +88,32 @@ Next, we demonstrate how to combine sheets into a single Excel file using the `s
 
 ```{r}
 supplementary_table_1 <- spreadsheet(
-  sheet(iris_commented, "iris sheet label", "sheet_legend for the iris dataset."),
-  sheet(ChickWeight_commented, "ChickWeight sheet label", "sheet_legend for the ChickWeight dataset."),
-  title = "Supplementary Table 1. Example of output from excelerate(). This is the legend_title passed to spreadsheet().",
+  sheet(
+    iris_commented,
+    "iris sheet label",
+    "sheet_legend for the iris dataset."
+  ),
+  sheet(
+    ChickWeight_commented,
+    "ChickWeight sheet label",
+    "sheet_legend for the ChickWeight dataset."
+  ),
+  title = "Supplementary Table 1. This is 'legend_title' from spreadsheet().",
   filename = file.path(temp_dir, "supplementary_table_1.xlsx")
 )
 
 supplementary_table_2 <- spreadsheet(
-  sheet(ToothGrowth_commented, "ToothGrowth sheet label", "sheet_legend for the ToothGrowth dataset."),
-  sheet(CO2_commented, "CO2 sheet label", "sheet_legend for the CO2 dataset."),
-  title = "Supplementary Table 2. Example of output from excelerate(). This is the legend_title passed to spreadsheet().",
+  sheet(
+    ToothGrowth_commented,
+    "ToothGrowth sheet label",
+    "sheet_legend for the ToothGrowth dataset."
+  ),
+  sheet(
+    CO2_commented,
+    "CO2 sheet label",
+    "sheet_legend for the CO2 dataset."
+  ),
+  title = "Supplementary Table 2. This is 'legend_title' from spreadsheet().",
   filename = file.path(temp_dir, "supplementary_table_2.xlsx")
 )
 
@@ -111,9 +126,11 @@ excelerate(
 
 ## Inspect the saved Excel files
 
-The Excel files have been saved in a temporary directory that we definied at the top of this script. You can inspect these files using the following steps:
+The Excel files have been saved in a temporary directory that we definied at the
+top of this script. You can inspect these files using the following steps:
 
-1. List the files in the temporary directory to make sure they have been created.
+1. List the files in the temporary directory to make sure they have been 
+  created.
 2. Open the Excel files directly from R using `browseURL()`.
 
 ```{r inspect-files}
@@ -127,4 +144,8 @@ browseURL(file.path(temp_dir, "supplementary_table_2.xlsx"))
 
 ## Conclusion
 
-This vignette has demonstrated how to create supplementary tables using the `excelerate` package in R. We viewed example datasets, attached metadata to these datasets, and generated Excel spreadsheets with multiple sheets. The `excelerate` package simplifies the process of creating Supplementary Tables which can often be a time consuming, manual task in manuscript preparation.
+This vignette has demonstrated how to create supplementary tables using the 
+`excelerate` package in R. We viewed example datasets, attached metadata to 
+these datasets, and generated Excel spreadsheets with multiple sheets. The 
+`excelerate` package simplifies the process of creating Supplementary Tables 
+which can often be a time consuming, manual task in manuscript preparation.

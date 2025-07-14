@@ -50,9 +50,15 @@ test_that("excelerate function works", {
 
   # Check excelerate returns expected object
   expect_true(file.exists(file.path(tmp_dir, "SuppTab1.xlsx")))
-  expect_equal(readxl::excel_sheets(file.path(tmp_dir, "SuppTab1.xlsx")), c("README", "A", "B"))
+  expect_equal(
+    readxl::excel_sheets(file.path(tmp_dir, "SuppTab1.xlsx")),
+    c("README", "A", "B")
+  )
   expect_true(file.exists(file.path(tmp_dir, "SuppTab2.xlsx")))
-  expect_equal(readxl::excel_sheets(file.path(tmp_dir, "SuppTab2.xlsx")), c("README", "A", "B"))
+  expect_equal(
+    readxl::excel_sheets(file.path(tmp_dir, "SuppTab2.xlsx")),
+    c("README", "A", "B")
+  )
 })
 
 test_that("input to excelerate are spreadsheet class", {

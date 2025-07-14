@@ -32,7 +32,8 @@
 #'
 #' @export
 sheet <- function(results, sheet_name, sheet_legend) {
-  # Create nested list so function returns sheet_name$results and sheet_name$sheet_legend
+  # Create nested list so function returns sheet_name$results and
+  # sheet_name$sheet_legend
   output <- list()
   output[[sheet_name]] <- list(results = results, sheet_legend = sheet_legend)
 

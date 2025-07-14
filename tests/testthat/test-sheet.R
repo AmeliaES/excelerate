@@ -17,7 +17,10 @@ test_that("sheet works", {
   )
 
   # Sheet returns a list item with two dataframes named main and meta
-  output <- sheet(results, sheet_name = "A", sheet_legend = "Summary of what sheet A contains")
+  output <- sheet(results,
+    sheet_name = "A",
+    sheet_legend = "Summary of what sheet A contains"
+  )
 
   expect_identical(as.data.frame(output[[1]]$results), as.data.frame(results))
   expect_equal(length(output), 1)

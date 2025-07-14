@@ -7,5 +7,5 @@
 #' @noRd
 add_readme <- function(wb) {
   # Create a readme sheet
-  addWorksheet(wb, sheetName = "README")
+  openxlsx::addWorksheet(wb, sheetName = "README")
 }

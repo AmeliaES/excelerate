@@ -46,13 +46,13 @@ test_that("check add_meta_to_readme works", {
   openxlsx::saveWorkbook(wb, temp_file, overwrite = TRUE)
 
   # Read the README sheet
-  README <- openxlsx::read.xlsx(temp_file, sheet = "README", colNames = FALSE)
+  readme <- openxlsx::read.xlsx(temp_file, sheet = "README", colNames = FALSE)
 
   # Check if the metadata were added
-  expect_equal(README[[4, 1]], "Sheet_Name")
-  expect_equal(README[[4, 2]], "Column_Name")
-  expect_equal(README[[4, 3]], "Description")
-  expect_equal(README[[5, 1]], "A")
-  expect_equal(README[[5, 2]], "mpg")
-  expect_equal(README[[5, 3]], "Miles/(US) gallon")
+  expect_equal(readme[[4, 1]], "Sheet_Name")
+  expect_equal(readme[[4, 2]], "Column_Name")
+  expect_equal(readme[[4, 3]], "Description")
+  expect_equal(readme[[5, 1]], "A")
+  expect_equal(readme[[5, 2]], "mpg")
+  expect_equal(readme[[5, 3]], "Miles/(US) gallon")
 })

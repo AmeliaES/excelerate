@@ -43,10 +43,10 @@ test_that("add_sheet_legend works", {
   openxlsx::saveWorkbook(wb, temp_file, overwrite = TRUE)
 
   # Read the README sheet
-  README <- openxlsx::read.xlsx(temp_file, sheet = "README", colNames = FALSE)
+  readme <- openxlsx::read.xlsx(temp_file, sheet = "README", colNames = FALSE)
 
   # Check if the sheet legends were added
-  expect_equal(README[[1, 1]], "sheet legend 1")
-  expect_equal(README[[2, 1]], "sheet legend 2")
+  expect_equal(readme[[1, 1]], "sheet legend 1")
+  expect_equal(readme[[2, 1]], "sheet legend 2")
   expect_equal(output, 4)
 })
