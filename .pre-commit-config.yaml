@@ -54,4 +54,4 @@ repos:
 
 ci:
     autoupdate_schedule: monthly
-    skip: [pkgdown]
+    skip: [pkgdown, devtools-check]
