@@ -13,6 +13,5 @@ test_that("add_legend_title adds text into first cell of first sheet", {
   cell_value <- openxlsx::read.xlsx(temp_file, sheet = "README", cols = 1, rows = 1, colNames = FALSE)
 
   # Check if the title was added correctly
-  expect_equal(cell_value[[1,1]], title)
-
+  expect_equal(cell_value[[1, 1]], title)
 })

@@ -8,13 +8,14 @@
 #' @importFrom openxlsx addWorksheet writeData
 #' @noRd
 add_main_sheets <- function(wb, spreadsheet) {
-
   # Add each table to a new sheet
   for (i in seq_along(spreadsheet$sheets)) {
     addWorksheet(wb, sheetName = names(spreadsheet$sheets)[i])
-    writeData(wb, sheet = names(spreadsheet$sheets)[i],
-              spreadsheet$sheets[[i]]$results,
-              startRow = 1,
-              colNames = TRUE)
+    writeData(wb,
+      sheet = names(spreadsheet$sheets)[i],
+      spreadsheet$sheets[[i]]$results,
+      startRow = 1,
+      colNames = TRUE
+    )
   }
 }

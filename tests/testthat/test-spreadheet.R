@@ -1,5 +1,4 @@
 test_that("spreadsheet function works", {
-
   results <- append_meta(
     results = mtcars,
     colname_descriptions = c(
@@ -20,11 +19,13 @@ test_that("spreadsheet function works", {
   # Check spreadsheet returns expected object
   output <- spreadsheet(
     sheet(results,
-          sheet_name = "A",
-          sheet_legend = "Legend for table"),
+      sheet_name = "A",
+      sheet_legend = "Legend for table"
+    ),
     sheet(results,
-          sheet_name = "B",
-          sheet_legend = "Legend for table"),
+      sheet_name = "B",
+      sheet_legend = "Legend for table"
+    ),
     title = "Supplementary Table 1",
     filename = "SuppTab1"
   )
@@ -34,7 +35,6 @@ test_that("spreadsheet function works", {
   expect_s3_class(output$sheets$A$results, "data.frame")
   expect_equal(output$title, "Supplementary Table 1")
   expect_equal(output$filename, "SuppTab1")
-
 })
 
 test_that("output of spreadsheet function is spreadsheet class", {
@@ -57,16 +57,17 @@ test_that("output of spreadsheet function is spreadsheet class", {
 
   output <- spreadsheet(
     sheet(results,
-          sheet_name = "A",
-          sheet_legend = "Legend for table"),
+      sheet_name = "A",
+      sheet_legend = "Legend for table"
+    ),
     sheet(results,
-          sheet_name = "B",
-          sheet_legend = "Legend for table"),
+      sheet_name = "B",
+      sheet_legend = "Legend for table"
+    ),
     title = "Supplementary Table 1",
     filename = "SuppTab1"
   )
 
   # class spreadsheet
   expect_s3_class(output, "spreadsheet")
-
 })
