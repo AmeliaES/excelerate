@@ -39,7 +39,7 @@ test_that("check add_meta_to_readme works", {
   writeData(wb, sheet = "README", "a test string 1", startRow = 2, startCol = 1)
   writeData(wb, sheet = "README", "a test string 2", startRow = 3, startCol = 1)
 
-  add_meta_to_readme(wb, spreadsheet1, nextFreeRow = 4)
+  add_meta_to_readme(wb, spreadsheet1, next_free_row = 4)
 
   # Save to a temporary file
   temp_file <- tempfile(fileext = ".xlsx")

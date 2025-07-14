@@ -94,7 +94,7 @@ supplementary_table_1 <- spreadsheet(
     "sheet_legend for the iris dataset."
   ),
   sheet(
-    ChickWeight_commented,
+    chickweight_commented,
     "ChickWeight sheet label",
     "sheet_legend for the ChickWeight dataset."
   ),
@@ -104,12 +104,12 @@ supplementary_table_1 <- spreadsheet(
 
 supplementary_table_2 <- spreadsheet(
   sheet(
-    ToothGrowth_commented,
+    toothgrowth_commented,
     "ToothGrowth sheet label",
     "sheet_legend for the ToothGrowth dataset."
   ),
   sheet(
-    CO2_commented,
+    co2_commented,
     "CO2 sheet label",
     "sheet_legend for the CO2 dataset."
   ),
