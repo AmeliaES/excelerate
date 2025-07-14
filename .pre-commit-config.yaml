@@ -49,7 +49,7 @@ repos:
         # `exclude: <regex>` to allow committing specific files
     -   id: devtools-check
         name: Devtools Check
-        entry: Rscript -e 'devtools::check()'
+        entry: Rscript -e 'if (!requireNamespace("devtools", quietly = TRUE)) install.packages("devtools"); devtools::check()'
         language: system
 
 ci:
