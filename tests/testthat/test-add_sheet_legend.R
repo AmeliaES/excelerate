@@ -22,11 +22,13 @@ test_that("add_sheet_legend works", {
   # Check spreadsheet returns expected object
   spreadsheet1 <- spreadsheet(
     sheet(results,
-          sheet_name = "A",
-          sheet_legend = "sheet legend 1"),
+      sheet_name = "A",
+      sheet_legend = "sheet legend 1"
+    ),
     sheet(results,
-          sheet_name = "B",
-          sheet_legend = "sheet legend 2"),
+      sheet_name = "B",
+      sheet_legend = "sheet legend 2"
+    ),
     title = "Supplementary Table 1",
     filename = "SuppTab1"
   )
@@ -41,14 +43,14 @@ test_that("add_sheet_legend works", {
   openxlsx::saveWorkbook(wb, temp_file, overwrite = TRUE)
 
   # Read the README sheet
-  README <- openxlsx::read.xlsx(temp_file, sheet = "README", colNames = FALSE)
+  readme <- openxlsx::read.xlsx(temp_file, sheet = "README", colNames = FALSE)
 
   # Check if the sheet legends were added
-  expect_equal(README[[1,1]], "Sheet_Name")
-  expect_equal(README[[1,2]], "Legend")
-  expect_equal(README[[2,1]], "A")
-  expect_equal(README[[3,1]], "B")
-  expect_equal(README[[2,2]], "sheet legend 1")
-  expect_equal(README[[3,2]], "sheet legend 2")
+  expect_equal(readme[[1, 1]], "Sheet_Name")
+  expect_equal(readme[[1, 2]], "Legend")
+  expect_equal(readme[[2, 1]], "A")
+  expect_equal(readme[[3, 1]], "B")
+  expect_equal(readme[[2, 2]], "sheet legend 1")
+  expect_equal(readme[[3, 2]], "sheet legend 2")
   expect_equal(output, 6)
 })

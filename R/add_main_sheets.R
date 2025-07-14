@@ -8,17 +8,14 @@
 #' @importFrom openxlsx addWorksheet writeData setColWidths
 #' @noRd
 add_main_sheets <- function(wb, spreadsheet) {
-
   # Add each table to a new sheet
   for (i in seq_along(spreadsheet$sheets)) {
-    addWorksheet(wb, sheetName = names(spreadsheet$sheets)[i])
-    writeData(wb, sheet = names(spreadsheet$sheets)[i],
-              spreadsheet$sheets[[i]]$results,
-              startRow = 1,
-              colNames = TRUE)
-    # autofit cols
-    setColWidths(wb, sheet = names(spreadsheet$sheets)[i],
-                 cols = c(1:ncol(spreadsheet$sheets[[i]]$results)),
-                 widths = "auto")
+    openxlsx::addWorksheet(wb, sheetName = names(spreadsheet$sheets)[i])
+    openxlsx::writeData(wb,
+      sheet = names(spreadsheet$sheets)[i],
+      spreadsheet$sheets[[i]]$results,
+      startRow = 1,
+      colNames = TRUE
+    )
   }
 }

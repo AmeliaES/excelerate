@@ -34,8 +34,8 @@
 append_meta <- function(results, colname_descriptions) {
   # Check for missing descriptions
   if (any(!colnames(results) %in% names(colname_descriptions))) {
-    missing_cols_idx <- which(!colnames(results) %in% names(colname_descriptions))
-    missing_cols <- colnames(results)[missing_cols_idx]
+    idx <- which(!colnames(results) %in% names(colname_descriptions))
+    missing_cols <- colnames(results)[idx]
     stop(glue::glue("Column names {paste(missing_cols, collapse = ', ')} in
                     the dataset are not all described in colname_descriptions"))
   }

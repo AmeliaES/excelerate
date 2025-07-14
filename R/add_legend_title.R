@@ -13,12 +13,16 @@ add_legend_title <- function(wb, title) {
   legend_title <- title
 
   # Write the table legend title
-  writeData(wb, sheet = "README", legend_title, startRow = 1, startCol = 1)
+  openxlsx::writeData(wb,
+    sheet = "README",
+    legend_title,
+    startRow = 1,
+    startCol = 1
+  )
 
   # Change style to bold
   bold_style <- createStyle(textDecoration = "bold")
 
   # Add style to the first cell (main table legend) of the README sheet
   addStyle(wb, sheet = "README", bold_style, rows = 1, cols = 1)
-
 }

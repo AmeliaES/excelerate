@@ -29,18 +29,22 @@ add_sheet_legend <- function(wb, spreadsheet) {
   header_row <- 3
 
   # Write the header
-  writeData(wb, sheet = "README",
-            legends_df,
-            startRow = header_row, startCol = 1,
-            colNames = TRUE, headerStyle = italic_style)
+  writeData(wb,
+    sheet = "README",
+    legends_df,
+    startRow = header_row, startCol = 1,
+    colNames = TRUE, headerStyle = italic_style
+  )
 
   # Style the legends with bold
-  addStyle(wb, sheet = "README", style = bold_style,
-           rows = (header_row + 1):(header_row + nrow(legends_df)), cols = 1:2,
-           gridExpand = TRUE)
+  addStyle(wb,
+    sheet = "README", style = bold_style,
+    rows = (header_row + 1):(header_row + nrow(legends_df)), cols = 1:2,
+    gridExpand = TRUE
+  )
 
   # Return the next free row
-  nextFreeRow <- header_row + nrow(legends_df) + 1
+  next_free_row <- header_row + nrow(legends_df) + 1
 
-  nextFreeRow
+  next_free_row
 }
