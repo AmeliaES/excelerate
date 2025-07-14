@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Functions to Create and Export Excel Spreadsheets for Supplementary Tables • excelerate</title>
+<title>Create Excel Spreadsheets for Supplementary Tables • excelerate</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
 <link rel="icon" type="”image/svg+xml”" href="favicon.svg">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
@@ -15,9 +15,9 @@
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Functions to Create and Export Excel Spreadsheets for Supplementary Tables">
-<meta name="description" content="The **excellerate** package provides a set of functions to easily create and export Excel spreadsheets, specifically for generating supplementary tables required when preparing research manuscripts for scientific journals. It allows for quick and customizable table creation from R data, making it easier to structure and format tables according to journal requirements.">
-<meta property="og:description" content="The **excellerate** package provides a set of functions to easily create and export Excel spreadsheets, specifically for generating supplementary tables required when preparing research manuscripts for scientific journals. It allows for quick and customizable table creation from R data, making it easier to structure and format tables according to journal requirements.">
+<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Create Excel Spreadsheets for Supplementary Tables">
+<meta name="description" content="The excelerate package simplifies the creation of supplementary tables for research papers. It uses the openxlsx R package to produce tables in a consistent format. You can easily turn data frames into Excel files, with accompanying metadata in a README sheet, and save them as numbered supplementary files.">
+<meta property="og:description" content="The excelerate package simplifies the creation of supplementary tables for research papers. It uses the openxlsx R package to produce tables in a consistent format. You can easily turn data frames into Excel files, with accompanying metadata in a README sheet, and save them as numbered supplementary files.">
 <meta property="og:image" content="https://ameliaes.github.io/excelerate/logo.png">
 </head>
 <body>
@@ -28,7 +28,7 @@
 
     <a class="navbar-brand me-2" href="index.html">excelerate</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -66,83 +66,39 @@
 <a class="anchor" aria-label="anchor" href="#excelerate-"></a>
 </h1>
 </div>
-<p><!-- badges: start --> <a href="https://github.com/AmeliaES/excelerate/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/AmeliaES/excelerate/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a> <a href="https://app.codecov.io/gh/AmeliaES/excelerate" class="external-link"><img src="https://codecov.io/gh/AmeliaES/excelerate/graph/badge.svg" alt="Codecov test coverage"></a> <!-- badges: end --></p>
-<p>This package provides a set of functions to easily create and export Excel spreadsheets for supplementary tables required when preparing research manuscripts for scientific journals. It helps accelerate the process of generating well-organised, publication-ready tables directly from raw csv or tsv files.</p>
-<div class="section level3">
-<h3 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
-</h3>
+<!-- badges: start -->
+
+<!-- badges: end -->
+<p>The excelerate package accelerates the creation of supplementary tables for research papers.</p>
+<ul>
+<li>
+<strong>Data Frame Conversion</strong>: Easily insert supplementary results as ordered, numbered sheets in Excel spreadsheets.</li>
+<li>
+<strong>Metadata Integration</strong>: Include comprehensive metadata with legends and column descriptions in a README sheet.</li>
+<li>
+<strong>Numbered Supplementary Files</strong>: Automatically organises and numbers sheets and supplementary files for easy reference.</li>
+<li>
+<strong>Efficient Workflow</strong>: Accelerates the preparation of standardised, publication-ready tables.</li>
+</ul>
+<p>This makes excelerate an invaluable tool for researchers looking to efficiently prepare tables that meet journal specifications.</p>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"ameliaes/excelerate"</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ameliaes.github.io/excelerate/">excelerate</a></span><span class="op">)</span></span></code></pre></div>
 </div>
+<div class="section level2">
+<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+</h2>
 <div class="section level3">
-<h3 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+<h3 id="id_1-append-meta-data">1. Append Meta Data<a class="anchor" aria-label="anchor" href="#id_1-append-meta-data"></a>
 </h3>
-<ol style="list-style-type: decimal">
-<li>Prepare Data Files: Ensure your data files are in CSV or TSV format, with accompanying .cols files for metadata. Using the function <code><a href="reference/create_meta.html">create_meta()</a></code>.</li>
-</ol>
-<div class="section level4">
-<h4 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
-</h4>
-<p>For example, <code>mtcars</code> (a built-in dataset in R) could be saved to <code>mtcars.csv</code> and a corresponding <code>mtcars.csv.cols</code> file could look like this:</p>
-<table class="table">
-<thead><tr class="header">
-<th>Column_Name</th>
-<th>Description</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td>mpg</td>
-<td>Miles/(US) gallon</td>
-</tr>
-<tr class="even">
-<td>cyl</td>
-<td>Number of cylinders</td>
-</tr>
-<tr class="odd">
-<td>disp</td>
-<td>Displacement (cu.in.)</td>
-</tr>
-<tr class="even">
-<td>hp</td>
-<td>Gross horsepower</td>
-</tr>
-<tr class="odd">
-<td>drat</td>
-<td>Rear axle ratio</td>
-</tr>
-<tr class="even">
-<td>wt</td>
-<td>Weight (1000 lbs)</td>
-</tr>
-<tr class="odd">
-<td>qsec</td>
-<td>1/4 mile time</td>
-</tr>
-<tr class="even">
-<td>vs</td>
-<td>Engine (0 = V-shaped, 1 = straight)</td>
-</tr>
-<tr class="odd">
-<td>am</td>
-<td>Transmission (0 = automatic, 1 = manual)</td>
-</tr>
-<tr class="even">
-<td>gear</td>
-<td>Number of forward gears</td>
-</tr>
-<tr class="odd">
-<td>carb</td>
-<td>Number of carburetors</td>
-</tr>
-</tbody>
-</table>
-<p>This can be generated by using <code><a href="reference/create_meta.html">create_meta()</a></code>:</p>
+<p>Use <code><a href="reference/append_meta.html">append_meta()</a></code> to add column descriptions to your data frame. This function annotates your data frame with descriptions for each column, which is then inserted as a table in the first sheet (“README” sheet) of your Excel spreadsheet.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create metadata for mtcars dataset</span></span>
-<span><span class="fu"><a href="reference/create_meta.html">create_meta</a></span><span class="op">(</span>file_name <span class="op">=</span> <span class="st">"mtcars.csv"</span>,</span>
-<span>            table_variable_name <span class="op">=</span> <span class="va">mtcars</span>,</span>
+<span><span class="fu"><a href="reference/append_meta.html">append_meta</a></span><span class="op">(</span>results <span class="op">=</span> <span class="va">mtcars</span>,</span>
 <span>            colname_descriptions <span class="op">=</span></span>
 <span>            <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>            <span class="st">"mpg"</span> <span class="op">=</span> <span class="st">"Miles/(US) gallon"</span>,</span>
@@ -157,13 +113,11 @@
 <span>            <span class="st">"gear"</span> <span class="op">=</span> <span class="st">"Number of forward gears"</span>,</span>
 <span>            <span class="st">"carb"</span> <span class="op">=</span> <span class="st">"Number of carburetors"</span></span>
 <span>             <span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<ol start="2" style="list-style-type: decimal">
-<li>Generate Excel Files: Use the <code><a href="reference/sheet.html">sheet()</a></code>, <code><a href="reference/spreadsheet.html">spreadsheet()</a></code> and <code><a href="reference/excelerate.html">excelerate()</a></code> functions to create and save the tables.</li>
-</ol>
 </div>
-<div class="section level4">
-<h4 id="example-1">Example<a class="anchor" aria-label="anchor" href="#example-1"></a>
-</h4>
+<div class="section level3">
+<h3 id="id_2-generate-excel-files">2. Generate Excel Files<a class="anchor" aria-label="anchor" href="#id_2-generate-excel-files"></a>
+</h3>
+<p>Use the <code><a href="reference/sheet.html">sheet()</a></code>, <code><a href="reference/spreadsheet.html">spreadsheet()</a></code> and <code><a href="reference/excelerate.html">excelerate()</a></code> functions to create and save the tables.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create spreadsheet specifying tables for each sheet</span></span>
 <span><span class="va">supplementary_table</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/spreadsheet.html">spreadsheet</a></span><span class="op">(</span></span>
@@ -176,8 +130,7 @@
 <span></span>
 <span><span class="co"># Export to Excel</span></span>
 <span><span class="fu"><a href="reference/excelerate.html">excelerate</a></span><span class="op">(</span><span class="va">supplementary_table</span><span class="op">)</span></span></code></pre></div>
-<p>Please see the <code>Get Started</code> page for more detailed instructions.</p>
-</div>
+<p>Please see the <a href="https://ameliaes.github.io/excelerate/articles/excelerate.html"><code>Get Started</code></a> page for more detailed instructions.</p>
 </div>
 <div class="section level3">
 <h3 id="output">Output<a class="anchor" aria-label="anchor" href="#output"></a>
@@ -188,11 +141,12 @@
 <ul>
 <li>The <code>title</code> specified in <code><a href="reference/spreadsheet.html">spreadsheet()</a></code>.</li>
 <li>The <code>sheet_legend</code>s, specified in <code><a href="reference/sheet.html">sheet()</a></code>, for each sheet.</li>
-<li>The meta data supplied in the <code>.cols</code> files for each sheet.</li>
+<li>The meta data supplied to <code><a href="reference/append_meta.html">append_meta()</a></code>, for each sheet.</li>
 </ul>
 </li>
 <li>The remaining sheets are those supplied to <code><a href="reference/sheet.html">sheet()</a></code>. In the order each sheet object was supplied to <code><a href="reference/spreadsheet.html">spreadsheet()</a></code>. Each sheet contains the data from the corresponding csv or tsv file, with the first row containing the column names.</li>
 </ul>
+</div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
@@ -222,16 +176,20 @@
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>
-<a href="https://ameliaes.github.io" class="external-link">Amelia Edmondson-Stait</a> <br><small class="roles"> Author, maintainer </small>   </li>
+<a href="https://ameliaes.github.io" class="external-link">Amelia Edmondson-Stait</a> <br><small class="roles"> Author, maintainer, copyright holder </small> <a href="https://orcid.org/0000-0003-1456-5128" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
+<li>
+<a href="https://differentialist.info/" class="external-link">Mark James Adams</a> <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-3599-6018" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
 </ul>
 </div>
+
+
 
   </aside>
 </div>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by <a href="https://ameliaes.github.io" class="external-link">Amelia Edmondson-Stait</a>.</p>
+  <p>Developed by <a href="https://ameliaes.github.io" class="external-link">Amelia Edmondson-Stait</a>, <a href="https://differentialist.info/" class="external-link">Mark James Adams</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">

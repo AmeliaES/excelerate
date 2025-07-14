@@ -25,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">excelerate</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -75,68 +75,109 @@
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
 <p>This vignette demonstrates how to use the <code>excelerate</code>
-package to create supplementary tables from example datasets. We will
-prepare CSV and .cols metadata files, and then generate Excel
-spreadsheets.</p>
+package to create supplementary tables from example datasets.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ameliaes.github.io/excelerate/">excelerate</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Set up temporary directory</span></span>
+<span><span class="co"># Set up temporary directory to save the excel spreadsheets in</span></span>
 <span><span class="va">temp_dir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="preparing-example-datasets">Preparing Example Datasets<a class="anchor" aria-label="anchor" href="#preparing-example-datasets"></a>
+<h2 id="viewing-example-datasets">Viewing Example Datasets<a class="anchor" aria-label="anchor" href="#viewing-example-datasets"></a>
 </h2>
-<p>First, we load and save example datasets as CSV files. We use the
-built-in datasets: iris, ChickWeight, ToothGrowth, and CO2.</p>
+<p>For our examples we will use the built-in datasets: iris,
+ChickWeight, ToothGrowth, and CO2.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load example datasets</span></span>
-<span><span class="va">dataset_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"iris"</span>, <span class="st">"ChickWeight"</span>, <span class="st">"ToothGrowth"</span>, <span class="st">"CO2"</span><span class="op">)</span></span>
-<span><span class="kw">for</span> <span class="op">(</span><span class="va">dataset</span> <span class="kw">in</span> <span class="va">dataset_names</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span>list <span class="op">=</span> <span class="va">dataset</span>, package <span class="op">=</span> <span class="st">"datasets"</span><span class="op">)</span></span>
-<span><span class="op">}</span></span>
-<span></span>
-<span><span class="co"># Save datasets as CSV files</span></span>
-<span><span class="kw">for</span> <span class="op">(</span><span class="va">dataset</span> <span class="kw">in</span> <span class="va">dataset_names</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.csv</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/get.html" class="external-link">get</a></span><span class="op">(</span><span class="va">dataset</span><span class="op">)</span>, file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">temp_dir</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"/"</span>, <span class="va">dataset</span>, <span class="st">".csv"</span><span class="op">)</span><span class="op">)</span>, row.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="op">}</span></span></code></pre></div>
+<span><span class="va">datasets</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">iris</span>, <span class="va">ChickWeight</span>, <span class="va">ToothGrowth</span>, <span class="va">CO2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">datasets</span>, <span class="va">head</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [[1]]</span></span>
+<span><span class="co">#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width Species</span></span>
+<span><span class="co">#&gt; 1          5.1         3.5          1.4         0.2  setosa</span></span>
+<span><span class="co">#&gt; 2          4.9         3.0          1.4         0.2  setosa</span></span>
+<span><span class="co">#&gt; 3          4.7         3.2          1.3         0.2  setosa</span></span>
+<span><span class="co">#&gt; 4          4.6         3.1          1.5         0.2  setosa</span></span>
+<span><span class="co">#&gt; 5          5.0         3.6          1.4         0.2  setosa</span></span>
+<span><span class="co">#&gt; 6          5.4         3.9          1.7         0.4  setosa</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[2]]</span></span>
+<span><span class="co">#&gt;   weight Time Chick Diet</span></span>
+<span><span class="co">#&gt; 1     42    0     1    1</span></span>
+<span><span class="co">#&gt; 2     51    2     1    1</span></span>
+<span><span class="co">#&gt; 3     59    4     1    1</span></span>
+<span><span class="co">#&gt; 4     64    6     1    1</span></span>
+<span><span class="co">#&gt; 5     76    8     1    1</span></span>
+<span><span class="co">#&gt; 6     93   10     1    1</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[3]]</span></span>
+<span><span class="co">#&gt;    len supp dose</span></span>
+<span><span class="co">#&gt; 1  4.2   VC  0.5</span></span>
+<span><span class="co">#&gt; 2 11.5   VC  0.5</span></span>
+<span><span class="co">#&gt; 3  7.3   VC  0.5</span></span>
+<span><span class="co">#&gt; 4  5.8   VC  0.5</span></span>
+<span><span class="co">#&gt; 5  6.4   VC  0.5</span></span>
+<span><span class="co">#&gt; 6 10.0   VC  0.5</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[4]]</span></span>
+<span><span class="co">#&gt;   Plant   Type  Treatment conc uptake</span></span>
+<span><span class="co">#&gt; 1   Qn1 Quebec nonchilled   95   16.0</span></span>
+<span><span class="co">#&gt; 2   Qn1 Quebec nonchilled  175   30.4</span></span>
+<span><span class="co">#&gt; 3   Qn1 Quebec nonchilled  250   34.8</span></span>
+<span><span class="co">#&gt; 4   Qn1 Quebec nonchilled  350   37.2</span></span>
+<span><span class="co">#&gt; 5   Qn1 Quebec nonchilled  500   35.3</span></span>
+<span><span class="co">#&gt; 6   Qn1 Quebec nonchilled  675   39.2</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="creating-metadata-files">Creating Metadata Files<a class="anchor" aria-label="anchor" href="#creating-metadata-files"></a>
+<h2 id="creating-metadata">Creating Metadata<a class="anchor" aria-label="anchor" href="#creating-metadata"></a>
 </h2>
-<p>We then create .cols sidecar metadata files for each dataset using
-the <code><a href="../reference/create_meta.html">create_meta()</a></code> function. This file contains column names
-and descriptions to ensure the generated excel file is easy to
-understand.</p>
+<p>We will use <code><a href="../reference/append_meta.html">append_meta()</a></code> to add comments on each of the
+columns in these dataframes with a description. This metadata will be
+presented in the README sheet of the Excel file.</p>
+<p>The <code><a href="../reference/append_meta.html">append_meta()</a></code> function requires the
+<code>results</code> argument to be a dataframe and the
+<code>colname_descriptions</code> argument to be a named character
+vector where the names are the column names and the values are the
+descriptions.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/create_meta.html">create_meta</a></span><span class="op">(</span>file_name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">temp_dir</span>, <span class="st">"iris.csv"</span><span class="op">)</span>,</span>
-<span>            table_variable_name <span class="op">=</span> <span class="va">iris</span>,</span>
-<span>            colname_descriptions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Sepal.Length"</span> <span class="op">=</span> <span class="st">"Length of the sepal in cm"</span>,</span>
-<span>                                      <span class="st">"Sepal.Width"</span> <span class="op">=</span> <span class="st">"Width of the sepal in cm"</span>,</span>
-<span>                                      <span class="st">"Petal.Length"</span> <span class="op">=</span> <span class="st">"Length of the petal in cm"</span>,</span>
-<span>                                      <span class="st">"Petal.Width"</span> <span class="op">=</span> <span class="st">"Width of the petal in cm"</span>,</span>
-<span>                                      <span class="st">"Species"</span> <span class="op">=</span> <span class="st">"Species of iris"</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">iris_commented</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/append_meta.html">append_meta</a></span><span class="op">(</span></span>
+<span>  results <span class="op">=</span> <span class="va">iris</span>,</span>
+<span>  colname_descriptions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>    <span class="st">"Sepal.Length"</span> <span class="op">=</span> <span class="st">"Length of the sepal in cm"</span>,</span>
+<span>    <span class="st">"Sepal.Width"</span> <span class="op">=</span> <span class="st">"Width of the sepal in cm"</span>,</span>
+<span>    <span class="st">"Petal.Length"</span> <span class="op">=</span> <span class="st">"Length of the petal in cm"</span>,</span>
+<span>    <span class="st">"Petal.Width"</span> <span class="op">=</span> <span class="st">"Width of the petal in cm"</span>,</span>
+<span>    <span class="st">"Species"</span> <span class="op">=</span> <span class="st">"Species of iris"</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="../reference/create_meta.html">create_meta</a></span><span class="op">(</span>file_name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">temp_dir</span>, <span class="st">"ChickWeight.csv"</span><span class="op">)</span>,</span>
-<span>            table_variable_name <span class="op">=</span> <span class="va">ChickWeight</span>,</span>
-<span>            colname_descriptions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"weight"</span> <span class="op">=</span> <span class="st">"Weight of the chick in grams"</span>,</span>
-<span>                                      <span class="st">"Time"</span> <span class="op">=</span> <span class="st">"Time in days"</span>,</span>
-<span>                                      <span class="st">"Chick"</span> <span class="op">=</span> <span class="st">"Chick identifier"</span>,</span>
-<span>                                      <span class="st">"Diet"</span> <span class="op">=</span> <span class="st">"Diet type"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">chickweight_commented</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/append_meta.html">append_meta</a></span><span class="op">(</span></span>
+<span>  results <span class="op">=</span> <span class="va">ChickWeight</span>,</span>
+<span>  colname_descriptions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>    <span class="st">"weight"</span> <span class="op">=</span> <span class="st">"Weight of the chick in grams"</span>,</span>
+<span>    <span class="st">"Time"</span> <span class="op">=</span> <span class="st">"Time in days"</span>,</span>
+<span>    <span class="st">"Chick"</span> <span class="op">=</span> <span class="st">"Chick identifier"</span>,</span>
+<span>    <span class="st">"Diet"</span> <span class="op">=</span> <span class="st">"Diet type"</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="../reference/create_meta.html">create_meta</a></span><span class="op">(</span>file_name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">temp_dir</span>, <span class="st">"ToothGrowth.csv"</span><span class="op">)</span>,</span>
-<span>            table_variable_name <span class="op">=</span> <span class="va">ToothGrowth</span>,</span>
-<span>            colname_descriptions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"len"</span> <span class="op">=</span> <span class="st">"Tooth length in mm"</span>,</span>
-<span>                                      <span class="st">"supp"</span> <span class="op">=</span> <span class="st">"Supplement type (VC or OJ)"</span>,</span>
-<span>                                      <span class="st">"dose"</span> <span class="op">=</span> <span class="st">"Dose of the supplement in mg"</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="../reference/create_meta.html">create_meta</a></span><span class="op">(</span>file_name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">temp_dir</span>, <span class="st">"CO2.csv"</span><span class="op">)</span>,</span>
-<span>            table_variable_name <span class="op">=</span> <span class="va">CO2</span>,</span>
-<span>            colname_descriptions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Plant"</span> <span class="op">=</span> <span class="st">"Identifier for the plant"</span>,</span>
-<span>                                      <span class="st">"Type"</span> <span class="op">=</span> <span class="st">"Type of plant (Quebec or Mississippi)"</span>,</span>
-<span>                                      <span class="st">"Treatment"</span> <span class="op">=</span> <span class="st">"Treatment type (nonchilled or chilled)"</span>,</span>
-<span>                                      <span class="st">"conc"</span> <span class="op">=</span> <span class="st">"Concentration of CO2 in uL/L"</span>,</span>
-<span>                                      <span class="st">"uptake"</span> <span class="op">=</span> <span class="st">"CO2 uptake in mg"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">toothgrowth_commented</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/append_meta.html">append_meta</a></span><span class="op">(</span></span>
+<span>  results <span class="op">=</span> <span class="va">ToothGrowth</span>,</span>
+<span>  colname_descriptions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>    <span class="st">"len"</span> <span class="op">=</span> <span class="st">"Tooth length in mm"</span>,</span>
+<span>    <span class="st">"supp"</span> <span class="op">=</span> <span class="st">"Supplement type (VC or OJ)"</span>,</span>
+<span>    <span class="st">"dose"</span> <span class="op">=</span> <span class="st">"Dose of the supplement in mg"</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">co2_commented</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/append_meta.html">append_meta</a></span><span class="op">(</span></span>
+<span>  results <span class="op">=</span> <span class="va">CO2</span>,</span>
+<span>  colname_descriptions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>    <span class="st">"Plant"</span> <span class="op">=</span> <span class="st">"Identifier for the plant"</span>,</span>
+<span>    <span class="st">"Type"</span> <span class="op">=</span> <span class="st">"Type of plant (Quebec or Mississippi)"</span>,</span>
+<span>    <span class="st">"Treatment"</span> <span class="op">=</span> <span class="st">"Treatment type (nonchilled or chilled)"</span>,</span>
+<span>    <span class="st">"conc"</span> <span class="op">=</span> <span class="st">"Concentration of CO2 in uL/L"</span>,</span>
+<span>    <span class="st">"uptake"</span> <span class="op">=</span> <span class="st">"CO2 uptake in mg"</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="generating-supplementary-tables">Generating Supplementary Tables<a class="anchor" aria-label="anchor" href="#generating-supplementary-tables"></a>
@@ -151,28 +192,40 @@ temporary directory with the names
 <code>supplementary_table_2.xlsx</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">supplementary_table_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/spreadsheet.html">spreadsheet</a></span><span class="op">(</span></span>
-<span>  <span class="fu"><a href="../reference/sheet.html">sheet</a></span><span class="op">(</span><span class="va">temp_dir</span>, <span class="st">"iris"</span>, <span class="st">"iris"</span>, <span class="st">"sheet_legend for the iris dataset."</span><span class="op">)</span>,</span>
-<span>  <span class="fu"><a href="../reference/sheet.html">sheet</a></span><span class="op">(</span><span class="va">temp_dir</span>, <span class="st">"ChickWeight"</span>, <span class="st">"ChickWeight"</span>, <span class="st">"sheet_legend for the ChickWeight dataset."</span><span class="op">)</span>,</span>
-<span>  title <span class="op">=</span> <span class="st">"Supplementary Table 1. Example of output from excelerate(). This is the legend_title passed to spreadsheet()."</span>,</span>
-<span>  filename <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">temp_dir</span>, <span class="st">"supplementary_table_1.xlsx"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; File that match pattern: </span></span>
-<span><span class="co">#&gt; /tmp/RtmpA4vW5U/iris.csv</span></span>
-<span><span class="co">#&gt; File that match pattern: </span></span>
-<span><span class="co">#&gt; /tmp/RtmpA4vW5U/ChickWeight.csv</span></span>
+<span>  <span class="fu"><a href="../reference/sheet.html">sheet</a></span><span class="op">(</span></span>
+<span>    <span class="va">iris_commented</span>,</span>
+<span>    <span class="st">"iris sheet label"</span>,</span>
+<span>    <span class="st">"sheet_legend for the iris dataset."</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="../reference/sheet.html">sheet</a></span><span class="op">(</span></span>
+<span>    <span class="va">chickweight_commented</span>,</span>
+<span>    <span class="st">"ChickWeight sheet label"</span>,</span>
+<span>    <span class="st">"sheet_legend for the ChickWeight dataset."</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  title <span class="op">=</span> <span class="st">"Supplementary Table 1. This is 'legend_title' from spreadsheet()."</span>,</span>
+<span>  filename <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">temp_dir</span>, <span class="st">"supplementary_table_1.xlsx"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">supplementary_table_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/spreadsheet.html">spreadsheet</a></span><span class="op">(</span></span>
-<span>  <span class="fu"><a href="../reference/sheet.html">sheet</a></span><span class="op">(</span><span class="va">temp_dir</span>, <span class="st">"ToothGrowth"</span>, <span class="st">"ToothGrowth"</span>, <span class="st">"sheet_legend for the ToothGrowth dataset."</span><span class="op">)</span>,</span>
-<span>  <span class="fu"><a href="../reference/sheet.html">sheet</a></span><span class="op">(</span><span class="va">temp_dir</span>, <span class="st">"CO2"</span>, <span class="st">"CO2"</span>, <span class="st">"sheet_legend for the CO2 dataset."</span><span class="op">)</span>,</span>
-<span>  title <span class="op">=</span> <span class="st">"Supplementary Table 2. Example of output from excelerate(). This is the legend_title passed to spreadsheet()."</span>,</span>
-<span>  filename <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">temp_dir</span>, <span class="st">"supplementary_table_2.xlsx"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; File that match pattern: </span></span>
-<span><span class="co">#&gt; /tmp/RtmpA4vW5U/ToothGrowth.csv</span></span>
-<span><span class="co">#&gt; File that match pattern: </span></span>
-<span><span class="co">#&gt; /tmp/RtmpA4vW5U/CO2.csv</span></span>
+<span>  <span class="fu"><a href="../reference/sheet.html">sheet</a></span><span class="op">(</span></span>
+<span>    <span class="va">toothgrowth_commented</span>,</span>
+<span>    <span class="st">"ToothGrowth sheet label"</span>,</span>
+<span>    <span class="st">"sheet_legend for the ToothGrowth dataset."</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="../reference/sheet.html">sheet</a></span><span class="op">(</span></span>
+<span>    <span class="va">co2_commented</span>,</span>
+<span>    <span class="st">"CO2 sheet label"</span>,</span>
+<span>    <span class="st">"sheet_legend for the CO2 dataset."</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  title <span class="op">=</span> <span class="st">"Supplementary Table 2. This is 'legend_title' from spreadsheet()."</span>,</span>
+<span>  filename <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">temp_dir</span>, <span class="st">"supplementary_table_2.xlsx"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Save supplementary tables as .xlsx to temp_dir</span></span>
-<span><span class="fu"><a href="../reference/excelerate.html">excelerate</a></span><span class="op">(</span><span class="va">supplementary_table_1</span>,</span>
-<span>           <span class="va">supplementary_table_2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/excelerate.html">excelerate</a></span><span class="op">(</span></span>
+<span>  <span class="va">supplementary_table_1</span>,</span>
+<span>  <span class="va">supplementary_table_2</span></span>
+<span><span class="op">)</span></span>
 <span><span class="co">#&gt; [[1]]</span></span>
 <span><span class="co">#&gt; [1] 1</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -180,14 +233,36 @@ temporary directory with the names
 <span><span class="co">#&gt; [1] 1</span></span></code></pre></div>
 </div>
 <div class="section level2">
+<h2 id="inspect-the-saved-excel-files">Inspect the saved Excel files<a class="anchor" aria-label="anchor" href="#inspect-the-saved-excel-files"></a>
+</h2>
+<p>The Excel files have been saved in a temporary directory that we
+definied at the top of this script. You can inspect these files using
+the following steps:</p>
+<ol style="list-style-type: decimal">
+<li>List the files in the temporary directory to make sure they have
+been created.</li>
+<li>Open the Excel files directly from R using
+<code><a href="https://rdrr.io/r/utils/browseURL.html" class="external-link">browseURL()</a></code>.</li>
+</ol>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># List all files in the temporary directory</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span><span class="va">temp_dir</span>, pattern <span class="op">=</span> <span class="st">"\\.xlsx$"</span>, full.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "/tmp/RtmpooEvym/supplementary_table_1.xlsx"</span></span>
+<span><span class="co">#&gt; [2] "/tmp/RtmpooEvym/supplementary_table_2.xlsx"</span></span>
+<span></span>
+<span><span class="co"># Open the files to inspect them</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/browseURL.html" class="external-link">browseURL</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">temp_dir</span>, <span class="st">"supplementary_table_1.xlsx"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/browseURL.html" class="external-link">browseURL</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">temp_dir</span>, <span class="st">"supplementary_table_2.xlsx"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
 <h2 id="conclusion">Conclusion<a class="anchor" aria-label="anchor" href="#conclusion"></a>
 </h2>
 <p>This vignette has demonstrated how to create supplementary tables
-using the <code>excelerate</code> package in R. We prepared example
-datasets, created metadata files, and generated Excel spreadsheets with
-multiple sheets. The <code>excelerate</code> package simplifies the
-process of creating well-structured and documented Excel files for data
-analysis and reporting.</p>
+using the <code>excelerate</code> package in R. We viewed example
+datasets, attached metadata to these datasets, and generated Excel
+spreadsheets with multiple sheets. The <code>excelerate</code> package
+simplifies the process of creating Supplementary Tables which can often
+be a time consuming, manual task in manuscript preparation.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
@@ -196,7 +271,7 @@ analysis and reporting.</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by <a href="https://ameliaes.github.io" class="external-link">Amelia Edmondson-Stait</a>.</p>
+  <p>Developed by <a href="https://ameliaes.github.io" class="external-link">Amelia Edmondson-Stait</a>, <a href="https://differentialist.info/" class="external-link">Mark James Adams</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">
