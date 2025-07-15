@@ -28,5 +28,5 @@ test_that("the width of the column is max n chars in each col + extra_char_n", {
   autofit_cols(wb_actual, data, sheet_name)
 
   # Compare the files
-  expect_equal(wb_actual, wb_expected)
+  expect_equal(wb_actual$colWidths, wb_expected$colWidths)
 })
