@@ -1,4 +1,5 @@
 ^.*\.Rproj$
+^.*\.lintr$
 ^LICENSE\.md$
 ^\.Rproj\.user$
 ^\.github$
