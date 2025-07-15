@@ -79,3 +79,7 @@ The output is an excel file with multiple sheets.
   - The `sheet_legend`s, specified in `sheet()`, for each sheet.
   - The meta data supplied to `append_meta()`, for each sheet.
 - The remaining sheets are the data frames supplied to `sheet()`. In the order each sheet object was supplied to `spreadsheet()`.
+
+### Contributing
+
+This package is in the early stages of development. If you encounter any issues or have feature requests, please contact me at [amelia.edmondson-stait@ed.ac.uk](mailto:amelia.edmondson-stait@ed.ac.uk) or open a [GitHub issue](https://github.com/AmeliaES/excelerate/issues/new). I've aimed to write comprehensive tests, but this may not be enough. I encourage you to try and break this package and let me know what you find ([pull requests](https://happygitwithr.com/fork-and-clone) [are welcome](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork)). User insights are crucial for creating robust software :-)
