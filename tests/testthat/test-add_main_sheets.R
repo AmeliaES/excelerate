@@ -41,8 +41,10 @@ test_that("check add_main_sheets works as expected", {
   openxlsx::saveWorkbook(wb, temp_file, overwrite = TRUE)
 
   # Read in the excel file, with sheet_name = A
-  sheet <- openxlsx::read.xlsx(temp_file, sheet = "A", colNames = TRUE)
+  sheet_a <- openxlsx::read.xlsx(temp_file, sheet = "A", colNames = TRUE)
+  sheet_b <- openxlsx::read.xlsx(temp_file, sheet = "B", colNames = TRUE)
 
   row.names(mtcars) <- NULL
-  expect_equal(sheet, mtcars)
+  expect_equal(sheet_a, mtcars)
+  expect_equal(sheet_b, mtcars)
 })

@@ -18,12 +18,12 @@ add_meta_to_readme <- function(wb, spreadsheet, next_free_row) {
   # Leave an empty row before inserting metadata
   openxlsx::writeData(wb,
     sheet = "README", col_name_descriptions,
-    startRow = next_free_row + 1, startCol = 1
+    startRow = (next_free_row + 1), startCol = 1
   )
 
   # Style heading as italic
   italic_style <- createStyle(textDecoration = "italic")
-  addStyle(wb, "README", italic_style, rows = next_free_row + 1, cols = 1:3)
+  addStyle(wb, "README", italic_style, rows = (next_free_row + 1), cols = 1:3)
 
   # Autofit cols based on the max number of characters in each column
   # autofitting based on all rows in the README includes the very long legends
