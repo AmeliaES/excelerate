@@ -47,11 +47,6 @@ repos:
         language: fail
         files: '\.(Rhistory|RData|Rds|rds)$'
         # `exclude: <regex>` to allow committing specific files
-    -   id: devtools-check
-        name: Devtools Check
-        entry: Rscript -e 'if (!requireNamespace("devtools", quietly = TRUE)) install.packages("devtools"); devtools::check()'
-        language: system
-
 ci:
     autoupdate_schedule: monthly
-    skip: [pkgdown, devtools-check]
+    skip: [pkgdown]
