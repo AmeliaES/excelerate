@@ -56,3 +56,8 @@ test_that("check add_meta_to_readme works", {
   expect_equal(readme[[5, 2]], "mpg")
   expect_equal(readme[[5, 3]], "Miles/(US) gallon")
 })
+
+
+test_that("sheet_name and description labels are in italic", {
+
+})
