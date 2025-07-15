@@ -82,7 +82,7 @@ Example output from the package vignette at [`Get Started`](https://ameliaes.git
 
 
 <p align="center">
-  <video src="https://github.com/user-attachments/assets/6f0673d3-5c86-4c73-b25f-a8f52f058fd6" controls>
+  <video src="https://github.com/user-attachments/assets/6f0673d3-5c86-4c73-b25f-a8f52f058fd6" controls width="100%">
   </video>
 </p>
 
