@@ -5,8 +5,6 @@
 #' @param next_free_row index of row with empty cell after writing sheet
 #' legends.
 #'
-#' @return Numeric value for the index of the next row with empty cells.
-#'
 #' @importFrom dplyr bind_rows
 #' @importFrom openxlsx writeData createStyle addStyle
 #' @noRd
@@ -20,7 +18,7 @@ add_meta_to_readme <- function(wb, spreadsheet, next_free_row) {
   # Leave an empty row before inserting metadata
   openxlsx::writeData(wb,
     sheet = "README", col_name_descriptions,
-    startRow = next_free_row, startCol = 1
+    startRow = next_free_row + 1, startCol = 1
   )
 
   # Style heading as italic
@@ -31,6 +29,4 @@ add_meta_to_readme <- function(wb, spreadsheet, next_free_row) {
   # autofitting based on all rows in the README includes the very long legends
   # we just want to autofit using the rows with sheet names and descriptions
   autofit_cols(wb, col_name_descriptions, "README")
-
-  next_free_row
 }
