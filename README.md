@@ -30,21 +30,21 @@ Use `append_meta()` to add column descriptions to your data frame. This function
 
 ``` r
 # Create metadata for mtcars dataset
-append_meta(results = mtcars,
-            colname_descriptions =
-            c(
-            "mpg" = "Miles/(US) gallon",
-            "cyl" = "Number of cylinders",
-            "disp" = "Displacement (cu.in.)",
-            "hp" = "Gross horsepower",
-            "drat" = "Rear axle ratio",
-            "wt" = "Weight (1000 lbs)",
-            "qsec" = "1/4 mile time",
-            "vs" = "Engine (0 = V-shaped, 1 = straight)",
-            "am" = "Transmission (0 = automatic, 1 = manual)",
-            "gear" = "Number of forward gears",
-            "carb" = "Number of carburetors"
-             ))
+mtcars_commented <- append_meta(results = mtcars,
+                      colname_descriptions =
+                      c(
+                      "mpg" = "Miles/(US) gallon",
+                      "cyl" = "Number of cylinders",
+                      "disp" = "Displacement (cu.in.)",
+                      "hp" = "Gross horsepower",
+                      "drat" = "Rear axle ratio",
+                      "wt" = "Weight (1000 lbs)",
+                      "qsec" = "1/4 mile time",
+                      "vs" = "Engine (0 = V-shaped, 1 = straight)",
+                      "am" = "Transmission (0 = automatic, 1 = manual)",
+                      "gear" = "Number of forward gears",
+                      "carb" = "Number of carburetors"
+                       ))
 ```
 
 ### 2. Generate Excel Files
@@ -54,11 +54,13 @@ Use the `sheet()`, `spreadsheet()` and `excelerate()` functions to create and sa
 ``` r
 # Create spreadsheet specifying tables for each sheet
 supplementary_table <- spreadsheet(
-  title = "Supplementary Table Example",
+  title = "Supplementary Table 1. This is space for a legend title describing
+  generally the contents of the file.",
   filename = "path/to/save/example_table.xlsx",
-  sheet("path/to/data", "results_file_1", "Sheet name 1", "Sheet legend 1"),
-  sheet("path/to/data", "results_file_2", "Sheet name 2", "Sheet legend 2"),
-  sheet("path/to/data", "results_file_3", "Sheet name 3", "Sheet legend 3"),
+  sheet(mtcars_commented, "Sheet name 1", "Specific legends for each table can 
+  go here. eg. a description of the mtcars data frame can go here."),
+  sheet(sheet_2_dataframe, "Sheet name 2", "Sheet legend 2"),
+  sheet(sheet_3_dataframe, "Sheet name 3", "Sheet legend 3"),
 )
 
 # Export to Excel
@@ -76,4 +78,4 @@ The output is an excel file with multiple sheets.
   - The `title` specified in `spreadsheet()`.
   - The `sheet_legend`s, specified in `sheet()`, for each sheet.
   - The meta data supplied to `append_meta()`, for each sheet.
-- The remaining sheets are those supplied to `sheet()`. In the order each sheet object was supplied to `spreadsheet()`. Each sheet contains the data from the corresponding csv or tsv file, with the first row containing the column names.
+- The remaining sheets are the data frames supplied to `sheet()`. In the order each sheet object was supplied to `spreadsheet()`.
