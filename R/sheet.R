@@ -1,7 +1,8 @@
-#' Read File Path, Pattern, Sheet Name, and Legend
+#' Append column descriptions as comments to data frame
 #'
-#' This function reads a file matching a pattern from a given directory and
-#' returns supplementary table data.
+#' This function annotates your data frame with descriptions for each column,
+#' which is then inserted as a table in the first sheet ("README" sheet)
+#' of your Excel spreadsheet.
 #'
 #' @param results A data.frame marked up with comments for each column.
 #' @param sheet_name A character string for naming the sheet.

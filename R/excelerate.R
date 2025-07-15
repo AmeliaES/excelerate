@@ -4,7 +4,7 @@
 #'
 #' @param ... One or more `spreadsheet` objects created with [spreadsheet()].
 #'
-#' @importFrom openxlsx createWorkbook saveWorkbook
+#' @importFrom openxlsx createWorkbook saveWorkbook loadWorkbook
 #' @examples
 #' temp_dir <- tempdir()
 #'
@@ -56,10 +56,6 @@ excelerate <- function(...) {
     add_readme(wb)
 
     # Insert into README sheet:
-    # Function that writes legend title for the excel table
-    # (using "title" from spreadsheet())
-    add_legend_title(wb, spreadsheet$title)
-
     # Function that writes the sheet summary
     # (using "sheet_legend" from sheet() )
     next_free_row <- add_sheet_legend(wb, spreadsheet)
@@ -71,6 +67,10 @@ excelerate <- function(...) {
     # Function that creates data sheets
     # (using "main" from sheet(), and name of sheet from sheet())
     add_main_sheets(wb, spreadsheet)
+
+    # Function that writes legend title for the excel table
+    # (using "title" from spreadsheet())
+    add_legend_title(wb, spreadsheet$title)
 
     # Write the spreadsheet to excel file
     saveWorkbook(wb, spreadsheet$filename, overwrite = TRUE)

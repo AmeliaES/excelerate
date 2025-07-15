@@ -30,21 +30,21 @@ Use `append_meta()` to add column descriptions to your data frame. This function
 
 ``` r
 # Create metadata for mtcars dataset
-append_meta(results = mtcars,
-            colname_descriptions =
-            c(
-            "mpg" = "Miles/(US) gallon",
-            "cyl" = "Number of cylinders",
-            "disp" = "Displacement (cu.in.)",
-            "hp" = "Gross horsepower",
-            "drat" = "Rear axle ratio",
-            "wt" = "Weight (1000 lbs)",
-            "qsec" = "1/4 mile time",
-            "vs" = "Engine (0 = V-shaped, 1 = straight)",
-            "am" = "Transmission (0 = automatic, 1 = manual)",
-            "gear" = "Number of forward gears",
-            "carb" = "Number of carburetors"
-             ))
+mtcars_commented <- append_meta(results = mtcars,
+                      colname_descriptions =
+                      c(
+                      "mpg" = "Miles/(US) gallon",
+                      "cyl" = "Number of cylinders",
+                      "disp" = "Displacement (cu.in.)",
+                      "hp" = "Gross horsepower",
+                      "drat" = "Rear axle ratio",
+                      "wt" = "Weight (1000 lbs)",
+                      "qsec" = "1/4 mile time",
+                      "vs" = "Engine (0 = V-shaped, 1 = straight)",
+                      "am" = "Transmission (0 = automatic, 1 = manual)",
+                      "gear" = "Number of forward gears",
+                      "carb" = "Number of carburetors"
+                       ))
 ```
 
 ### 2. Generate Excel Files
@@ -54,19 +54,18 @@ Use the `sheet()`, `spreadsheet()` and `excelerate()` functions to create and sa
 ``` r
 # Create spreadsheet specifying tables for each sheet
 supplementary_table <- spreadsheet(
-  title = "Supplementary Table Example",
+  title = "Supplementary Table 1. This is space for a legend title describing
+  generally the contents of the file.",
   filename = "path/to/save/example_table.xlsx",
-  sheet("path/to/data", "results_file_1", "Sheet name 1", "Sheet legend 1"),
-  sheet("path/to/data", "results_file_2", "Sheet name 2", "Sheet legend 2"),
-  sheet("path/to/data", "results_file_3", "Sheet name 3", "Sheet legend 3"),
+  sheet(mtcars_commented, "Sheet name 1", "Specific legends for each table can 
+  go here. eg. a description of the mtcars data frame can go here."),
+  sheet(sheet_2_dataframe, "Sheet name 2", "Sheet legend 2"),
+  sheet(sheet_3_dataframe, "Sheet name 3", "Sheet legend 3"),
 )
 
 # Export to Excel
 excelerate(supplementary_table)
 ```
-
-Please see the [`Get Started`](https://ameliaes.github.io/excelerate/articles/excelerate.html) page for more detailed instructions.
-
 ### Output
 
 The output is an excel file with multiple sheets. 
@@ -76,4 +75,18 @@ The output is an excel file with multiple sheets.
   - The `title` specified in `spreadsheet()`.
   - The `sheet_legend`s, specified in `sheet()`, for each sheet.
   - The meta data supplied to `append_meta()`, for each sheet.
-- The remaining sheets are those supplied to `sheet()`. In the order each sheet object was supplied to `spreadsheet()`. Each sheet contains the data from the corresponding csv or tsv file, with the first row containing the column names.
+- The remaining sheets are the data frames supplied to `sheet()`. In the order each sheet object was supplied to `spreadsheet()`.
+
+
+Example output from the package vignette at [`Get Started`](https://ameliaes.github.io/excelerate/articles/excelerate.html):
+
+
+<p align="center">
+  <video src="https://github.com/user-attachments/assets/6f0673d3-5c86-4c73-b25f-a8f52f058fd6" controls width="100%">
+  </video>
+</p>
+
+
+### Contributing
+
+This package is in the early stages of development. If you encounter any issues or have feature requests, please contact me at [amelia.edmondson-stait@ed.ac.uk](mailto:amelia.edmondson-stait@ed.ac.uk) or open a [GitHub issue](https://github.com/AmeliaES/excelerate/issues/new). I've aimed to write comprehensive tests, but this may not be enough. I encourage you to try and break this package and let me know what you find ([pull requests](https://happygitwithr.com/fork-and-clone) [are welcome](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork)). User insights are crucial for creating robust software :-)

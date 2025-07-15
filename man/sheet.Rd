@@ -2,7 +2,7 @@
 % Please edit documentation in R/sheet.R
 \name{sheet}
 \alias{sheet}
-\title{Read File Path, Pattern, Sheet Name, and Legend}
+\title{Append column descriptions as comments to data frame}
 \usage{
 sheet(results, sheet_name, sheet_legend)
 }
@@ -18,8 +18,9 @@ A named nested list containing the main results (data frame),
 metadata (data frame), and sheet legend. Named by \code{sheet_name}.
 }
 \description{
-This function reads a file matching a pattern from a given directory and
-returns supplementary table data.
+This function annotates your data frame with descriptions for each column,
+which is then inserted as a table in the first sheet ("README" sheet)
+of your Excel spreadsheet.
 }
 \examples{
 
