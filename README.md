@@ -66,9 +66,6 @@ supplementary_table <- spreadsheet(
 # Export to Excel
 excelerate(supplementary_table)
 ```
-
-Please see the [`Get Started`](https://ameliaes.github.io/excelerate/articles/excelerate.html) page for more detailed instructions.
-
 ### Output
 
 The output is an excel file with multiple sheets. 
@@ -79,6 +76,16 @@ The output is an excel file with multiple sheets.
   - The `sheet_legend`s, specified in `sheet()`, for each sheet.
   - The meta data supplied to `append_meta()`, for each sheet.
 - The remaining sheets are the data frames supplied to `sheet()`. In the order each sheet object was supplied to `spreadsheet()`.
+
+
+Example output from the package vignette at [`Get Started`](https://ameliaes.github.io/excelerate/articles/excelerate.html):
+
+
+<p align="center">
+  <video src="https://github.com/user-attachments/assets/6f0673d3-5c86-4c73-b25f-a8f52f058fd6" controls>
+  </video>
+</p>
+
 
 ### Contributing
 
