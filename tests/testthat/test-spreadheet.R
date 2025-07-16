@@ -1,18 +1,12 @@
 test_that("spreadsheet function works", {
   results <- append_meta(
-    results = mtcars,
+    results = iris,
     colname_descriptions = c(
-      "mpg" = "Miles/(US) gallon",
-      "cyl" = "Number of cylinders",
-      "disp" = "Displacement (cu.in.)",
-      "hp" = "Gross horsepower",
-      "drat" = "Rear axle ratio",
-      "wt" = "Weight (1000 lbs)",
-      "qsec" = "1/4 mile time",
-      "vs" = "Engine (0 = V-shaped, 1 = straight)",
-      "am" = "Transmission (0 = automatic, 1 = manual)",
-      "gear" = "Number of forward gears",
-      "carb" = "Number of carburetors"
+      "Sepal.Length" = "Length of the sepal in cm",
+      "Sepal.Width" = "Width of the sepal in cm",
+      "Petal.Length" = "Length of the petal in cm",
+      "Petal.Width" = "Width of the petal in cm",
+      "Species" = "Species of iris"
     )
   )
 
@@ -39,19 +33,13 @@ test_that("spreadsheet function works", {
 
 test_that("output of spreadsheet function is spreadsheet class", {
   results <- append_meta(
-    results = mtcars,
+    results = iris,
     colname_descriptions = c(
-      "mpg" = "Miles/(US) gallon",
-      "cyl" = "Number of cylinders",
-      "disp" = "Displacement (cu.in.)",
-      "hp" = "Gross horsepower",
-      "drat" = "Rear axle ratio",
-      "wt" = "Weight (1000 lbs)",
-      "qsec" = "1/4 mile time",
-      "vs" = "Engine (0 = V-shaped, 1 = straight)",
-      "am" = "Transmission (0 = automatic, 1 = manual)",
-      "gear" = "Number of forward gears",
-      "carb" = "Number of carburetors"
+      "Sepal.Length" = "Length of the sepal in cm",
+      "Sepal.Width" = "Width of the sepal in cm",
+      "Petal.Length" = "Length of the petal in cm",
+      "Petal.Width" = "Width of the petal in cm",
+      "Species" = "Species of iris"
     )
   )
 
@@ -70,4 +58,102 @@ test_that("output of spreadsheet function is spreadsheet class", {
 
   # class spreadsheet
   expect_s3_class(output, "spreadsheet")
+})
+
+test_that("spreadhseet() throws error if not given sheet objects", {
+  results <- append_meta(
+    results = iris,
+    colname_descriptions = c(
+      "Sepal.Length" = "Length of the sepal in cm",
+      "Sepal.Width" = "Width of the sepal in cm",
+      "Petal.Length" = "Length of the petal in cm",
+      "Petal.Width" = "Width of the petal in cm",
+      "Species" = "Species of iris"
+    )
+  )
+
+  # Check spreadsheet returns expected object
+  expect_error(
+    spreadsheet(
+      "Supplementary Table 1",
+      "SuppTab1",
+      "another string"
+    ),
+    "All additional arguments must be 'sheet' objects."
+  )
+})
+
+test_that("spreadhseet() throws error if sheets missing", {
+  results <- append_meta(
+    results = iris,
+    colname_descriptions = c(
+      "Sepal.Length" = "Length of the sepal in cm",
+      "Sepal.Width" = "Width of the sepal in cm",
+      "Petal.Length" = "Length of the petal in cm",
+      "Petal.Width" = "Width of the petal in cm",
+      "Species" = "Species of iris"
+    )
+  )
+
+  # Check spreadsheet returns expected object
+  expect_error(
+    spreadsheet(
+      "Supplementary Table 1",
+      "SuppTab1"
+    ),
+    "At least one sheet must be provided."
+  )
+})
+
+
+test_that("spreadhseet() error if 1st arg is not character string for title", {
+  results <- append_meta(
+    results = iris,
+    colname_descriptions = c(
+      "Sepal.Length" = "Length of the sepal in cm",
+      "Sepal.Width" = "Width of the sepal in cm",
+      "Petal.Length" = "Length of the petal in cm",
+      "Petal.Width" = "Width of the petal in cm",
+      "Species" = "Species of iris"
+    )
+  )
+
+  # Check spreadsheet returns expected object
+  expect_error(
+    spreadsheet(
+      sheet(results,
+        sheet_name = "B",
+        sheet_legend = "Legend for table"
+      ),
+      "Supplementary Table 1",
+      "SuppTab1"
+    ),
+    "Title must be a single character string."
+  )
+})
+
+test_that("spreadhseet() error if 2nd arg is not character string filename", {
+  results <- append_meta(
+    results = iris,
+    colname_descriptions = c(
+      "Sepal.Length" = "Length of the sepal in cm",
+      "Sepal.Width" = "Width of the sepal in cm",
+      "Petal.Length" = "Length of the petal in cm",
+      "Petal.Width" = "Width of the petal in cm",
+      "Species" = "Species of iris"
+    )
+  )
+
+  # Check spreadsheet returns expected object
+  expect_error(
+    spreadsheet(
+      "Supplementary Table 1",
+      sheet(results,
+        sheet_name = "B",
+        sheet_legend = "Legend for table"
+      ),
+      "SuppTab1"
+    ),
+    "Filename must be a single character string."
+  )
 })

@@ -88,6 +88,8 @@ Next, we demonstrate how to combine sheets into a single Excel file using the `s
 
 ```{r}
 supplementary_table_1 <- spreadsheet(
+  title = "Supplementary Table 1. This is 'legend_title' from spreadsheet().",
+  filename = file.path(temp_dir, "supplementary_table_1.xlsx"),
   sheet(
     iris_commented,
     "iris sheet label",
@@ -97,12 +99,12 @@ supplementary_table_1 <- spreadsheet(
     chickweight_commented,
     "ChickWeight sheet label",
     "sheet_legend for the ChickWeight dataset."
-  ),
-  title = "Supplementary Table 1. This is 'legend_title' from spreadsheet().",
-  filename = file.path(temp_dir, "supplementary_table_1.xlsx")
+  )
 )
 
 supplementary_table_2 <- spreadsheet(
+  title = "Supplementary Table 2. This is 'legend_title' from spreadsheet().",
+  filename = file.path(temp_dir, "supplementary_table_2.xlsx"),
   sheet(
     toothgrowth_commented,
     "ToothGrowth sheet label",
@@ -112,9 +114,7 @@ supplementary_table_2 <- spreadsheet(
     co2_commented,
     "CO2 sheet label",
     "sheet_legend for the CO2 dataset."
-  ),
-  title = "Supplementary Table 2. This is 'legend_title' from spreadsheet().",
-  filename = file.path(temp_dir, "supplementary_table_2.xlsx")
+  )
 )
 
 # Save supplementary tables as .xlsx to temp_dir
