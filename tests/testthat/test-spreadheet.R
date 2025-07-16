@@ -106,7 +106,7 @@ test_that("spreadhseet() throws error if sheets missing", {
 })
 
 
-test_that("spreadhseet() throws error if arguments given in wrong order", {
+test_that("spreadhseet() error if 1st arg is not character string for title", {
   results <- append_meta(
     results = iris,
     colname_descriptions = c(
@@ -129,5 +129,31 @@ test_that("spreadhseet() throws error if arguments given in wrong order", {
       "SuppTab1"
     ),
     "Title must be a single character string."
+  )
+})
+
+test_that("spreadhseet() error if 2nd arg is not character string filename", {
+  results <- append_meta(
+    results = iris,
+    colname_descriptions = c(
+      "Sepal.Length" = "Length of the sepal in cm",
+      "Sepal.Width" = "Width of the sepal in cm",
+      "Petal.Length" = "Length of the petal in cm",
+      "Petal.Width" = "Width of the petal in cm",
+      "Species" = "Species of iris"
+    )
+  )
+
+  # Check spreadsheet returns expected object
+  expect_error(
+    spreadsheet(
+      "Supplementary Table 1",
+      sheet(results,
+        sheet_name = "B",
+        sheet_legend = "Legend for table"
+      ),
+      "SuppTab1"
+    ),
+    "Filename must be a single character string."
   )
 })
