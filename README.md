@@ -29,22 +29,17 @@ library(excelerate)
 Use `append_meta()` to add column descriptions to your data frame. This function annotates your data frame with descriptions for each column, which is then inserted as a table in the first sheet ("README" sheet) of your Excel spreadsheet.
 
 ``` r
-# Create metadata for mtcars dataset
-mtcars_commented <- append_meta(results = mtcars,
-                      colname_descriptions =
-                      c(
-                      "mpg" = "Miles/(US) gallon",
-                      "cyl" = "Number of cylinders",
-                      "disp" = "Displacement (cu.in.)",
-                      "hp" = "Gross horsepower",
-                      "drat" = "Rear axle ratio",
-                      "wt" = "Weight (1000 lbs)",
-                      "qsec" = "1/4 mile time",
-                      "vs" = "Engine (0 = V-shaped, 1 = straight)",
-                      "am" = "Transmission (0 = automatic, 1 = manual)",
-                      "gear" = "Number of forward gears",
-                      "carb" = "Number of carburetors"
-                       ))
+# Create metadata for iris dataset
+results <- append_meta(
+    results = iris,
+    colname_descriptions = c(
+      "Sepal.Length" = "Length of the sepal in cm",
+      "Sepal.Width" = "Width of the sepal in cm",
+      "Petal.Length" = "Length of the petal in cm",
+      "Petal.Width" = "Width of the petal in cm",
+      "Species" = "Species of iris"
+    )
+  )
 ```
 
 ### 2. Generate Excel Files
@@ -57,8 +52,7 @@ supplementary_table <- spreadsheet(
   title = "Supplementary Table 1. This is space for a legend title describing
   generally the contents of the file.",
   filename = "path/to/save/example_table.xlsx",
-  sheet(mtcars_commented, "Sheet name 1", "Specific legends for each table can 
-  go here. eg. a description of the mtcars data frame can go here."),
+  sheet(results, "Sheet name 1", "Specific legends for each table can go here."),
   sheet(sheet_2_dataframe, "Sheet name 2", "Sheet legend 2"),
   sheet(sheet_3_dataframe, "Sheet name 3", "Sheet legend 3"),
 )
