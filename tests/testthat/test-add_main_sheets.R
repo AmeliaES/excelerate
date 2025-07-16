@@ -3,19 +3,13 @@ test_that("check add_main_sheets works as expected", {
   tmp_dir <- withr::local_tempdir()
 
   results <- append_meta(
-    results = mtcars,
+    results = iris,
     colname_descriptions = c(
-      "mpg" = "Miles/(US) gallon",
-      "cyl" = "Number of cylinders",
-      "disp" = "Displacement (cu.in.)",
-      "hp" = "Gross horsepower",
-      "drat" = "Rear axle ratio",
-      "wt" = "Weight (1000 lbs)",
-      "qsec" = "1/4 mile time",
-      "vs" = "Engine (0 = V-shaped, 1 = straight)",
-      "am" = "Transmission (0 = automatic, 1 = manual)",
-      "gear" = "Number of forward gears",
-      "carb" = "Number of carburetors"
+      "Sepal.Length" = "Length of the sepal in cm",
+      "Sepal.Width" = "Width of the sepal in cm",
+      "Petal.Length" = "Length of the petal in cm",
+      "Petal.Width" = "Width of the petal in cm",
+      "Species" = "Species of iris"
     )
   )
 
@@ -43,8 +37,12 @@ test_that("check add_main_sheets works as expected", {
   # Read in the excel file, with sheet_name = A
   sheet_a <- openxlsx::read.xlsx(temp_file, sheet = "A", colNames = TRUE)
   sheet_b <- openxlsx::read.xlsx(temp_file, sheet = "B", colNames = TRUE)
-
-  row.names(mtcars) <- NULL
-  expect_equal(sheet_a, mtcars)
-  expect_equal(sheet_b, mtcars)
+  expect_equal(
+    as.data.frame(lapply(sheet_a, as.character)),
+    as.data.frame(lapply(iris, as.character))
+  )
+  expect_equal(
+    as.data.frame(lapply(sheet_b, as.character)),
+    as.data.frame(lapply(iris, as.character))
+  )
 })

@@ -16,6 +16,8 @@ test_that("sheet works", {
     )
   )
 
+  rownames(results) <- NULL
+
   # Sheet returns a list item with two dataframes named main and meta
   output <- sheet(results,
     sheet_name = "A",
@@ -89,7 +91,7 @@ test_that("sheet_name does not exceed max characters", {
       sheet_name = sheet_name,
       sheet_legend = "Legend for table"
     ),
-    paste0("sheet_name (", sheet_name, ") exceeds maximum 31 characters")
+    paste0("Sheet name '", sheet_name, "' exceeds the 31-character limit.")
   )
 })
 
@@ -111,6 +113,8 @@ test_that("sheet() returns an object of sheet class", {
     )
   )
 
+  rownames(results) <- NULL
+
   output <- sheet(results,
     sheet_name = "A",
     sheet_legend = "Legend for table"
@@ -123,7 +127,7 @@ test_that("sheet() returns an object of sheet class", {
 test_that("sheet() stops if there are no comments attribute on dataframe", {
   # error if no comments attributes assigned to each column
   expect_error(
-    sheet(mtcars,
+    sheet(iris,
       sheet_name = "A",
       sheet_legend = "Legend for table"
     ),

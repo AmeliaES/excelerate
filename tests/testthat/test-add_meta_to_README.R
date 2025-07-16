@@ -3,19 +3,13 @@ test_that("check add_meta_to_readme works", {
   tmp_dir <- withr::local_tempdir()
 
   results <- append_meta(
-    results = mtcars,
+    results = iris,
     colname_descriptions = c(
-      "mpg" = "Miles/(US) gallon",
-      "cyl" = "Number of cylinders",
-      "disp" = "Displacement (cu.in.)",
-      "hp" = "Gross horsepower",
-      "drat" = "Rear axle ratio",
-      "wt" = "Weight (1000 lbs)",
-      "qsec" = "1/4 mile time",
-      "vs" = "Engine (0 = V-shaped, 1 = straight)",
-      "am" = "Transmission (0 = automatic, 1 = manual)",
-      "gear" = "Number of forward gears",
-      "carb" = "Number of carburetors"
+      "Sepal.Length" = "Length of the sepal in cm",
+      "Sepal.Width" = "Width of the sepal in cm",
+      "Petal.Length" = "Length of the petal in cm",
+      "Petal.Width" = "Width of the petal in cm",
+      "Species" = "Species of iris"
     )
   )
 
@@ -54,26 +48,20 @@ test_that("check add_meta_to_readme works", {
   expect_equal(readme[[1, 2]], "Column_Name")
   expect_equal(readme[[1, 3]], "Description")
   expect_equal(readme[[2, 1]], "A")
-  expect_equal(readme[[2, 2]], "mpg")
-  expect_equal(readme[[2, 3]], "Miles/(US) gallon")
+  expect_equal(readme[[2, 2]], "Sepal.Length")
+  expect_equal(readme[[2, 3]], "Length of the sepal in cm")
 })
 
 
 test_that("sheet_name and description labels are in italic", {
   results <- append_meta(
-    results = mtcars,
+    results = iris,
     colname_descriptions = c(
-      "mpg" = "Miles/(US) gallon",
-      "cyl" = "Number of cylinders",
-      "disp" = "Displacement (cu.in.)",
-      "hp" = "Gross horsepower",
-      "drat" = "Rear axle ratio",
-      "wt" = "Weight (1000 lbs)",
-      "qsec" = "1/4 mile time",
-      "vs" = "Engine (0 = V-shaped, 1 = straight)",
-      "am" = "Transmission (0 = automatic, 1 = manual)",
-      "gear" = "Number of forward gears",
-      "carb" = "Number of carburetors"
+      "Sepal.Length" = "Length of the sepal in cm",
+      "Sepal.Width" = "Width of the sepal in cm",
+      "Petal.Length" = "Length of the petal in cm",
+      "Petal.Width" = "Width of the petal in cm",
+      "Species" = "Species of iris"
     )
   )
 
@@ -97,6 +85,11 @@ test_that("sheet_name and description labels are in italic", {
   add_meta_to_readme(wb, spreadsheet1, next_free_row = next_free_row)
 
   # Check the header rows and cols are contained in the style objects
+  # and style contains ITALIC
   expect_equal(wb$styleObjects[[1]]$row, rep(5, 3))
   expect_equal(wb$styleObjects[[1]]$col, c(1, 2, 3))
+  expect_contains(
+    capture.output(wb$styleObjects[[1]]$style),
+    " Font decoration: ITALIC "
+  )
 })

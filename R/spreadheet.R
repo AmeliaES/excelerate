@@ -31,8 +31,32 @@
 #' spreadsheet("Example Title", "example.xlsx", sheet1, sheet2)
 #' @export
 spreadsheet <- function(title, filename, ...) {
-  sheets <- c(...)
-  spreadsheet <- list(sheets = sheets, title = title, filename = filename)
+  # Validate title and filename
+  if (!is.character(title) || length(title) != 1) {
+    stop("Title must be a single character string.")
+  }
+  if (!is.character(filename) || length(filename) != 1) {
+    stop("Filename must be a single character string.")
+  }
+
+  # Validate sheets
+  sheets <- list(...)
+
+  if (length(sheets) == 0) {
+    stop("At least one sheet must be provided.")
+  }
+
+  if (!all(sapply(sheets, function(s) inherits(s, "sheet")))) {
+    stop(
+      "All additional arguments must be 'sheet' objects.",
+      "Ensure you pass valid sheets."
+    )
+  }
+
+  spreadsheet <- list(
+    sheets = unlist(sheets, recursive = FALSE),
+    title = title, filename = filename
+  )
   class(spreadsheet) <- "spreadsheet"
   spreadsheet
 }
