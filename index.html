@@ -97,22 +97,17 @@
 </h3>
 <p>Use <code><a href="reference/append_meta.html">append_meta()</a></code> to add column descriptions to your data frame. This function annotates your data frame with descriptions for each column, which is then inserted as a table in the first sheet (“README” sheet) of your Excel spreadsheet.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Create metadata for mtcars dataset</span></span>
-<span><span class="va">mtcars_commented</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/append_meta.html">append_meta</a></span><span class="op">(</span>results <span class="op">=</span> <span class="va">mtcars</span>,</span>
-<span>                      colname_descriptions <span class="op">=</span></span>
-<span>                      <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span>                      <span class="st">"mpg"</span> <span class="op">=</span> <span class="st">"Miles/(US) gallon"</span>,</span>
-<span>                      <span class="st">"cyl"</span> <span class="op">=</span> <span class="st">"Number of cylinders"</span>,</span>
-<span>                      <span class="st">"disp"</span> <span class="op">=</span> <span class="st">"Displacement (cu.in.)"</span>,</span>
-<span>                      <span class="st">"hp"</span> <span class="op">=</span> <span class="st">"Gross horsepower"</span>,</span>
-<span>                      <span class="st">"drat"</span> <span class="op">=</span> <span class="st">"Rear axle ratio"</span>,</span>
-<span>                      <span class="st">"wt"</span> <span class="op">=</span> <span class="st">"Weight (1000 lbs)"</span>,</span>
-<span>                      <span class="st">"qsec"</span> <span class="op">=</span> <span class="st">"1/4 mile time"</span>,</span>
-<span>                      <span class="st">"vs"</span> <span class="op">=</span> <span class="st">"Engine (0 = V-shaped, 1 = straight)"</span>,</span>
-<span>                      <span class="st">"am"</span> <span class="op">=</span> <span class="st">"Transmission (0 = automatic, 1 = manual)"</span>,</span>
-<span>                      <span class="st">"gear"</span> <span class="op">=</span> <span class="st">"Number of forward gears"</span>,</span>
-<span>                      <span class="st">"carb"</span> <span class="op">=</span> <span class="st">"Number of carburetors"</span></span>
-<span>                       <span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Create metadata for iris dataset</span></span>
+<span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/append_meta.html">append_meta</a></span><span class="op">(</span></span>
+<span>    results <span class="op">=</span> <span class="va">iris</span>,</span>
+<span>    colname_descriptions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>      <span class="st">"Sepal.Length"</span> <span class="op">=</span> <span class="st">"Length of the sepal in cm"</span>,</span>
+<span>      <span class="st">"Sepal.Width"</span> <span class="op">=</span> <span class="st">"Width of the sepal in cm"</span>,</span>
+<span>      <span class="st">"Petal.Length"</span> <span class="op">=</span> <span class="st">"Length of the petal in cm"</span>,</span>
+<span>      <span class="st">"Petal.Width"</span> <span class="op">=</span> <span class="st">"Width of the petal in cm"</span>,</span>
+<span>      <span class="st">"Species"</span> <span class="op">=</span> <span class="st">"Species of iris"</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="id_2-generate-excel-files">2. Generate Excel Files<a class="anchor" aria-label="anchor" href="#id_2-generate-excel-files"></a>
@@ -124,8 +119,7 @@
 <span>  title <span class="op">=</span> <span class="st">"Supplementary Table 1. This is space for a legend title describing</span></span>
 <span><span class="st">  generally the contents of the file."</span>,</span>
 <span>  filename <span class="op">=</span> <span class="st">"path/to/save/example_table.xlsx"</span>,</span>
-<span>  <span class="fu"><a href="reference/sheet.html">sheet</a></span><span class="op">(</span><span class="va">mtcars_commented</span>, <span class="st">"Sheet name 1"</span>, <span class="st">"Specific legends for each table can </span></span>
-<span><span class="st">  go here. eg. a description of the mtcars data frame can go here."</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="reference/sheet.html">sheet</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"Sheet name 1"</span>, <span class="st">"Specific legends for each table can go here."</span><span class="op">)</span>,</span>
 <span>  <span class="fu"><a href="reference/sheet.html">sheet</a></span><span class="op">(</span><span class="va">sheet_2_dataframe</span>, <span class="st">"Sheet name 2"</span>, <span class="st">"Sheet legend 2"</span><span class="op">)</span>,</span>
 <span>  <span class="fu"><a href="reference/sheet.html">sheet</a></span><span class="op">(</span><span class="va">sheet_3_dataframe</span>, <span class="st">"Sheet name 3"</span>, <span class="st">"Sheet legend 3"</span><span class="op">)</span>,</span>
 <span><span class="op">)</span></span>
