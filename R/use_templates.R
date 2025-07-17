@@ -13,7 +13,7 @@ use_spreadsheet_template <- function(spreadsheet_template,
   if (spreadsheet_template != "" && !stringr::str_detect(
     spreadsheet_template, "\\{n\\}"
   )) {
-    stop('spreadsheet_template character string must contain "{n}"')
+    stop('spreadsheet_template character string must contain "\\{n\\}"')
   }
 
   if (spreadsheet_template == "" && spreadsheet$file == "") {
@@ -53,7 +53,7 @@ use_sheet_template <- function(sheet_template,
                                spreadsheet,
                                n) {
   # Use guard clauses to exit function early if conditions met
-  if (sheet_template == "") {
+  if (is.null(sheet_template) || sheet_template == "") {
     return(spreadsheet)
   }
 
@@ -69,16 +69,12 @@ use_sheet_template <- function(sheet_template,
     return(spreadsheet)
   }
 
-  if (!is.character(sheet_template)) {
-    stop("sheet_template must be a character string")
-  }
-
-  if (sheet_template != "" && !stringr::str_detect(sheet_template, "\\{n\\}")) {
-    stop('sheet_template character string must contain "{n}"')
+  if (!stringr::str_detect(sheet_template, "\\{n\\}")) {
+    stop('sheet_template character string must contain "\\{n\\}"')
   }
 
   if (sheet_template != "" && !stringr::str_detect(sheet_template, "\\{l\\}")) {
-    stop('sheet_template character string must contain "{l}"')
+    stop('sheet_template character string must contain "\\{l\\}"')
   }
 
   # Append prefix to sheet names for each sheet

@@ -34,6 +34,94 @@ test_that("use_spreadsheet_template works", {
   expect_equal(output$file, "S3")
 })
 
+test_that("use_spreadsheet_template errors if not char str input", {
+  results <- get_test_data()
+
+  spreadsheet <- spreadsheet(
+    sheet(results,
+      sheet_name = "A",
+      sheet_legend = "Legend for table"
+    ),
+    sheet(results,
+      sheet_name = "B",
+      sheet_legend = "Legend for table"
+    ),
+    title = "Here is a fabulous title for my table.",
+    path = tempdir()
+  )
+
+  expect_error(
+    use_spreadsheet_template(NULL, spreadsheet, 3),
+    "spreadsheet_template must be a character string"
+  )
+})
+
+test_that("use_spreadsheet_template errors if not containing {n}", {
+  results <- get_test_data()
+
+  spreadsheet <- spreadsheet(
+    sheet(results,
+      sheet_name = "A",
+      sheet_legend = "Legend for table"
+    ),
+    sheet(results,
+      sheet_name = "B",
+      sheet_legend = "Legend for table"
+    ),
+    title = "Here is a fabulous title for my table.",
+    path = tempdir()
+  )
+
+  expect_error(
+    use_spreadsheet_template("a string", spreadsheet, 3),
+    'spreadsheet_template character string must contain "\\{n\\}"'
+  )
+})
+
+test_that("use_spreadsheet_template cannot have empty file and template", {
+  results <- get_test_data()
+
+  spreadsheet <- spreadsheet(
+    sheet(results,
+      sheet_name = "A",
+      sheet_legend = "Legend for table"
+    ),
+    sheet(results,
+      sheet_name = "B",
+      sheet_legend = "Legend for table"
+    ),
+    title = "Here is a fabulous title for my table.",
+    path = tempdir()
+  )
+
+  expect_error(
+    use_spreadsheet_template("", spreadsheet, 3),
+    "file and spreadsheet_template cannot both be an empty string"
+  )
+})
+
+test_that("use_spreadsheet_template cannot have empty file and template", {
+  results <- get_test_data()
+
+  spreadsheet <- spreadsheet(
+    sheet(results,
+      sheet_name = "A",
+      sheet_legend = "Legend for table"
+    ),
+    sheet(results,
+      sheet_name = "B",
+      sheet_legend = "Legend for table"
+    ),
+    title = "Here is a fabulous title for my table.",
+    path = tempdir()
+  )
+
+  expect_error(
+    use_spreadsheet_template("", spreadsheet, 3),
+    "file and spreadsheet_template cannot both be an empty string"
+  )
+})
+
 test_that(
   "use_sheet_template returns unchanged spreadsheet if template is empty",
   {
@@ -55,6 +143,56 @@ test_that(
     output <- use_sheet_template("", spreadsheet, 1)
 
     expect_equal(output, spreadsheet)
+  }
+)
+
+test_that(
+  "use_sheet_template must be a character string",
+  {
+    results <- get_test_data()
+
+    spreadsheet <- spreadsheet(
+      sheet(results,
+        sheet_name = "A",
+        sheet_legend = "Legend for table"
+      ),
+      sheet(results,
+        sheet_name = "B",
+        sheet_legend = "Legend for table"
+      ),
+      title = "Here is a fabulous title for my table.",
+      path = tempdir()
+    )
+
+    expect_error(
+      use_sheet_template("a string", spreadsheet, 1),
+      'sheet_template character string must contain "\\{n\\}"'
+    )
+  }
+)
+
+test_that(
+  "use_sheet_template must be a character string",
+  {
+    results <- get_test_data()
+
+    spreadsheet <- spreadsheet(
+      sheet(results,
+        sheet_name = "A",
+        sheet_legend = "Legend for table"
+      ),
+      sheet(results,
+        sheet_name = "B",
+        sheet_legend = "Legend for table"
+      ),
+      title = "Here is a fabulous title for my table.",
+      path = tempdir()
+    )
+
+    expect_error(
+      use_sheet_template("a string{n}", spreadsheet, 1),
+      'sheet_template character string must contain "\\{l\\}"'
+    )
   }
 )
 
