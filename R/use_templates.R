@@ -13,7 +13,7 @@ use_spreadsheet_template <- function(spreadsheet_template,
   if (spreadsheet_template != "" && !stringr::str_detect(
     spreadsheet_template, "\\{n\\}"
   )) {
-    stop('spreadsheet_template character string must contain "\\{n\\}"')
+    stop('spreadsheet_template character string must contain "{n}"')
   }
 
   if (spreadsheet_template == "" && spreadsheet$file == "") {
@@ -70,11 +70,11 @@ use_sheet_template <- function(sheet_template,
   }
 
   if (!stringr::str_detect(sheet_template, "\\{n\\}")) {
-    stop('sheet_template character string must contain "\\{n\\}"')
+    stop('sheet_template character string must contain "{n}"')
   }
 
   if (sheet_template != "" && !stringr::str_detect(sheet_template, "\\{l\\}")) {
-    stop('sheet_template character string must contain "\\{l\\}"')
+    stop('sheet_template character string must contain "{l}"')
   }
 
   # Append prefix to sheet names for each sheet
