@@ -24,7 +24,8 @@ test_that("excelerate function works", {
       sheet_legend = "Legend for table"
     ),
     title = "Supplementary Table 1",
-    filename = file.path(tmp_dir, "SuppTab1.xlsx")
+    path = file.path(tmp_dir),
+    file = ""
   )
 
   spreadsheet2 <- spreadsheet(
@@ -37,21 +38,22 @@ test_that("excelerate function works", {
       sheet_legend = "Legend for table"
     ),
     title = "Supplementary Table 2",
-    filename = file.path(tmp_dir, "SuppTab2.xlsx")
+    path = file.path(tmp_dir),
+    file = "SuppTab2.xlsx"
   )
 
   output <- excelerate(spreadsheet1, spreadsheet2)
 
   # Check excelerate returns expected object
-  expect_true(file.exists(file.path(tmp_dir, "SuppTab1.xlsx")))
+  expect_true(file.exists(file.path(tmp_dir, "S1.xlsx")))
   expect_equal(
-    readxl::excel_sheets(file.path(tmp_dir, "SuppTab1.xlsx")),
-    c("README", "A", "B")
+    readxl::excel_sheets(file.path(tmp_dir, "S1.xlsx")),
+    c("README", "1A A", "1B B")
   )
-  expect_true(file.exists(file.path(tmp_dir, "SuppTab2.xlsx")))
+  expect_true(file.exists(file.path(tmp_dir, "S2_SuppTab2.xlsx")))
   expect_equal(
-    readxl::excel_sheets(file.path(tmp_dir, "SuppTab2.xlsx")),
-    c("README", "A", "B")
+    readxl::excel_sheets(file.path(tmp_dir, "S2_SuppTab2.xlsx")),
+    c("README", "2A A", "2B B")
   )
 })
 

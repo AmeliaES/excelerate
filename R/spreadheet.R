@@ -1,10 +1,12 @@
 #' Combine Sheets into a List for an Excel Spreadsheet
 #'
 #' Combines multiple sheets into a single structure with supplementary table
-#' legend and filename for saving as Excel.
+#' legend and file name for saving as Excel.
 #'
 #' @param title A character string with the legend title for the spreadsheet.
-#' @param filename A character string with the path and file name for the Excel
+#' @param path A character string with the path to save the Excel files in.
+#' Defaults to current working directory.
+#' @param file A character string with the file name to save the Excel file.
 #'   spreadsheet.
 #' @param ... Sheet objects created using [sheet()].
 #'
@@ -24,13 +26,23 @@
 #' sheet2 <- sheet(results, "Sheet B", "Legend B")
 #' spreadsheet("Example Title", "example.xlsx", sheet1, sheet2)
 #' @export
-spreadsheet <- function(title, filename, ...) {
-  # Validate title and filename
+spreadsheet <- function(title,
+                        path = getwd(),
+                        file,
+                        ...) {
+  # Validate title, path and file
   if (!is.character(title) || length(title) != 1) {
     stop("Title must be a single character string.")
   }
-  if (!is.character(filename) || length(filename) != 1) {
-    stop("Filename must be a single character string.")
+  if (!is.character(path) || length(path) != 1) {
+    stop("path must be a single character string.")
+  }
+  if (!is.character(file) || length(file) != 1) {
+    stop("file must be a single character string.")
+  }
+
+  if (!dir.exists(path)) {
+    stop("Directory specified to path does not exist.")
   }
 
   # Validate sheets
@@ -49,7 +61,7 @@ spreadsheet <- function(title, filename, ...) {
 
   spreadsheet <- list(
     sheets = unlist(sheets, recursive = FALSE),
-    title = title, filename = filename
+    title = title, path = path, file = file
   )
   class(spreadsheet) <- "spreadsheet"
   spreadsheet

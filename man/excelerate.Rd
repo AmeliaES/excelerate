@@ -4,10 +4,14 @@
 \alias{excelerate}
 \title{Create and Save Excel Files with Supplementary Tables}
 \usage{
-excelerate(...)
+excelerate(..., sheet_template = "{n}{l} ", spreadsheet_template = "S{n}")
 }
 \arguments{
 \item{...}{One or more \code{spreadsheet} objects created with \code{\link[=spreadsheet]{spreadsheet()}}.}
+
+\item{sheet_template}{Enumerate sheet name with table number and a letter}
+
+\item{spreadsheet_template}{Enumerate spreadsheet title and file.}
 }
 \description{
 This function creates and saves Excel files from given spreadsheet objects.

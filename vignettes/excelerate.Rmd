@@ -89,7 +89,8 @@ Next, we demonstrate how to combine sheets into a single Excel file using the `s
 ```{r}
 supplementary_table_1 <- spreadsheet(
   title = "Supplementary Table 1. This is 'legend_title' from spreadsheet().",
-  filename = file.path(temp_dir, "supplementary_table_1.xlsx"),
+  path = file.path(temp_dir),
+  file = "my_results",
   sheet(
     iris_commented,
     "iris sheet label",
@@ -104,7 +105,8 @@ supplementary_table_1 <- spreadsheet(
 
 supplementary_table_2 <- spreadsheet(
   title = "Supplementary Table 2. This is 'legend_title' from spreadsheet().",
-  filename = file.path(temp_dir, "supplementary_table_2.xlsx"),
+  path = file.path(temp_dir),
+  file = "some_more_results",
   sheet(
     toothgrowth_commented,
     "ToothGrowth sheet label",
@@ -138,10 +140,59 @@ top of this script. You can inspect these files using the following steps:
 list.files(temp_dir, pattern = "\\.xlsx$", full.names = TRUE)
 
 # Open the files to inspect them
-browseURL(file.path(temp_dir, "supplementary_table_1.xlsx"))
-browseURL(file.path(temp_dir, "supplementary_table_2.xlsx"))
+# The file name has now appended "S1" and "S2" by default in excelerate()
+browseURL(file.path(temp_dir, "S1_my_results.xlsx"))
+browseURL(file.path(temp_dir, "S2_some_more_results.xlsx"))
 ```
 
+## Customise the prefix to sheet name, spreadsheet title and filenames
+
+`sheet_template` must contain `{n}` (referring to the table number) and `{l}` (referring to the sheet letter). `spreadsheet_template` must contain `{n}` (referring to the table number).
+
+```{r}
+supplementary_table_1 <- spreadsheet(
+  title = "Supplementary Table 1. This is 'legend_title' from spreadsheet().",
+  path = file.path(temp_dir),
+  file = "",
+  sheet(
+    iris_commented,
+    "iris sheet label",
+    "sheet_legend for the iris dataset."
+  ),
+  sheet(
+    chickweight_commented,
+    "ChickWeight sheet label",
+    "sheet_legend for the ChickWeight dataset."
+  )
+)
+
+supplementary_table_2 <- spreadsheet(
+  title = "Supplementary Table 2. This is 'legend_title' from spreadsheet().",
+  path = file.path(temp_dir),
+  file = "",
+  sheet(
+    toothgrowth_commented,
+    "ToothGrowth sheet label",
+    "sheet_legend for the ToothGrowth dataset."
+  ),
+  sheet(
+    co2_commented,
+    "CO2 sheet label",
+    "sheet_legend for the CO2 dataset."
+  )
+)
+
+excelerate(
+  supplementary_table_1,
+  supplementary_table_2,
+  sheet_template = "{n}_{l}_",
+  spreadsheet_template = "Supplementary Table {n}"
+)
+
+list.files(temp_dir, pattern = "\\.xlsx$", full.names = TRUE)
+browseURL(file.path(temp_dir, "Supplementary_Table_1.xlsx"))
+browseURL(file.path(temp_dir, "Supplementary_Table_2.xlsx"))
+```
 ## Conclusion
 
 This vignette has demonstrated how to create supplementary tables using the 

@@ -4,12 +4,15 @@
 \alias{spreadsheet}
 \title{Combine Sheets into a List for an Excel Spreadsheet}
 \usage{
-spreadsheet(title, filename, ...)
+spreadsheet(title, path = getwd(), file, ...)
 }
 \arguments{
 \item{title}{A character string with the legend title for the spreadsheet.}
 
-\item{filename}{A character string with the path and file name for the Excel
+\item{path}{A character string with the path to save the Excel files in.
+Defaults to current working directory.}
+
+\item{file}{A character string with the file name to save the Excel file.
 spreadsheet.}
 
 \item{...}{Sheet objects created using \code{\link[=sheet]{sheet()}}.}
@@ -19,7 +22,7 @@ A list of sheets, with title and path for saving the Excel file.
 }
 \description{
 Combines multiple sheets into a single structure with supplementary table
-legend and filename for saving as Excel.
+legend and file name for saving as Excel.
 }
 \examples{
 results <- append_meta(
