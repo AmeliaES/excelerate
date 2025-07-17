@@ -24,7 +24,8 @@ test_that("check add_meta_to_readme works", {
       sheet_legend = "Legend for table"
     ),
     title = "Supplementary Table 1",
-    filename = "SuppTab1"
+    file = "SuppTab1",
+    path = tmp_dir
   )
 
   wb <- createWorkbook()
@@ -54,6 +55,8 @@ test_that("check add_meta_to_readme works", {
 
 
 test_that("sheet_name and description labels are in italic", {
+  tmp_dir <- withr::local_tempdir()
+
   results <- append_meta(
     results = iris,
     colname_descriptions = c(
@@ -76,7 +79,8 @@ test_that("sheet_name and description labels are in italic", {
       sheet_legend = "Legend for table"
     ),
     title = "Supplementary Table 1",
-    filename = "SuppTab1"
+    file = "SuppTab1",
+    path = tmp_dir
   )
 
   wb <- createWorkbook()

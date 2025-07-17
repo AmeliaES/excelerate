@@ -31,7 +31,8 @@ Imports:
     openxlsx,
     dplyr,
     glue,
-    tibble
+    tibble,
+    stringr
 Suggests: 
     testthat (>= 3.0.0),
     readxl,

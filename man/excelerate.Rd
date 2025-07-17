@@ -4,10 +4,14 @@
 \alias{excelerate}
 \title{Create and Save Excel Files with Supplementary Tables}
 \usage{
-excelerate(...)
+excelerate(..., sheet_template = "{n}{l} ", spreadsheet_template = "S{n}")
 }
 \arguments{
 \item{...}{One or more \code{spreadsheet} objects created with \code{\link[=spreadsheet]{spreadsheet()}}.}
+
+\item{sheet_template}{Enumerate sheet name with table number and a letter}
+
+\item{spreadsheet_template}{Enumerate spreadsheet title and file.}
 }
 \description{
 This function creates and saves Excel files from given spreadsheet objects.
@@ -30,9 +34,10 @@ sheet1 <- sheet(results, "Sheet A", "Legend A")
 sheet2 <- sheet(results, "Sheet B", "Legend B")
 
 sp <- spreadsheet(
-  "Supplementary Table X",
-  file.path(temp_dir, "example.xlsx"),
-  sheet1, sheet2
+  sheet1, sheet2,
+  title = "Supplementary Table X",
+  path = tempdir(),
+  file = "example_file.xlsx"
 )
 
 excelerate(sp)

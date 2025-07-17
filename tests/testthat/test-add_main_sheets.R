@@ -24,7 +24,8 @@ test_that("check add_main_sheets works as expected", {
       sheet_legend = "Legend for table"
     ),
     title = "Supplementary Table 1",
-    filename = "SuppTab1"
+    file = "SuppTab1",
+    path = tmp_dir
   )
 
   wb <- createWorkbook()
