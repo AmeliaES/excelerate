@@ -34,9 +34,10 @@ sheet1 <- sheet(results, "Sheet A", "Legend A")
 sheet2 <- sheet(results, "Sheet B", "Legend B")
 
 sp <- spreadsheet(
-  "Supplementary Table X",
-  tempdir(), "example_file.xlsx",
-  sheet1, sheet2
+  sheet1, sheet2,
+  title = "Supplementary Table X",
+  path = tempdir(),
+  file = "example_file.xlsx"
 )
 
 excelerate(sp)

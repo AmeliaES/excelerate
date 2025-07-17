@@ -24,19 +24,25 @@
 #' )
 #' sheet1 <- sheet(results, "Sheet A", "Legend A")
 #' sheet2 <- sheet(results, "Sheet B", "Legend B")
-#' spreadsheet("Example Title", tempdir(), "example_file.xlsx", sheet1, sheet2)
+#' spreadsheet(
+#'   sheet1, sheet2,
+#'   title = "Supplementary Table X",
+#'   path = tempdir(),
+#'   file = "example_file.xlsx"
+#' )
 #' @export
-spreadsheet <- function(title,
+spreadsheet <- function(...,
+                        title,
                         path = getwd(),
-                        file,
-                        ...) {
+                        file = "") {
   # Validate title, path and file
-  if (!is.character(title) || length(title) != 1) {
-    stop("Title must be a single character string.")
+  if (!is.character(title) || length(title) != 1 || title == "") {
+    stop("title must be a single character string.")
   }
   if (!is.character(path) || length(path) != 1) {
     stop("path must be a single character string.")
   }
+
   if (!is.character(file) || length(file) != 1) {
     stop("file must be a single character string.")
   }

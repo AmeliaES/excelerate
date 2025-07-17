@@ -111,7 +111,85 @@ test_that("spreadhseet() throws error if sheets missing", {
 })
 
 
-test_that("spreadhseet() error if 1st arg is not character string for title", {
+test_that("spreadsheet() error if title incorrect or missing", {
+  results <- append_meta(
+    results = iris,
+    colname_descriptions = c(
+      "Sepal.Length" = "Length of the sepal in cm",
+      "Sepal.Width" = "Width of the sepal in cm",
+      "Petal.Length" = "Length of the petal in cm",
+      "Petal.Width" = "Width of the petal in cm",
+      "Species" = "Species of iris"
+    )
+  )
+
+  expect_error(
+    spreadsheet(
+      sheet(results,
+        sheet_name = "B",
+        sheet_legend = "Legend for table"
+      ),
+      title = "",
+      file = "SuppTab1",
+      path = tempdir()
+    ),
+    "title must be a single character string."
+  )
+
+  expect_error(
+    spreadsheet(
+      sheet(results,
+        sheet_name = "B",
+        sheet_legend = "Legend for table"
+      ),
+      title = c("", "another string"),
+      file = "SuppTab1",
+      path = tempdir()
+    ),
+    "title must be a single character string."
+  )
+})
+
+test_that("spreadsheet() error if file incorrect or missing", {
+  results <- append_meta(
+    results = iris,
+    colname_descriptions = c(
+      "Sepal.Length" = "Length of the sepal in cm",
+      "Sepal.Width" = "Width of the sepal in cm",
+      "Petal.Length" = "Length of the petal in cm",
+      "Petal.Width" = "Width of the petal in cm",
+      "Species" = "Species of iris"
+    )
+  )
+
+  expect_error(
+    spreadsheet(
+      sheet(results,
+        sheet_name = "B",
+        sheet_legend = "Legend for table"
+      ),
+      title = "title",
+      file = NULL,
+      path = tempdir()
+    ),
+    "file must be a single character string."
+  )
+
+  expect_error(
+    spreadsheet(
+      sheet(results,
+        sheet_name = "B",
+        sheet_legend = "Legend for table"
+      ),
+      title = c("", "another string"),
+      file = "SuppTab1",
+      path = tempdir()
+    ),
+    "title must be a single character string."
+  )
+})
+
+test_that("spreadsheet() error if path not a character string", {
   results <- append_meta(
     results = iris,
     colname_descriptions = c(
@@ -130,10 +208,52 @@ test_that("spreadhseet() error if 1st arg is not character string for title", {
         sheet_name = "B",
         sheet_legend = "Legend for table"
       ),
-      title = NULL,
+      title = "a title",
       file = "SuppTab1",
-      path = tempdir(),
+      path = NULL,
     ),
-    "Title must be a single character string."
+    "path must be a single character string."
+  )
+
+  # Check spreadsheet returns expected object
+  expect_error(
+    spreadsheet(
+      sheet(results,
+        sheet_name = "B",
+        sheet_legend = "Legend for table"
+      ),
+      title = "a title",
+      file = "SuppTab1",
+      path = "path/to/nonexistent/dir/",
+    ),
+    "Directory specified to path does not exist."
+  )
+})
+
+test_that("no error occurs if file not given", {
+  results <- append_meta(
+    results = iris,
+    colname_descriptions = c(
+      "Sepal.Length" = "Length of the sepal in cm",
+      "Sepal.Width" = "Width of the sepal in cm",
+      "Petal.Length" = "Length of the petal in cm",
+      "Petal.Width" = "Width of the petal in cm",
+      "Species" = "Species of iris"
+    )
+  )
+
+  expect_no_error(
+    spreadsheet(
+      sheet(results,
+        sheet_name = "A",
+        sheet_legend = "Legend for table"
+      ),
+      sheet(results,
+        sheet_name = "B",
+        sheet_legend = "Legend for table"
+      ),
+      title = "Supplementary Table 1",
+      path = tempdir()
+    )
   )
 })

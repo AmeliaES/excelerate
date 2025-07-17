@@ -26,9 +26,10 @@
 #' sheet2 <- sheet(results, "Sheet B", "Legend B")
 #'
 #' sp <- spreadsheet(
-#'   "Supplementary Table X",
-#'   tempdir(), "example_file.xlsx",
-#'   sheet1, sheet2
+#'   sheet1, sheet2,
+#'   title = "Supplementary Table X",
+#'   path = tempdir(),
+#'   file = "example_file.xlsx"
 #' )
 #'
 #' excelerate(sp)
@@ -46,87 +47,20 @@ excelerate <- function(...,
     stop("Non spreadsheet class used as input to excelerate")
   }
 
-  if (!is.character(spreadsheet_template)) {
-    stop("spreadsheet_template must be a character string")
-  }
-
-  if (!is.character(sheet_template)) {
-    stop("sheet_template must be a character string")
-  }
-
-  if (spreadsheet_template != "" && !stringr::str_detect(
-    spreadsheet_template, "\\{n\\}"
-  )) {
-    stop('spreadsheet_template character string must contain "{n}"')
-  }
-
-  if (sheet_template != "" && !stringr::str_detect(sheet_template, "\\{n\\}")) {
-    stop('sheet_template character string must contain "{n}"')
-  }
-
-  if (sheet_template != "" && !stringr::str_detect(sheet_template, "\\{l\\}")) {
-    stop('sheet_template character string must contain "{l}"')
-  }
-
   # For each spreadsheet object create an excel table
   lapply(seq_along(spreadsheets), function(n) {
-    if (spreadsheet_template == "" && spreadsheets[[n]]$file == "") {
-      stop("file and spreadsheet_template cannot both be an empty string")
-    }
+    # Update spreadsheet title and file name
+    spreadsheets[[n]] <- use_spreadsheet_template(
+      spreadsheet_template,
+      spreadsheets[[n]],
+      n
+    )
 
-    # First append sheet_template and spreadsheet_template
-    # to sheet_name, file and title
-
-    if (spreadsheet_template != "") {
-      # Append prefix to file name
-      file <- spreadsheets[[n]]$file
-
-      # Don't append _ on end if file empty
-      new_file <- paste0(c(glue(spreadsheet_template), file),
-        collapse = ifelse(file != "", "_", "")
-      )
-
-      # remove spaces from file and replace with "_"
-      new_file <- stringr::str_replace_all(new_file, " ", "_")
-
-      spreadsheets[[n]]$file <- new_file
-
-      # Append prefix to title
-      spreadsheets[[n]]$title <- paste0(
-        glue(spreadsheet_template),
-        ". ",
-        spreadsheets[[n]]$title
-      )
-    }
-
-    if (sheet_template != "") {
-      # if there are more than 26 sheets then warn user that the sheet will not
-      # be labeled with a prefix letter
-
-      sheets <- spreadsheets[[n]]$sheets
-
-      # Append prefix to sheet names for each sheet
-      prefixed_names <- lapply(seq_along(sheets), function(i) {
-        l <- LETTERS[i]
-        sheet_prefix <- glue(sheet_template)
-        og_name <- names(sheets[i])
-        sheet_name <- paste0(sheet_prefix, og_name)
-
-        # error if sheet names now exceeding max 31 characters
-        if (nchar(sheet_name) > 31) {
-          stop(
-            "The sheet name, combined with the prefix (sheet_template),",
-            "exceeds the maximum length of 31 characters.",
-            "Please shorten sheet_name or adjust sheet_template."
-          )
-        }
-        sheet_name
-      })
-
-      names(sheets) <- prefixed_names
-
-      spreadsheets[[n]]$sheets <- sheets
-    }
+    spreadsheets[[n]] <- use_sheet_template(
+      sheet_template,
+      spreadsheets[[n]],
+      n
+    )
 
     # Function that creates excel table
     wb <- createWorkbook()
