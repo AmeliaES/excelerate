@@ -35,7 +35,7 @@ sheet2 <- sheet(results, "Sheet B", "Legend B")
 
 sp <- spreadsheet(
   "Supplementary Table X",
-  file.path(temp_dir, "example.xlsx"),
+  tempdir(), "example_file.xlsx",
   sheet1, sheet2
 )
 

@@ -37,5 +37,5 @@ results <- append_meta(
 )
 sheet1 <- sheet(results, "Sheet A", "Legend A")
 sheet2 <- sheet(results, "Sheet B", "Legend B")
-spreadsheet("Example Title", "example.xlsx", sheet1, sheet2)
+spreadsheet("Example Title", tempdir(), "example_file.xlsx", sheet1, sheet2)
 }
