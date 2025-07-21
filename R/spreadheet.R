@@ -7,7 +7,7 @@
 #' @param path A character string with the path to save the Excel files in.
 #' Defaults to current working directory.
 #' @param file A character string with the file name to save the Excel file.
-#'   spreadsheet.
+#'   spreadsheet. By default spaces will be converted to underscores.
 #' @param ... Sheet objects created using [sheet()].
 #'
 #' @return A list of sheets, with title and path for saving the Excel file.

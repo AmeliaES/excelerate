@@ -32,7 +32,8 @@ Imports:
     dplyr,
     glue,
     tibble,
-    stringr
+    stringr,
+    magrittr
 Suggests: 
     testthat (>= 3.0.0),
     readxl,

@@ -88,9 +88,9 @@ Next, we demonstrate how to combine sheets into a single Excel file using the `s
 
 ```{r}
 supplementary_table_1 <- spreadsheet(
-  title = "Supplementary Table 1. This is 'legend_title' from spreadsheet().",
+  title = "Results for iris and ChickWeight. 'title' from spreadsheet().",
   path = file.path(temp_dir),
-  file = "my_results",
+  file = "",
   sheet(
     iris_commented,
     "iris sheet label",
@@ -104,17 +104,17 @@ supplementary_table_1 <- spreadsheet(
 )
 
 supplementary_table_2 <- spreadsheet(
-  title = "Supplementary Table 2. This is 'legend_title' from spreadsheet().",
+  title = "Results for toothgrowth and C02 R supplied datasets.",
   path = file.path(temp_dir),
-  file = "some_more_results",
+  file = "",
   sheet(
     toothgrowth_commented,
-    "ToothGrowth sheet label",
+    "ToothGrowth sheet_name",
     "sheet_legend for the ToothGrowth dataset."
   ),
   sheet(
     co2_commented,
-    "CO2 sheet label",
+    "CO2 sheet_name",
     "sheet_legend for the CO2 dataset."
   )
 )
@@ -141,8 +141,8 @@ list.files(temp_dir, pattern = "\\.xlsx$", full.names = TRUE)
 
 # Open the files to inspect them
 # The file name has now appended "S1" and "S2" by default in excelerate()
-browseURL(file.path(temp_dir, "S1_my_results.xlsx"))
-browseURL(file.path(temp_dir, "S2_some_more_results.xlsx"))
+browseURL(file.path(temp_dir, "S1.xlsx"))
+browseURL(file.path(temp_dir, "S2.xlsx"))
 ```
 
 ## Customise the prefix to sheet name, spreadsheet title and filenames
@@ -151,9 +151,9 @@ browseURL(file.path(temp_dir, "S2_some_more_results.xlsx"))
 
 ```{r}
 supplementary_table_1 <- spreadsheet(
-  title = "Supplementary Table 1. This is 'legend_title' from spreadsheet().",
+  title = "Results for iris and ChickWeight. 'title' from spreadsheet().",
   path = file.path(temp_dir),
-  file = "",
+  file = "iris ChickWeight",
   sheet(
     iris_commented,
     "iris sheet label",
@@ -167,21 +167,24 @@ supplementary_table_1 <- spreadsheet(
 )
 
 supplementary_table_2 <- spreadsheet(
-  title = "Supplementary Table 2. This is 'legend_title' from spreadsheet().",
+  title = "Results for toothgrowth and C02 R supplied datasets.",
   path = file.path(temp_dir),
   file = "",
   sheet(
     toothgrowth_commented,
-    "ToothGrowth sheet label",
+    "ToothGrowth sheet_name",
     "sheet_legend for the ToothGrowth dataset."
   ),
   sheet(
     co2_commented,
-    "CO2 sheet label",
+    "CO2 sheet_name",
     "sheet_legend for the CO2 dataset."
   )
 )
 
+# Append "A_1_", "B_1_" to each sheet name
+# and "Supplementary Table 1" to the legend title and file name
+# by default any spaces in the file name will be converted to underscores
 excelerate(
   supplementary_table_1,
   supplementary_table_2,
@@ -190,9 +193,10 @@ excelerate(
 )
 
 list.files(temp_dir, pattern = "\\.xlsx$", full.names = TRUE)
-browseURL(file.path(temp_dir, "Supplementary_Table_1.xlsx"))
+browseURL(file.path(temp_dir, "Supplementary_Table_1_iris_ChickWeight.xlsx"))
 browseURL(file.path(temp_dir, "Supplementary_Table_2.xlsx"))
 ```
+
 ## Conclusion
 
 This vignette has demonstrated how to create supplementary tables using the 

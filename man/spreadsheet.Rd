@@ -15,7 +15,7 @@ spreadsheet(..., title, path = getwd(), file = "")
 Defaults to current working directory.}
 
 \item{file}{A character string with the file name to save the Excel file.
-spreadsheet.}
+spreadsheet. By default spaces will be converted to underscores.}
 }
 \value{
 A list of sheets, with title and path for saving the Excel file.

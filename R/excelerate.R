@@ -1,13 +1,30 @@
-#' Create and Save Excel Files with Supplementary Tables
+#' Create and Save Excel Files for Supplementary Tables
 #'
-#' This function creates and saves Excel files from given spreadsheet objects.
+#' This function processes one or more `spreadsheet` objects (created with
+#' [spreadsheet()]) and produces Excel files according to a set of customisable
+#' naming templates. It applies user-specified patterns to rename data sheets
+#' as well as update the spreadsheet title and file name.
 #'
 #' @param ... One or more `spreadsheet` objects created with [spreadsheet()].
-#' @param sheet_template Enumerate sheet name with table number and a letter
-#' @param spreadsheet_template Enumerate spreadsheet title and file.
+#' @param sheet_template A character string template used to append prefix to
+#' `sheet_name` supplied to [sheet()].
+#'   The default is `"{n}{l} "`, where:
+#'   \itemize{
+#'     \item `"{n}"` is replaced with the sheet sequence number.
+#'     \item `"{l}"` is replaced with a letter in order from A to Z.
+#'   }
+#'   eg. Sheet names will be prefixed with "A1 ", "B1 ", "C1 " etc.
+#'   Note that if you have more than 26 sheets then `sheet_template` is ignored.
+#' @param spreadsheet_template A character string template to append prefix to
+#' spreadsheet `title` and `file` (supplied to [spreadsheet()]). The default
+#' is `"S{n}"`, where `"{n}"` is replaced with the spreadsheet sequence number.
+#' eg. "S1_filename.xlsx" for and "S1. Legend title" in README sheet. Note that
+#' by default if spaces are detected in this string they are converted to
+#' underscores for the file name.
 #'
 #' @importFrom openxlsx createWorkbook saveWorkbook loadWorkbook
 #' @importFrom stringr str_detect str_replace_all
+#' @importFrom magrittr %>%
 #' @examples
 #' temp_dir <- tempdir()
 #'
@@ -34,6 +51,9 @@
 #'
 #' excelerate(sp)
 #'
+#' # List files in tmp dir to see file created
+#' list.files(temp_dir, pattern = "\\.xlsx$", full.names = TRUE)
+#'
 #' # Clean up the temporary files
 #' unlink(file.path(temp_dir, "example.xlsx"))
 #' @export
@@ -45,6 +65,18 @@ excelerate <- function(...,
 
   if (any(sapply(spreadsheets, class) != "spreadsheet")) {
     stop("Non spreadsheet class used as input to excelerate")
+  }
+
+  # if any spreadsheets have the same file name then stop with an error
+  duplicated_file_names <- lapply(spreadsheets, function(spreadsheet) {
+    spreadsheet$file
+  }) %>% duplicated()
+
+  if (any(duplicated_file_names) && spreadsheet_template == "") {
+    stop(
+      "Multiple spreadsheets cannot have the same filename ",
+      "and missing spreadsheet_template."
+    )
   }
 
   # For each spreadsheet object create an excel table
@@ -92,6 +124,11 @@ excelerate <- function(...,
     }
 
     # Write the spreadsheet to excel file
+    # Remove spaces from user supplied file name
+    spreadsheets[[n]]$file <- stringr::str_replace_all(
+      spreadsheets[[n]]$file, " ", "_"
+    )
+
     saveWorkbook(wb, file.path(spreadsheets[[n]]$path, spreadsheets[[n]]$file),
       overwrite = TRUE
     )

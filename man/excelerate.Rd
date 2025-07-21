@@ -2,19 +2,35 @@
 % Please edit documentation in R/excelerate.R
 \name{excelerate}
 \alias{excelerate}
-\title{Create and Save Excel Files with Supplementary Tables}
+\title{Create and Save Excel Files for Supplementary Tables}
 \usage{
 excelerate(..., sheet_template = "{n}{l} ", spreadsheet_template = "S{n}")
 }
 \arguments{
 \item{...}{One or more \code{spreadsheet} objects created with \code{\link[=spreadsheet]{spreadsheet()}}.}
 
-\item{sheet_template}{Enumerate sheet name with table number and a letter}
+\item{sheet_template}{A character string template used to append prefix to
+\code{sheet_name} supplied to \code{\link[=sheet]{sheet()}}.
+The default is \code{"{n}{l} "}, where:
+\itemize{
+\item \code{"{n}"} is replaced with the sheet sequence number.
+\item \code{"{l}"} is replaced with a letter in order from A to Z.
+}
+eg. Sheet names will be prefixed with "A1 ", "B1 ", "C1 " etc.
+Note that if you have more than 26 sheets then \code{sheet_template} is ignored.}
 
-\item{spreadsheet_template}{Enumerate spreadsheet title and file.}
+\item{spreadsheet_template}{A character string template to append prefix to
+spreadsheet \code{title} and \code{file} (supplied to \code{\link[=spreadsheet]{spreadsheet()}}). The default
+is \code{"S{n}"}, where \code{"{n}"} is replaced with the spreadsheet sequence number.
+eg. "S1_filename.xlsx" for and "S1. Legend title" in README sheet. Note that
+by default if spaces are detected in this string they are converted to
+underscores for the file name.}
 }
 \description{
-This function creates and saves Excel files from given spreadsheet objects.
+This function processes one or more \code{spreadsheet} objects (created with
+\code{\link[=spreadsheet]{spreadsheet()}}) and produces Excel files according to a set of customisable
+naming templates. It applies user-specified patterns to rename data sheets
+as well as update the spreadsheet title and file name.
 }
 \examples{
 temp_dir <- tempdir()
@@ -41,6 +57,9 @@ sp <- spreadsheet(
 )
 
 excelerate(sp)
+
+# List files in tmp dir to see file created
+list.files(temp_dir, pattern = "\\\\.xlsx$", full.names = TRUE)
 
 # Clean up the temporary files
 unlink(file.path(temp_dir, "example.xlsx"))
