@@ -43,3 +43,4 @@ Suggests:
 Config/testthat/edition: 3
 VignetteBuilder: knitr
 URL: https://ameliaes.github.io/excelerate/
+Config/Needs/website: rmarkdown
