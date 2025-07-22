@@ -132,18 +132,19 @@ use_sheet_template <- function(sheet_template,
 #'
 #' @noRd
 append_sheet_prefix <- function(i, sheet_template, sheet, n) {
+
   l <- LETTERS[i]
   sheet_prefix <- glue::glue(sheet_template)
   sheet_name <- names(sheet)
   numbered_sheet_name <- paste0(sheet_prefix, sheet_name)
 
   # error if sheet names now exceeding max 31 characters
-  if (nchar(sheet_name) > 31) {
+  if (nchar(numbered_sheet_name) > 31) {
     stop(
       "The sheet name, combined with the prefix (sheet_template),",
       "exceeds the maximum length of 31 characters.",
       "Please shorten sheet_name or adjust sheet_template."
     )
   }
-  sheet_name
+  numbered_sheet_name
 }
