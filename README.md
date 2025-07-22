@@ -107,7 +107,6 @@ The output is an Excel file with multiple sheets.
   - The meta data supplied to `append_meta()`, for each sheet.
 - The remaining sheets are the data frames supplied to `sheet()`. In the order each sheet object was supplied to `spreadsheet()`.
 
-
 Example output from the package vignette at [`Get Started`](https://ameliaes.github.io/excelerate/articles/excelerate.html):
 
 <p align="center">
