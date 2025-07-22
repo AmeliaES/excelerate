@@ -100,12 +100,16 @@ use_sheet_template <- function(sheet_template,
     stop('sheet_template character string must contain "{n}"')
   }
 
-  if (sheet_template != "" && !stringr::str_detect(sheet_template, "\\{l\\}")) {
+  if (sheet_template != "" && !stringr::str_detect(sheet_template, "\\{l\\}") && length(sheets) > 1) {
     stop('sheet_template character string must contain "{l}"')
   }
 
   # Append prefix to sheet names for each sheet
   prefixed_names <- lapply(seq_along(sheets), function(i) {
+    # if there's only one sheet then remove the letter from sheet_template
+    if (length(sheets) == 1) {
+      sheet_template <- stringr::str_remove(sheet_template, "\\{l\\} ")
+    }
     append_sheet_prefix(i, sheet_template, sheets[i], n)
   })
 

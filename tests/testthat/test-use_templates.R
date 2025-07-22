@@ -316,3 +316,20 @@ test_that("append_sheet_prefix returns prefixed name correctly", {
 
   expect_equal(output, "2B this is another sheet")
 })
+
+test_that("if there's only one sheet then only number is appended", {
+  results <- get_test_data()
+
+  spreadsheet <- spreadsheet(
+    sheet(results,
+      sheet_name = "this is sheet 1",
+      sheet_legend = "Legend for table"
+    ),
+    title = "Here is a fabulous title for my table.",
+    path = tempdir()
+  )
+
+  output <- use_sheet_template("{n} {l} ", spreadsheet, 2)
+
+  expect_equal(names(output$sheets), "2 this is sheet 1")
+})
