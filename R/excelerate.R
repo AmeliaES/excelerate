@@ -137,8 +137,6 @@ excelerate <- function(...,
       message("Removing existing file at: ", file_path)
       if (file.remove(file_path)) {
         message("Success. File removed.")
-      } else {
-        message("Failed to remove the file.")
       }
     }
 
