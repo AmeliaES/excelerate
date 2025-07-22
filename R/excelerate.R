@@ -80,7 +80,7 @@ excelerate <- function(...,
   }
 
   # For each spreadsheet object create an excel table
-  lapply(seq_along(spreadsheets), function(n) {
+  for (n in seq_along(spreadsheets)) {
     # Update spreadsheet title and file name
     spreadsheets[[n]] <- use_spreadsheet_template(
       spreadsheet_template,
@@ -132,5 +132,5 @@ excelerate <- function(...,
     saveWorkbook(wb, file.path(spreadsheets[[n]]$path, spreadsheets[[n]]$file),
       overwrite = TRUE
     )
-  })
+  }
 }
