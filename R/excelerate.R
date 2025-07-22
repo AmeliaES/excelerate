@@ -124,9 +124,9 @@ excelerate <- function(...,
     }
 
     # Write the spreadsheet to excel file
-    # Remove spaces from user supplied file name
+    # Remove white space from user supplied file name
     spreadsheets[[n]]$file <- stringr::str_replace_all(
-      spreadsheets[[n]]$file, " ", "_"
+      spreadsheets[[n]]$file, "\\s+", "_"
     )
 
     # Remove file if it exists before overwriting

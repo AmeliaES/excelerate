@@ -46,8 +46,8 @@ use_spreadsheet_template <- function(spreadsheet_template,
       collapse = ifelse(file != "", "_", "")
     )
 
-    # remove spaces from file and replace with "_"
-    new_file <- stringr::str_replace_all(new_file, " ", "_")
+    # remove white space from file and replace with "_"
+    new_file <- stringr::str_replace_all(new_file, "\\s+", "_")
 
     spreadsheet$file <- new_file
 
