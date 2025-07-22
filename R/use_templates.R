@@ -100,7 +100,11 @@ use_sheet_template <- function(sheet_template,
     stop('sheet_template character string must contain "{n}"')
   }
 
-  if (sheet_template != "" && !stringr::str_detect(sheet_template, "\\{l\\}") && length(sheets) > 1) {
+  template_not_empty <- sheet_template != ""
+  detect_l <- !stringr::str_detect(sheet_template, "\\{l\\}")
+  multiple_sheets <- length(sheets) > 1
+
+  if (template_not_empty && detect_l && multiple_sheets) {
     stop('sheet_template character string must contain "{l}"')
   }
 
