@@ -276,12 +276,12 @@ test_that("append_sheet_prefix throws error if name exceeds 31 chars", {
 
   spreadsheet <- spreadsheet(
     sheet(results,
-          sheet_name = paste0(rep("A", 30), collapse = ""),
-          sheet_legend = "Legend for table"
+      sheet_name = paste0(rep("A", 30), collapse = ""),
+      sheet_legend = "Legend for table"
     ),
     sheet(results,
-          sheet_name = "this is another sheet",
-          sheet_legend = "Legend for this table"
+      sheet_name = "this is another sheet",
+      sheet_legend = "Legend for this table"
     ),
     title = "Here is a fabulous title for my table.",
     path = tempdir()
@@ -297,4 +297,3 @@ test_that("append_sheet_prefix throws error if name exceeds 31 chars", {
     "exceeds the maximum length of 31 characters"
   )
 })
-
