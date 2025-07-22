@@ -129,8 +129,26 @@ excelerate <- function(...,
       spreadsheets[[n]]$file, " ", "_"
     )
 
-    saveWorkbook(wb, file.path(spreadsheets[[n]]$path, spreadsheets[[n]]$file),
-      overwrite = TRUE
-    )
+    # Remove file if it exists before overwriting
+    # this ensures success message to user is based on writting new file
+    file_path <- file.path(spreadsheets[[n]]$path, spreadsheets[[n]]$file)
+
+    if (file.exists(file_path)) {
+      message("Removing existing file at: ", file_path)
+      if (file.remove(file_path)) {
+        message("Success. File removed.")
+      } else {
+        message("Failed to remove the file.")
+      }
+    }
+
+    # Save spreadsheet to file
+    saveWorkbook(wb, file_path, overwrite = FALSE)
+
+    # if workbook saved successfully print a message to the user with the path
+    # and file name
+    if (file.exists(file_path)) {
+      message(paste0("Excel file saved successfuly at: ", file_path))
+    }
   }
 }

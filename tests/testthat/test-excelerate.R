@@ -209,3 +209,52 @@ test_that("spaces converted to underscores in user supplied file", {
   expect_true(file.exists(file.path(tmp_dir, "S1_another_file_name.xlsx")))
   expect_true(file.exists(file.path(tmp_dir, "S2_a_file_name.xlsx")))
 })
+
+test_that("message if file saved successfully", {
+  # Generate tmp directory to test function against
+  tmp_dir <- withr::local_tempdir()
+
+  results <- append_meta(
+    results = iris,
+    colname_descriptions = c(
+      "Sepal.Length" = "Length of the sepal in cm",
+      "Sepal.Width" = "Width of the sepal in cm",
+      "Petal.Length" = "Length of the petal in cm",
+      "Petal.Width" = "Width of the petal in cm",
+      "Species" = "Species of iris"
+    )
+  )
+
+  # Check spreadsheet returns expected object
+  spreadsheet1 <- spreadsheet(
+    sheet(results,
+          sheet_name = "A",
+          sheet_legend = "Legend for table"
+    ),
+    sheet(results,
+          sheet_name = "B",
+          sheet_legend = "Legend for table"
+    ),
+    title = "Supplementary Table 1",
+    path = file.path(tmp_dir),
+    file = ""
+  )
+
+  spreadsheet2 <- spreadsheet(
+    sheet(results,
+          sheet_name = "A",
+          sheet_legend = "Legend for table"
+    ),
+    sheet(results,
+          sheet_name = "B",
+          sheet_legend = "Legend for table"
+    ),
+    title = "Supplementary Table 2",
+    path = file.path(tmp_dir),
+    file = "file_with_unusual_extension.xls"
+  )
+
+  expect_message(excelerate(spreadsheet1, spreadsheet2),
+                 "Excel file saved successfuly")
+
+})
