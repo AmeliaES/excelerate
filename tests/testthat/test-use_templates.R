@@ -275,7 +275,7 @@ test_that("append_sheet_prefix throws error if name exceeds 31 chars", {
     append_sheet_prefix(
       i = 1,
       sheet_template = "{n}{l}",
-      sheets = spreadsheet$sheets,
+      sheet = spreadsheet$sheets[1],
       n = 2
     ),
     "exceeds the maximum length of 31 characters"
@@ -301,7 +301,7 @@ test_that("append_sheet_prefix returns prefixed name correctly", {
   output <- append_sheet_prefix(
     i = 1,
     sheet_template = "{n}{l} ",
-    sheets = spreadsheet$sheets,
+    sheet = spreadsheet$sheets[1],
     n = 2
   )
 
@@ -310,7 +310,7 @@ test_that("append_sheet_prefix returns prefixed name correctly", {
   output <- append_sheet_prefix(
     i = 2,
     sheet_template = "{n}{l} ",
-    sheets = spreadsheet$sheets,
+    sheet = spreadsheet$sheets[2],
     n = 2
   )
 

@@ -106,7 +106,7 @@ use_sheet_template <- function(sheet_template,
 
   # Append prefix to sheet names for each sheet
   prefixed_names <- lapply(seq_along(sheets), function(i) {
-    append_sheet_prefix(i, sheet_template, sheets, n)
+    append_sheet_prefix(i, sheet_template, sheets[i], n)
   })
 
   names(sheets) <- prefixed_names
@@ -131,11 +131,12 @@ use_sheet_template <- function(sheet_template,
 #' @return A character string containing the new sheet name.
 #'
 #' @noRd
-append_sheet_prefix <- function(i, sheet_template, sheets, n) {
+append_sheet_prefix <- function(i, sheet_template, sheet, n) {
+
   l <- LETTERS[i]
   sheet_prefix <- glue::glue(sheet_template)
-  og_name <- names(sheets[i])
-  sheet_name <- paste0(sheet_prefix, og_name)
+  sheet_name <- names(sheet)
+  numbered_sheet_name <- paste0(sheet_prefix, sheet_name)
 
   # error if sheet names now exceeding max 31 characters
   if (nchar(sheet_name) > 31) {
