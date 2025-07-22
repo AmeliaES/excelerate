@@ -93,12 +93,12 @@ supplementary_table_1 <- spreadsheet(
   file = "",
   sheet(
     iris_commented,
-    "iris sheet label",
+    "iris sheet_name",
     "sheet_legend for the iris dataset."
   ),
   sheet(
     chickweight_commented,
-    "ChickWeight sheet label",
+    "ChickWeight sheet_name",
     "sheet_legend for the ChickWeight dataset."
   )
 )
@@ -156,12 +156,12 @@ supplementary_table_1 <- spreadsheet(
   file = "iris ChickWeight",
   sheet(
     iris_commented,
-    "iris sheet label",
+    "iris sheet_name",
     "sheet_legend for the iris dataset."
   ),
   sheet(
     chickweight_commented,
-    "ChickWeight sheet label",
+    "ChickWeight sheet_name",
     "sheet_legend for the ChickWeight dataset."
   )
 )
