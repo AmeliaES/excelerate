@@ -24,7 +24,7 @@ spreadsheet \code{title} and \code{file} (supplied to \code{\link[=spreadsheet]{
 is \code{"S{n}"}, where \code{"{n}"} is replaced with the spreadsheet sequence number.
 eg. "S1_filename.xlsx" for and "S1. Legend title" in README sheet. Note that
 by default if spaces are detected in this string they are converted to
-underscores for the file name.}
+underscores for the file name, this is to aid file naming best practices.}
 }
 \description{
 This function processes one or more \code{spreadsheet} objects (created with
