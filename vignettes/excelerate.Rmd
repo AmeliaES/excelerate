@@ -182,7 +182,7 @@ supplementary_table_2 <- spreadsheet(
   )
 )
 
-# Append "A_1_", "B_1_" to each sheet name
+# Append "1_A_", "1_B_" to each sheet name
 # and "Supplementary Table 1" to the legend title and file name
 # by default any spaces in the file name will be converted to underscores
 excelerate(
