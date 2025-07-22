@@ -4,7 +4,7 @@ pkgdown_sha: ~
 articles:
   articles/customise: customise.html
   excelerate: excelerate.html
-last_built: 2025-07-22T13:43Z
+last_built: 2025-07-22T13:47Z
 urls:
   reference: https://ameliaes.github.io/excelerate/reference
   article: https://ameliaes.github.io/excelerate/articles
