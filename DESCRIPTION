@@ -29,6 +29,7 @@ RoxygenNote: 7.3.2
 Imports:
     data.table,
     openxlsx,
+    openxlsx2,
     dplyr,
     glue,
     tibble,

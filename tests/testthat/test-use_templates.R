@@ -196,40 +196,38 @@ test_that(
   }
 )
 
-test_that(
-  "use_sheet_template warns and returns unchanged spreadsheet if >26 sheets",
-  {
-    results <- get_test_data()
+test_that("repeats letters if n sheets > 26", {
+  results <- get_test_data()
 
-    sheets <- replicate(
-      30,
-      sheet(
-        results,
-        sheet_name = "A",
-        sheet_legend = "Legend for table"
-      ),
-      simplify = FALSE
-    )
+  sheets <- replicate(
+    30,
+    sheet(
+      results,
+      sheet_name = "test",
+      sheet_legend = "Legend for table"
+    ),
+    simplify = FALSE
+  )
 
-    spreadsheet <- do.call(
-      spreadsheet,
-      c(sheets, list(
-        title = "Here is a fabulous title for my table.",
-        path = tempdir()
-      ))
-    )
+  spreadsheet <- do.call(
+    spreadsheet,
+    c(sheets, list(
+      title = "Here is a fabulous title for my table.",
+      path = tempdir()
+    ))
+  )
 
-    expect_warning(
-      output <- use_sheet_template("{n}{l}_", spreadsheet, 1),
-      "More than 26 sheets"
-    )
+  output <- use_sheet_template("{n}{l}_", spreadsheet, 1)
 
-    expect_equal(
-      output,
-      spreadsheet
-    )
-  }
-)
+  expected_names <- c(
+    "1A_test", "1B_test", "1C_test", "1D_test", "1E_test", "1F_test",
+    "1G_test", "1H_test", "1I_test", "1J_test", "1K_test", "1L_test",
+    "1M_test", "1N_test", "1O_test", "1P_test", "1Q_test", "1R_test",
+    "1S_test", "1T_test", "1U_test", "1V_test", "1W_test", "1X_test",
+    "1Y_test", "1Z_test", "1AA_test", "1AB_test", "1AC_test", "1AD_test"
+  )
+  expect_equal(names(output$sheets), expected_names)
+})
 
 test_that("use_sheet_template applies prefixes correctly", {
   results <- get_test_data()
@@ -255,67 +253,6 @@ test_that("use_sheet_template applies prefixes correctly", {
   ))
 })
 
-test_that("append_sheet_prefix throws error if name exceeds 31 chars", {
-  results <- get_test_data()
-
-  spreadsheet <- spreadsheet(
-    sheet(results,
-      sheet_name = paste0(rep("A", 30), collapse = ""),
-      sheet_legend = "Legend for table"
-    ),
-    sheet(results,
-      sheet_name = "this is another sheet",
-      sheet_legend = "Legend for this table"
-    ),
-    title = "Here is a fabulous title for my table.",
-    path = tempdir()
-  )
-
-  expect_error(
-    append_sheet_prefix(
-      i = 1,
-      sheet_template = "{n}{l}",
-      sheet = spreadsheet$sheets[1],
-      n = 2
-    ),
-    "exceeds the maximum length of 31 characters"
-  )
-})
-
-test_that("append_sheet_prefix returns prefixed name correctly", {
-  results <- get_test_data()
-
-  spreadsheet <- spreadsheet(
-    sheet(results,
-      sheet_name = "a sheet name",
-      sheet_legend = "Legend for table"
-    ),
-    sheet(results,
-      sheet_name = "this is another sheet",
-      sheet_legend = "Legend for this table"
-    ),
-    title = "Here is a fabulous title for my table.",
-    path = tempdir()
-  )
-
-  output <- append_sheet_prefix(
-    i = 1,
-    sheet_template = "{n}{l} ",
-    sheet = spreadsheet$sheets[1],
-    n = 2
-  )
-
-  expect_equal(output, "2A a sheet name")
-
-  output <- append_sheet_prefix(
-    i = 2,
-    sheet_template = "{n}{l} ",
-    sheet = spreadsheet$sheets[2],
-    n = 2
-  )
-
-  expect_equal(output, "2B this is another sheet")
-})
 
 test_that("if there's only one sheet then only number is appended", {
   results <- get_test_data()

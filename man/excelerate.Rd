@@ -16,8 +16,7 @@ The default is \code{"{n}{l} "}, where:
 \item \code{"{n}"} is replaced with the sheet sequence number.
 \item \code{"{l}"} is replaced with a letter in order from A to Z.
 }
-eg. Sheet names will be prefixed with "A1 ", "B1 ", "C1 " etc.
-Note that if you have more than 26 sheets then \code{sheet_template} is ignored.}
+eg. Sheet names will be prefixed with "A1 ", "B1 ", "C1 " etc.}
 
 \item{spreadsheet_template}{A character string template to append prefix to
 spreadsheet \code{title} and \code{file} (supplied to \code{\link[=spreadsheet]{spreadsheet()}}). The default

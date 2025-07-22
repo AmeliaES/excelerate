@@ -14,7 +14,6 @@
 #'     \item `"{l}"` is replaced with a letter in order from A to Z.
 #'   }
 #'   eg. Sheet names will be prefixed with "A1 ", "B1 ", "C1 " etc.
-#'   Note that if you have more than 26 sheets then `sheet_template` is ignored.
 #' @param spreadsheet_template A character string template to append prefix to
 #' spreadsheet `title` and `file` (supplied to [spreadsheet()]). The default
 #' is `"S{n}"`, where `"{n}"` is replaced with the spreadsheet sequence number.

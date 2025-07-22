@@ -84,21 +84,11 @@ use_sheet_template <- function(sheet_template,
     return(spreadsheet)
   }
 
-  # if there are more than 26 sheets then warn user that the sheet will not
-  # be labeled with a prefix letter and exit function early
-  sheets <- spreadsheet$sheets
-
-  if (length(sheets) > 26) {
-    warning(
-      "More than 26 sheets in spreadsheet.",
-      "Sheets will not be labelled with a letter prefix."
-    )
-    return(spreadsheet)
-  }
-
   if (!stringr::str_detect(sheet_template, "\\{n\\}")) {
     stop('sheet_template character string must contain "{n}"')
   }
+
+  sheets <- spreadsheet$sheets
 
   template_not_empty <- sheet_template != ""
   detect_l <- !stringr::str_detect(sheet_template, "\\{l\\}")
@@ -140,7 +130,7 @@ use_sheet_template <- function(sheet_template,
 #'
 #' @noRd
 append_sheet_prefix <- function(i, sheet_template, sheet, n) {
-  l <- LETTERS[i]
+  l <- openxlsx2::int2col(i) # returns "AA" for int2col(27) etc.
   sheet_prefix <- glue::glue(sheet_template)
   sheet_name <- names(sheet)
   numbered_sheet_name <- paste0(sheet_prefix, sheet_name)
