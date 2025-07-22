@@ -41,8 +41,14 @@ use_spreadsheet_template <- function(spreadsheet_template,
     # Append prefix to file name
     file <- spreadsheet$file
 
+    # evaluate template inside a protected environment
+    env <- new.env(parent = emptyenv())
+    # add "n" as the only variable
+    assign("n", value = n, envir = env)
+    file_prefix <- glue::glue_safe(spreadsheet_template, .envir = env)
+
     # Don't append _ on end if file empty
-    new_file <- paste0(c(glue(spreadsheet_template), file),
+    new_file <- paste0(c(file_prefix, file),
       collapse = ifelse(file != "", "_", "")
     )
 

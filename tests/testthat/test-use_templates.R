@@ -297,3 +297,32 @@ test_that("append_sheet_prefix throws error if name exceeds 31 chars", {
     "exceeds the maximum length of 31 characters"
   )
 })
+
+test_that("spreadsheet template is sanitised", {
+  # test data
+  results <- get_test_data()
+  # other namespace variables
+  a <- 1
+
+  spreadsheet <- spreadsheet(
+    sheet(results,
+      sheet_name = paste0(rep("A", 30), collapse = ""),
+      sheet_legend = "Legend for table"
+    ),
+    sheet(results,
+      sheet_name = "this is another sheet",
+      sheet_legend = "Legend for this table"
+    ),
+    title = "Here is a fabulous title for my table.",
+    path = tempdir()
+  )
+
+  expect_error(
+    use_spreadsheet_template(
+      spreadsheet_template = "{n}{a}",
+      spreadsheet = spreadsheet,
+      n = 2
+    ),
+    "object 'a' not found"
+  )
+})
