@@ -7,7 +7,7 @@
 
 The excelerate package accelerates the creation of supplementary tables for research papers.
 
-- **Data Frame Conversion**: Easily insert supplementary results as ordered, numbered sheets in Excelspreadsheets.
+- **Data Frame Conversion**: Easily insert supplementary results as ordered, numbered sheets in Excel spreadsheets.
 - **Metadata Integration**: Include comprehensive metadata with legends and column descriptions in a README sheet.
 - **Numbered Supplementary Files**: Automatically organises and numbers sheets and supplementary files for easy reference.
 - **Efficient Workflow**: Accelerates the preparation of standardised, publication-ready tables.
@@ -26,7 +26,7 @@ library(excelerate)
 
 ### 1. Append Meta Data
 
-Use `append_meta()` to add column descriptions to your data frame. This function annotates your data frame with descriptions for each column, which is then inserted as a table in the first sheet (the "README" sheet) of your Excelspreadsheet.
+Use `append_meta()` to add column descriptions to your data frame. This function annotates your data frame with descriptions for each column, which is then inserted as a table in the first sheet (the "README" sheet) of your Excel spreadsheet.
 
 ``` r
 # Create metadata for iris dataset
@@ -42,11 +42,11 @@ results <- append_meta(
   )
 ```
 
-### 2. Generate ExcelFiles
+### 2. Generate Excel Files
 
 Use the `sheet()`, `spreadsheet()` and `excelerate()` functions to create and save the tables.
 
-`sheet()` takes the output from `append_meta()` (ie. a data frame where each column has an associated description explaining its contents), the name of the sheet (which appears in the tabs in Excelfiles) and a table legend for each sheet.
+`sheet()` takes the output from `append_meta()` (ie. a data frame where each column has an associated description explaining its contents), the name of the sheet (which appears in the tabs in Excel files) and a table legend for each sheet.
 
 ```r
 sheet1 <- sheet(
@@ -68,7 +68,7 @@ sheet3 <- sheet(
 )
 ```
 
-`spreadsheet()` combines the sheets together into a `spreadsheet` object. Taking the main `title` legend, the `path` and `file` for where to save the Excelfile. The last argument contains the `sheet` objects from `sheet()`.
+`spreadsheet()` combines the sheets together into a `spreadsheet` object. Taking the main `title` legend, the `path` and `file` for where to save the Excel file. The last argument contains the `sheet` objects from `sheet()`.
 
 ``` r
 # Create spreadsheet specifying tables for each sheet
@@ -98,7 +98,7 @@ excelerate(
 ```
 ### Output
 
-The output is an Excelfile with multiple sheets. 
+The output is an Excel file with multiple sheets. 
 
 - The first sheet is called "README" by default.
   The README sheet cells contain the following in order:
