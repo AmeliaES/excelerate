@@ -36,6 +36,12 @@
       <ul class="navbar-nav me-auto">
 <li class="active nav-item"><a class="nav-link" href="../articles/excelerate.html">Get started</a></li>
 <li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
+<li><a class="dropdown-item" href="../articles/customise.html">Customise output from excelerate</a></li>
+  </ul>
+</li>
       </ul>
 <ul class="navbar-nav">
 <li class="nav-item"><form class="form-inline" role="search">
@@ -192,31 +198,33 @@ temporary directory with the names
 <code>supplementary_table_2.xlsx</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">supplementary_table_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/spreadsheet.html">spreadsheet</a></span><span class="op">(</span></span>
-<span>  title <span class="op">=</span> <span class="st">"Supplementary Table 1. This is 'legend_title' from spreadsheet()."</span>,</span>
-<span>  filename <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">temp_dir</span>, <span class="st">"supplementary_table_1.xlsx"</span><span class="op">)</span>,</span>
+<span>  title <span class="op">=</span> <span class="st">"Results for iris and ChickWeight. 'title' from spreadsheet()."</span>,</span>
+<span>  path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">temp_dir</span><span class="op">)</span>,</span>
+<span>  file <span class="op">=</span> <span class="st">""</span>,</span>
 <span>  <span class="fu"><a href="../reference/sheet.html">sheet</a></span><span class="op">(</span></span>
 <span>    <span class="va">iris_commented</span>,</span>
-<span>    <span class="st">"iris sheet label"</span>,</span>
+<span>    <span class="st">"iris sheet_name"</span>,</span>
 <span>    <span class="st">"sheet_legend for the iris dataset."</span></span>
 <span>  <span class="op">)</span>,</span>
 <span>  <span class="fu"><a href="../reference/sheet.html">sheet</a></span><span class="op">(</span></span>
 <span>    <span class="va">chickweight_commented</span>,</span>
-<span>    <span class="st">"ChickWeight sheet label"</span>,</span>
+<span>    <span class="st">"ChickWeight sheet_name"</span>,</span>
 <span>    <span class="st">"sheet_legend for the ChickWeight dataset."</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">supplementary_table_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/spreadsheet.html">spreadsheet</a></span><span class="op">(</span></span>
-<span>  title <span class="op">=</span> <span class="st">"Supplementary Table 2. This is 'legend_title' from spreadsheet()."</span>,</span>
-<span>  filename <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">temp_dir</span>, <span class="st">"supplementary_table_2.xlsx"</span><span class="op">)</span>,</span>
+<span>  title <span class="op">=</span> <span class="st">"Results for toothgrowth and C02 R supplied datasets."</span>,</span>
+<span>  path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">temp_dir</span><span class="op">)</span>,</span>
+<span>  file <span class="op">=</span> <span class="st">""</span>,</span>
 <span>  <span class="fu"><a href="../reference/sheet.html">sheet</a></span><span class="op">(</span></span>
 <span>    <span class="va">toothgrowth_commented</span>,</span>
-<span>    <span class="st">"ToothGrowth sheet label"</span>,</span>
+<span>    <span class="st">"ToothGrowth sheet_name"</span>,</span>
 <span>    <span class="st">"sheet_legend for the ToothGrowth dataset."</span></span>
 <span>  <span class="op">)</span>,</span>
 <span>  <span class="fu"><a href="../reference/sheet.html">sheet</a></span><span class="op">(</span></span>
 <span>    <span class="va">co2_commented</span>,</span>
-<span>    <span class="st">"CO2 sheet label"</span>,</span>
+<span>    <span class="st">"CO2 sheet_name"</span>,</span>
 <span>    <span class="st">"sheet_legend for the CO2 dataset."</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span>
@@ -226,11 +234,8 @@ temporary directory with the names
 <span>  <span class="va">supplementary_table_1</span>,</span>
 <span>  <span class="va">supplementary_table_2</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; [[1]]</span></span>
-<span><span class="co">#&gt; [1] 1</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; [[2]]</span></span>
-<span><span class="co">#&gt; [1] 1</span></span></code></pre></div>
+<span><span class="co">#&gt; Excel file saved successfuly at: /tmp/RtmprwKjuy/S1.xlsx</span></span>
+<span><span class="co">#&gt; Excel file saved successfuly at: /tmp/RtmprwKjuy/S2.xlsx</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="inspect-the-saved-excel-files">Inspect the saved Excel files<a class="anchor" aria-label="anchor" href="#inspect-the-saved-excel-files"></a>
@@ -247,12 +252,73 @@ been created.</li>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># List all files in the temporary directory</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span><span class="va">temp_dir</span>, pattern <span class="op">=</span> <span class="st">"\\.xlsx$"</span>, full.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "/tmp/RtmpvRd0zS/supplementary_table_1.xlsx"</span></span>
-<span><span class="co">#&gt; [2] "/tmp/RtmpvRd0zS/supplementary_table_2.xlsx"</span></span>
+<span><span class="co">#&gt; [1] "/tmp/RtmprwKjuy/S1.xlsx" "/tmp/RtmprwKjuy/S2.xlsx"</span></span>
 <span></span>
 <span><span class="co"># Open the files to inspect them</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/browseURL.html" class="external-link">browseURL</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">temp_dir</span>, <span class="st">"supplementary_table_1.xlsx"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/browseURL.html" class="external-link">browseURL</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">temp_dir</span>, <span class="st">"supplementary_table_2.xlsx"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="co"># The file name has now appended "S1" and "S2" by default in excelerate()</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/browseURL.html" class="external-link">browseURL</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">temp_dir</span>, <span class="st">"S1.xlsx"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/browseURL.html" class="external-link">browseURL</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">temp_dir</span>, <span class="st">"S2.xlsx"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="customise-the-prefix-to-sheet-name-spreadsheet-title-and-filenames">Customise the prefix to sheet name, spreadsheet title and
+filenames<a class="anchor" aria-label="anchor" href="#customise-the-prefix-to-sheet-name-spreadsheet-title-and-filenames"></a>
+</h2>
+<p><code>sheet_template</code> must contain <code>{n}</code> (referring
+to the table number) and <code>{l}</code> (referring to the sheet
+letter). <code>spreadsheet_template</code> must contain <code>{n}</code>
+(referring to the table number).</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">supplementary_table_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/spreadsheet.html">spreadsheet</a></span><span class="op">(</span></span>
+<span>  title <span class="op">=</span> <span class="st">"Results for iris and ChickWeight. 'title' from spreadsheet()."</span>,</span>
+<span>  path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">temp_dir</span><span class="op">)</span>,</span>
+<span>  file <span class="op">=</span> <span class="st">"iris ChickWeight"</span>,</span>
+<span>  <span class="fu"><a href="../reference/sheet.html">sheet</a></span><span class="op">(</span></span>
+<span>    <span class="va">iris_commented</span>,</span>
+<span>    <span class="st">"iris sheet_name"</span>,</span>
+<span>    <span class="st">"sheet_legend for the iris dataset."</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="../reference/sheet.html">sheet</a></span><span class="op">(</span></span>
+<span>    <span class="va">chickweight_commented</span>,</span>
+<span>    <span class="st">"ChickWeight sheet_name"</span>,</span>
+<span>    <span class="st">"sheet_legend for the ChickWeight dataset."</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">supplementary_table_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/spreadsheet.html">spreadsheet</a></span><span class="op">(</span></span>
+<span>  title <span class="op">=</span> <span class="st">"Results for toothgrowth and C02 R supplied datasets."</span>,</span>
+<span>  path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">temp_dir</span><span class="op">)</span>,</span>
+<span>  file <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  <span class="fu"><a href="../reference/sheet.html">sheet</a></span><span class="op">(</span></span>
+<span>    <span class="va">toothgrowth_commented</span>,</span>
+<span>    <span class="st">"ToothGrowth sheet_name"</span>,</span>
+<span>    <span class="st">"sheet_legend for the ToothGrowth dataset."</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="../reference/sheet.html">sheet</a></span><span class="op">(</span></span>
+<span>    <span class="va">co2_commented</span>,</span>
+<span>    <span class="st">"CO2 sheet_name"</span>,</span>
+<span>    <span class="st">"sheet_legend for the CO2 dataset."</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Append "1_A_", "1_B_" to each sheet name</span></span>
+<span><span class="co"># and "Supplementary Table 1" to the legend title and file name</span></span>
+<span><span class="co"># by default any spaces in the file name will be converted to underscores</span></span>
+<span><span class="fu"><a href="../reference/excelerate.html">excelerate</a></span><span class="op">(</span></span>
+<span>  <span class="va">supplementary_table_1</span>,</span>
+<span>  <span class="va">supplementary_table_2</span>,</span>
+<span>  sheet_template <span class="op">=</span> <span class="st">"{n}_{l}_"</span>,</span>
+<span>  spreadsheet_template <span class="op">=</span> <span class="st">"Supplementary Table {n}"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; Excel file saved successfuly at: /tmp/RtmprwKjuy/Supplementary_Table_1_iris_ChickWeight.xlsx</span></span>
+<span><span class="co">#&gt; Excel file saved successfuly at: /tmp/RtmprwKjuy/Supplementary_Table_2.xlsx</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span><span class="va">temp_dir</span>, pattern <span class="op">=</span> <span class="st">"\\.xlsx$"</span>, full.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "/tmp/RtmprwKjuy/S1.xlsx"                                    </span></span>
+<span><span class="co">#&gt; [2] "/tmp/RtmprwKjuy/S2.xlsx"                                    </span></span>
+<span><span class="co">#&gt; [3] "/tmp/RtmprwKjuy/Supplementary_Table_1_iris_ChickWeight.xlsx"</span></span>
+<span><span class="co">#&gt; [4] "/tmp/RtmprwKjuy/Supplementary_Table_2.xlsx"</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/browseURL.html" class="external-link">browseURL</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">temp_dir</span>, <span class="st">"Supplementary_Table_1_iris_ChickWeight.xlsx"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/browseURL.html" class="external-link">browseURL</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">temp_dir</span>, <span class="st">"Supplementary_Table_2.xlsx"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="conclusion">Conclusion<a class="anchor" aria-label="anchor" href="#conclusion"></a>

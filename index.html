@@ -39,6 +39,12 @@
       <ul class="navbar-nav me-auto">
 <li class="nav-item"><a class="nav-link" href="articles/excelerate.html">Get started</a></li>
 <li class="nav-item"><a class="nav-link" href="reference/index.html">Reference</a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
+<li><a class="dropdown-item" href="articles/customise.html">Customise output from excelerate</a></li>
+  </ul>
+</li>
       </ul>
 <ul class="navbar-nav">
 <li class="nav-item"><form class="form-inline" role="search">
@@ -95,7 +101,7 @@
 <div class="section level3">
 <h3 id="id_1-append-meta-data">1. Append Meta Data<a class="anchor" aria-label="anchor" href="#id_1-append-meta-data"></a>
 </h3>
-<p>Use <code><a href="reference/append_meta.html">append_meta()</a></code> to add column descriptions to your data frame. This function annotates your data frame with descriptions for each column, which is then inserted as a table in the first sheet (“README” sheet) of your Excel spreadsheet.</p>
+<p>Use <code><a href="reference/append_meta.html">append_meta()</a></code> to add column descriptions to your data frame. This function annotates your data frame with descriptions for each column, which is then inserted as a table in the first sheet (the “README” sheet) of your Excel spreadsheet.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create metadata for iris dataset</span></span>
 <span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/append_meta.html">append_meta</a></span><span class="op">(</span></span>
@@ -113,19 +119,49 @@
 <h3 id="id_2-generate-excel-files">2. Generate Excel Files<a class="anchor" aria-label="anchor" href="#id_2-generate-excel-files"></a>
 </h3>
 <p>Use the <code><a href="reference/sheet.html">sheet()</a></code>, <code><a href="reference/spreadsheet.html">spreadsheet()</a></code> and <code><a href="reference/excelerate.html">excelerate()</a></code> functions to create and save the tables.</p>
+<p><code><a href="reference/sheet.html">sheet()</a></code> takes the output from <code><a href="reference/append_meta.html">append_meta()</a></code> (ie. a data frame where each column has an associated description explaining its contents), the name of the sheet (which appears in the tabs in Excel files) and a table legend for each sheet.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Create spreadsheet specifying tables for each sheet</span></span>
-<span><span class="va">supplementary_table</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/spreadsheet.html">spreadsheet</a></span><span class="op">(</span></span>
-<span>  title <span class="op">=</span> <span class="st">"Supplementary Table 1. This is space for a legend title describing</span></span>
-<span><span class="st">  generally the contents of the file."</span>,</span>
-<span>  filename <span class="op">=</span> <span class="st">"path/to/save/example_table.xlsx"</span>,</span>
-<span>  <span class="fu"><a href="reference/sheet.html">sheet</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"Sheet name 1"</span>, <span class="st">"Specific legends for each table can go here."</span><span class="op">)</span>,</span>
-<span>  <span class="fu"><a href="reference/sheet.html">sheet</a></span><span class="op">(</span><span class="va">sheet_2_dataframe</span>, <span class="st">"Sheet name 2"</span>, <span class="st">"Sheet legend 2"</span><span class="op">)</span>,</span>
-<span>  <span class="fu"><a href="reference/sheet.html">sheet</a></span><span class="op">(</span><span class="va">sheet_3_dataframe</span>, <span class="st">"Sheet name 3"</span>, <span class="st">"Sheet legend 3"</span><span class="op">)</span>,</span>
+<code class="sourceCode R"><span><span class="va">sheet1</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/sheet.html">sheet</a></span><span class="op">(</span></span>
+<span>  <span class="va">results</span>,</span>
+<span>  <span class="st">"Sheet name 1"</span>,</span>
+<span>  <span class="st">"Specific legends for each table can go here."</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Export to Excel</span></span>
-<span><span class="fu"><a href="reference/excelerate.html">excelerate</a></span><span class="op">(</span><span class="va">supplementary_table</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">sheet2</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/sheet.html">sheet</a></span><span class="op">(</span></span>
+<span>  <span class="va">sheet_2_dataframe</span>,</span>
+<span>  <span class="st">"Sheet name 2"</span>,</span>
+<span>  <span class="st">"Sheet legend 2"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">sheet3</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/sheet.html">sheet</a></span><span class="op">(</span></span>
+<span>  <span class="va">sheet_3_dataframe</span>,</span>
+<span>  <span class="st">"Sheet name 3"</span>,</span>
+<span>  <span class="st">"Sheet legend 3"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p><code><a href="reference/spreadsheet.html">spreadsheet()</a></code> combines the sheets together into a <code>spreadsheet</code> object. Taking the main <code>title</code> legend, the <code>path</code> and <code>file</code> for where to save the Excel file. The last argument contains the <code>sheet</code> objects from <code><a href="reference/sheet.html">sheet()</a></code>.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># Create spreadsheet specifying tables for each sheet</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>supplementary_table1 <span class="ot">&lt;-</span> <span class="fu">spreadsheet</span>(</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"This is space for a legend title describing generally the contents of the file."</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>  <span class="at">path =</span> <span class="st">"path/to/save/results"</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">"example_file_name"</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>  sheet1,</span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>  sheet2</span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>)</span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a>supplementary_table2 <span class="ot">&lt;-</span> <span class="fu">spreadsheet</span>(</span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Results from a fabulous analysis about something amazing"</span>,</span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a>  <span class="at">path =</span> <span class="st">"path/to/save/results"</span>,</span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">"example_file_name"</span>,</span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a>  sheet3</span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a>)</span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a><span class="st">`</span><span class="at">excelerate()</span><span class="st">`</span> generates an Excel file <span class="cf">for</span> each spreadsheet. It creates a README sheet with the title legend, sheet legends and column descriptions <span class="cf">for</span> each sheet. By default it prefixes a letter and number to each Excel file name, title legend and sheet name. For example, <span class="cf">in</span> the below code <span class="st">"S1"</span> and <span class="st">"S2"</span> will be appended as a prefix to the file name and title legend. <span class="st">"A1"</span> and <span class="st">"B1"</span> will be appended to the sheet names of <span class="st">`</span><span class="at">supplementary_table1</span><span class="st">`</span> (as this has two sheets) and <span class="st">"A2"</span> will be appended to the sheet names of <span class="st">`</span><span class="at">supplementary_table2</span><span class="st">`</span> (as this has one sheet). See the [package vignette](https<span class="sc">:</span><span class="er">//</span>ameliaes.github.io<span class="sc">/</span>excelerate<span class="sc">/</span>articles<span class="sc">/</span>excelerate.html) <span class="cf">for</span> further details on how to customise this.</span>
+<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a></span>
+<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a><span class="co"># Export to Excel</span></span>
+<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a><span class="fu">excelerate</span>(</span>
+<span id="cb4-21"><a href="#cb4-21" tabindex="-1"></a>  supplementary_table1,</span>
+<span id="cb4-22"><a href="#cb4-22" tabindex="-1"></a>  supplementary_table2</span>
+<span id="cb4-23"><a href="#cb4-23" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="output">Output<a class="anchor" aria-label="anchor" href="#output"></a>

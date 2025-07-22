@@ -2,8 +2,9 @@ pandoc: 3.1.11
 pkgdown: 2.1.3
 pkgdown_sha: ~
 articles:
+  articles/customise: customise.html
   excelerate: excelerate.html
-last_built: 2025-07-17T12:22Z
+last_built: 2025-07-22T13:30Z
 urls:
   reference: https://ameliaes.github.io/excelerate/reference
   article: https://ameliaes.github.io/excelerate/articles
