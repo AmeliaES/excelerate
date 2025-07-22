@@ -298,6 +298,35 @@ test_that("append_sheet_prefix throws error if name exceeds 31 chars", {
   )
 })
 
+test_that("protected transformer returns safely", {
+  # workspace symbols
+  n <- 1
+  a <- 2
+
+  # glue strings
+  good_string <- "{n} and {a}"
+  bad_string <- "{n} and {a} and {b}"
+
+  expect_equal(
+    glue::glue(
+      good_string,
+      .transformer = protected_transformer
+    ),
+    "1 and 2"
+  )
+
+  expect_warning(
+    bad_result <- glue::glue(bad_string, .transformer = protected_transformer),
+    "Unexpected template symbol 'b'"
+  )
+
+  expect_equal(
+    bad_result,
+    "1 and 2 and b"
+  )
+
+})
+
 test_that("spreadsheet template is sanitised", {
   # test data
   results <- get_test_data()

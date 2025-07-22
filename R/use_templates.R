@@ -151,3 +151,24 @@ append_sheet_prefix <- function(i, sheet_template, sheet, n) {
   }
   numbered_sheet_name
 }
+
+#' Transform only known inputs and pass through other symbols
+#'
+#' Acts as a `glue::glue()` transformer that interprets symbols that are
+#' found in the environment and returns their interpreted value while
+#' symbols that cannot be found are returned as-is.
+#'
+#' @param text Text to parse and evaluate
+#' @param envir Environment to evaluate text in
+#'
+#' @return The parsed and evaluated value
+protected_transformer <- function(text, envir = parent.frame()) {
+  # look up text in environment
+  if (exists(text, envir = envir)) {
+    result <- glue::identity_transformer(text, envir)
+  } else {
+    result <- text
+    warning("Unexpected template symbol '", text, "'")
+  }
+  result
+}
