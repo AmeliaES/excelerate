@@ -132,7 +132,6 @@ use_sheet_template <- function(sheet_template,
 #'
 #' @noRd
 append_sheet_prefix <- function(i, sheet_template, sheet, n) {
-
   l <- LETTERS[i]
   sheet_prefix <- glue::glue(sheet_template)
   sheet_name <- names(sheet)
