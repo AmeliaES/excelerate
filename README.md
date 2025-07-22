@@ -75,7 +75,7 @@ sheet3 <- sheet(
 supplementary_table1 <- spreadsheet(
   title = "This is space for a legend title describing generally the contents of the file.",
   path = "path/to/save/results",
-  file = "example_file_name",
+  file = "example_file_name1",
   sheet1,
   sheet2
 )
@@ -83,7 +83,7 @@ supplementary_table1 <- spreadsheet(
 supplementary_table2 <- spreadsheet(
   title = "Results from a fabulous analysis about something amazing",
   path = "path/to/save/results",
-  file = "example_file_name",
+  file = "example_file_name2",
   sheet3
 )
 
@@ -109,9 +109,8 @@ The output is an excel file with multiple sheets.
 
 Example output from the package vignette at [`Get Started`](https://ameliaes.github.io/excelerate/articles/excelerate.html):
 
-
 <p align="center">
-  <video src="https://github.com/user-attachments/assets/6f0673d3-5c86-4c73-b25f-a8f52f058fd6" controls width="100%">
+  <video src="https://github.com/user-attachments/assets/194eeb37-7f04-4453-bd80-5b4b3a84f38e" controls width="100%">
   </video>
 </p>
 
