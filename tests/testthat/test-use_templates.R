@@ -270,3 +270,31 @@ test_that("if there's only one sheet then only number is appended", {
 
   expect_equal(names(output$sheets), "2 this is sheet 1")
 })
+
+test_that("append_sheet_prefix throws error if name exceeds 31 chars", {
+  results <- get_test_data()
+
+  spreadsheet <- spreadsheet(
+    sheet(results,
+          sheet_name = paste0(rep("A", 30), collapse = ""),
+          sheet_legend = "Legend for table"
+    ),
+    sheet(results,
+          sheet_name = "this is another sheet",
+          sheet_legend = "Legend for this table"
+    ),
+    title = "Here is a fabulous title for my table.",
+    path = tempdir()
+  )
+
+  expect_error(
+    append_sheet_prefix(
+      i = 1,
+      sheet_template = "{n}{l}",
+      sheet = spreadsheet$sheets[1],
+      n = 2
+    ),
+    "exceeds the maximum length of 31 characters"
+  )
+})
+
