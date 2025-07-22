@@ -10,3 +10,4 @@
 ^pkgdown$
 ^renv$
 ^renv\.lock$
+^vignettes/articles$
