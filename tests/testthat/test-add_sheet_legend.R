@@ -24,7 +24,8 @@ test_that("add_sheet_legend works", {
       sheet_legend = "sheet legend 2"
     ),
     title = "Supplementary Table 1",
-    filename = "SuppTab1"
+    file = "SuppTab1",
+    path = tmp_dir
   )
 
   wb <- createWorkbook()

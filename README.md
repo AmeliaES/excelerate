@@ -26,7 +26,7 @@ library(excelerate)
 
 ### 1. Append Meta Data
 
-Use `append_meta()` to add column descriptions to your data frame. This function annotates your data frame with descriptions for each column, which is then inserted as a table in the first sheet ("README" sheet) of your Excel spreadsheet.
+Use `append_meta()` to add column descriptions to your data frame. This function annotates your data frame with descriptions for each column, which is then inserted as a table in the first sheet (the "README" sheet) of your Excel spreadsheet.
 
 ``` r
 # Create metadata for iris dataset
@@ -46,19 +46,54 @@ results <- append_meta(
 
 Use the `sheet()`, `spreadsheet()` and `excelerate()` functions to create and save the tables.
 
-``` r
-# Create spreadsheet specifying tables for each sheet
-supplementary_table <- spreadsheet(
-  title = "Supplementary Table 1. This is space for a legend title describing
-  generally the contents of the file.",
-  filename = "path/to/save/example_table.xlsx",
-  sheet(results, "Sheet name 1", "Specific legends for each table can go here."),
-  sheet(sheet_2_dataframe, "Sheet name 2", "Sheet legend 2"),
-  sheet(sheet_3_dataframe, "Sheet name 3", "Sheet legend 3"),
+`sheet()` takes the output from `append_meta()` (ie. a data frame where each column has an associated description explaining its contents), the name of the sheet (which appears in the tabs in Excel files) and a table legend for each sheet.
+
+```r
+sheet1 <- sheet(
+  results,
+  "Sheet name 1",
+  "Specific legends for each table can go here."
 )
 
+sheet2 <- sheet(
+  sheet_2_dataframe,
+  "Sheet name 2",
+  "Sheet legend 2"
+)
+
+sheet3 <- sheet(
+  sheet_3_dataframe,
+  "Sheet name 3",
+  "Sheet legend 3"
+)
+```
+
+`spreadsheet()` combines the sheets together into a `spreadsheet` object. Taking the main `title` legend, the `path` and `file` for where to save the Excel file. The last argument contains the `sheet` objects from `sheet()`.
+
+``` r
+# Create spreadsheet specifying tables for each sheet
+supplementary_table1 <- spreadsheet(
+  title = "This is space for a legend title describing generally the contents of the file.",
+  path = "path/to/save/results",
+  file = "example_file_name",
+  sheet1,
+  sheet2
+)
+
+supplementary_table2 <- spreadsheet(
+  title = "Results from a fabulous analysis about something amazing",
+  path = "path/to/save/results",
+  file = "example_file_name",
+  sheet3
+)
+
+`excelerate()` generates an Excel file for each spreadsheet. It creates a README sheet with the title legend, sheet legends and column descriptions for each sheet. By default it prefixes a letter and number to each Excel file name, title legend and sheet name. For example, in the below code "S1" and "S2" will be appended as a prefix to the file name and title legend. "A1" and "B1" will be appended to the sheet names of `supplementary_table1` (as this has two sheets) and "A2" will be appended to the sheet names of `supplementary_table2` (as this has one sheet). See the [package vignette](https://ameliaes.github.io/excelerate/articles/excelerate.html) for further details on how to customise this.
+
 # Export to Excel
-excelerate(supplementary_table)
+excelerate(
+  supplementary_table1,
+  supplementary_table2
+)
 ```
 ### Output
 

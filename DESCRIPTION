@@ -29,9 +29,12 @@ RoxygenNote: 7.3.2
 Imports:
     data.table,
     openxlsx,
+    openxlsx2,
     dplyr,
     glue,
-    tibble
+    tibble,
+    stringr,
+    magrittr
 Suggests: 
     testthat (>= 3.0.0),
     readxl,
@@ -41,3 +44,4 @@ Suggests:
 Config/testthat/edition: 3
 VignetteBuilder: knitr
 URL: https://ameliaes.github.io/excelerate/
+Config/Needs/website: rmarkdown
