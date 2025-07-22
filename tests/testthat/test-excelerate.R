@@ -228,12 +228,12 @@ test_that("message if file saved successfully", {
   # Check spreadsheet returns expected object
   spreadsheet1 <- spreadsheet(
     sheet(results,
-          sheet_name = "A",
-          sheet_legend = "Legend for table"
+      sheet_name = "A",
+      sheet_legend = "Legend for table"
     ),
     sheet(results,
-          sheet_name = "B",
-          sheet_legend = "Legend for table"
+      sheet_name = "B",
+      sheet_legend = "Legend for table"
     ),
     title = "Supplementary Table 1",
     path = file.path(tmp_dir),
@@ -242,19 +242,20 @@ test_that("message if file saved successfully", {
 
   spreadsheet2 <- spreadsheet(
     sheet(results,
-          sheet_name = "A",
-          sheet_legend = "Legend for table"
+      sheet_name = "A",
+      sheet_legend = "Legend for table"
     ),
     sheet(results,
-          sheet_name = "B",
-          sheet_legend = "Legend for table"
+      sheet_name = "B",
+      sheet_legend = "Legend for table"
     ),
     title = "Supplementary Table 2",
     path = file.path(tmp_dir),
     file = "file_with_unusual_extension.xls"
   )
 
-  expect_message(excelerate(spreadsheet1, spreadsheet2),
-                 "Excel file saved successfuly")
-
+  expect_message(
+    excelerate(spreadsheet1, spreadsheet2),
+    "Excel file saved successfuly"
+  )
 })
