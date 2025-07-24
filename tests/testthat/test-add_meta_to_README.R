@@ -88,12 +88,22 @@ test_that("sheet_name and description labels are in italic", {
   next_free_row <- 4
   add_meta_to_readme(wb, spreadsheet1, next_free_row = next_free_row)
 
-  # Check the header rows and cols are contained in the style objects
-  # and style contains ITALIC
-  expect_equal(wb$styleObjects[[1]]$row, rep(5, 3))
-  expect_equal(wb$styleObjects[[1]]$col, c(1, 2, 3))
-  expect_contains(
-    capture.output(wb$styleObjects[[1]]$style),
-    " Font decoration: ITALIC "
-  )
+  # Save the workbook to a temporary file
+  temp_file <- tempfile(fileext = ".xlsx")
+  saveWorkbook(wb, temp_file, overwrite = TRUE)
+
+  # Check any of the cells are italic
+  # Use tidyxl to inspect styles
+  cells <- tidyxl::xlsx_cells(temp_file)
+  formats <- tidyxl::xlsx_formats(temp_file)
+
+  # Filter for target labels
+  target_labels <- c("sheet_name", "description")
+  target_cells <- cells[cells$character %in% target_labels, ]
+
+  # Get the style index for each target cell
+  italic_flags <- formats$local$font$italic[target_cells$local_format_id]
+
+  # Assert all targets are italic
+  expect_true(all(italic_flags))
 })
