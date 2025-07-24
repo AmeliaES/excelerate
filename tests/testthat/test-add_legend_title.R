@@ -25,11 +25,21 @@ test_that("legend title is in bold font", {
 
   add_legend_title(wb, title)
 
-  # Check style is in the correct cell and contains "BOLD"
-  expect_equal(wb$styleObjects[[1]]$row, 1)
-  expect_equal(wb$styleObjects[[1]]$col, 1)
-  expect_contains(
-    capture.output(wb$styleObjects[[1]]$style),
-    " Font decoration: BOLD "
-  )
+  # Save the workbook to a temporary file
+  temp_file <- tempfile(fileext = ".xlsx")
+  saveWorkbook(wb, temp_file, overwrite = TRUE)
+
+  # Use tidyxl to inspect styles
+  cells <- tidyxl::xlsx_cells(temp_file)
+  formats <- tidyxl::xlsx_formats(temp_file)
+
+  # Find the cell in the README sheet at row 1, column 1
+  cell <- subset(cells, sheet == "README" & row == 1 & col == 1)
+
+  # Extract the format ID (see tidyxl for details)
+  fmt_id <- cell$local_format_id
+
+  # Now check the font formatting
+  is_bold <- formats$local$font$bold[fmt_id]
+  expect_true(is_bold)
 })
