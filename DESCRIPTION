@@ -1,7 +1,7 @@
 Package: excelerate
 Type: Package
 Title: Create Excel Spreadsheets for Supplementary Tables
-Version: 0.1.0
+Version: 0.2.0
 Authors@R: c(
     person(
       "Amelia", "Edmondson-Stait",
