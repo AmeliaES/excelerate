@@ -38,7 +38,7 @@ lapply(datasets, head)
 We will use `append_meta()` to add comments on each of the columns in these dataframes with a description.
 This metadata will be presented in the README sheet of the Excel file.
 
-The `append_meta()` function requires the `results` argument to be a dataframe and the `colname_descriptions` argument to be a named character vector where the names are the column names and the values are the descriptions.
+The `append_meta()` function requires the `results` argument to be a dataframe and the `colname_descriptions` argument to be a named character vector where the names are the column names and the values are the descriptions. If the column is a factor then include descriptions for the meaning of each factor level.
 
 ```{r}
 iris_commented <- append_meta(
