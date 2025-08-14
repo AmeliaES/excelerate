@@ -8,7 +8,7 @@ body:
     attributes:
       value: |
         <p align="center">
-          <img src="https://github.com/AmeliaES/excelerate/blob/main/pkgdown/favicon/favicon-96x96.png" alt="excelerate Logo">
+          <img src="man/figures/logo.png" alt="excelerate Logo">
           <br>
           <em>—<a href="https://ameliaes.github.io/excelerate/">excelerate documentation</a>.</em>
         </p>
@@ -25,7 +25,6 @@ body:
     attributes:
       label: "Description"
       description: Please provide a clear and concise description of the bug.
-      placeholder: ""
     validations:
       required: true
   - type: input
