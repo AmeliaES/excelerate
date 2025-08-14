@@ -235,8 +235,8 @@ temporary directory with the names
 <span>  <span class="va">supplementary_table_1</span>,</span>
 <span>  <span class="va">supplementary_table_2</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; Excel file saved successfuly at: /tmp/RtmprgbP1S/S1.xlsx</span></span>
-<span><span class="co">#&gt; Excel file saved successfuly at: /tmp/RtmprgbP1S/S2.xlsx</span></span></code></pre></div>
+<span><span class="co">#&gt; Excel file saved successfuly at: /tmp/RtmpCbQhuy/S1.xlsx</span></span>
+<span><span class="co">#&gt; Excel file saved successfuly at: /tmp/RtmpCbQhuy/S2.xlsx</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="inspect-the-saved-excel-files">Inspect the saved Excel files<a class="anchor" aria-label="anchor" href="#inspect-the-saved-excel-files"></a>
@@ -253,7 +253,7 @@ been created.</li>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># List all files in the temporary directory</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span><span class="va">temp_dir</span>, pattern <span class="op">=</span> <span class="st">"\\.xlsx$"</span>, full.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "/tmp/RtmprgbP1S/S1.xlsx" "/tmp/RtmprgbP1S/S2.xlsx"</span></span>
+<span><span class="co">#&gt; [1] "/tmp/RtmpCbQhuy/S1.xlsx" "/tmp/RtmpCbQhuy/S2.xlsx"</span></span>
 <span></span>
 <span><span class="co"># Open the files to inspect them</span></span>
 <span><span class="co"># The file name has now appended "S1" and "S2" by default in excelerate()</span></span>
@@ -310,14 +310,14 @@ letter). <code>spreadsheet_template</code> must contain <code>{n}</code>
 <span>  sheet_template <span class="op">=</span> <span class="st">"{n}_{l}_"</span>,</span>
 <span>  spreadsheet_template <span class="op">=</span> <span class="st">"Supplementary Table {n}"</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; Excel file saved successfuly at: /tmp/RtmprgbP1S/Supplementary_Table_1_iris_ChickWeight.xlsx</span></span>
-<span><span class="co">#&gt; Excel file saved successfuly at: /tmp/RtmprgbP1S/Supplementary_Table_2.xlsx</span></span>
+<span><span class="co">#&gt; Excel file saved successfuly at: /tmp/RtmpCbQhuy/Supplementary_Table_1_iris_ChickWeight.xlsx</span></span>
+<span><span class="co">#&gt; Excel file saved successfuly at: /tmp/RtmpCbQhuy/Supplementary_Table_2.xlsx</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span><span class="va">temp_dir</span>, pattern <span class="op">=</span> <span class="st">"\\.xlsx$"</span>, full.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "/tmp/RtmprgbP1S/S1.xlsx"                                    </span></span>
-<span><span class="co">#&gt; [2] "/tmp/RtmprgbP1S/S2.xlsx"                                    </span></span>
-<span><span class="co">#&gt; [3] "/tmp/RtmprgbP1S/Supplementary_Table_1_iris_ChickWeight.xlsx"</span></span>
-<span><span class="co">#&gt; [4] "/tmp/RtmprgbP1S/Supplementary_Table_2.xlsx"</span></span>
+<span><span class="co">#&gt; [1] "/tmp/RtmpCbQhuy/S1.xlsx"                                    </span></span>
+<span><span class="co">#&gt; [2] "/tmp/RtmpCbQhuy/S2.xlsx"                                    </span></span>
+<span><span class="co">#&gt; [3] "/tmp/RtmpCbQhuy/Supplementary_Table_1_iris_ChickWeight.xlsx"</span></span>
+<span><span class="co">#&gt; [4] "/tmp/RtmpCbQhuy/Supplementary_Table_2.xlsx"</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/browseURL.html" class="external-link">browseURL</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">temp_dir</span>, <span class="st">"Supplementary_Table_1_iris_ChickWeight.xlsx"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/browseURL.html" class="external-link">browseURL</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">temp_dir</span>, <span class="st">"Supplementary_Table_2.xlsx"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
