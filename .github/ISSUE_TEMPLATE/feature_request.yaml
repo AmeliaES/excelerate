@@ -8,7 +8,7 @@ body:
     attributes:
       value: |
         <p align="center">
-          <img src="man/figures/logo.png" alt="excelerate Logo">
+          <img src="https://github.com/AmeliaES/excelerate/blob/main/man/figures/logo.png" alt="excelerate Logo">
           <br>
           <em>—<a href="https://ameliaes.github.io/excelerate/">excelerate documentation</a>.</em>
         </p>
